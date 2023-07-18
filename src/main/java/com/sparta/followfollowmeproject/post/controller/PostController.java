@@ -2,19 +2,21 @@ package com.sparta.followfollowmeproject.post.controller;
 
 
 import com.sparta.followfollowmeproject.common.dto.ApiResponseDto;
+import com.sparta.followfollowmeproject.common.security.UserDetailsImpl;
 import com.sparta.followfollowmeproject.post.dto.PostRequestDto;
 import com.sparta.followfollowmeproject.post.dto.PostResponseDto;
 import com.sparta.followfollowmeproject.post.service.PostService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/api/post")
+@RequestMapping("/api/posts")
 public class PostController {
     private final PostService postService;
 
@@ -35,8 +37,8 @@ public class PostController {
     }
 
     @PostMapping
-    public ResponseEntity<PostResponseDto> createPost(@RequestBody PostRequestDto requestDto) {
-        PostResponseDto createdPost = postService.createPost(requestDto);
+    public ResponseEntity<PostResponseDto> createPost(@RequestBody PostRequestDto requestDto, @AuthenticationPrincipal UserDetailsImpl userDetails) {
+        PostResponseDto createdPost = postService.createPost(requestDto, userDetails.getUser());
         return new ResponseEntity<>(createdPost, HttpStatus.CREATED);
     }
 
@@ -51,8 +53,8 @@ public class PostController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<ApiResponseDto> deletePost(@PathVariable Long id) {
-        postService.deletePost(id);
+    public ResponseEntity<ApiResponseDto> deletePost(@PathVariable Long id, @AuthenticationPrincipal UserDetailsImpl userDetails) {
+        postService.deletePost(id, userDetails.getUser());
         return ResponseEntity.ok().body(new ApiResponseDto("게시글 삭제 성공", 200));
     }
 }
