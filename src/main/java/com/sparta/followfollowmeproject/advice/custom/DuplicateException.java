@@ -1,0 +1,7 @@
+package com.sparta.followfollowmeproject.advice.custom;
+
+public class DuplicateException extends RuntimeException{
+    public DuplicateException(String message) {
+        super(message);
+    }
+}
