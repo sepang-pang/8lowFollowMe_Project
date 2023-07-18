@@ -1,6 +1,7 @@
 package com.sparta.followfollowmeproject.comment.dto;
 
 import com.sparta.followfollowmeproject.comment.entity.Comment;
+import com.sparta.followfollowmeproject.common.dto.ApiResponseDto;
 import lombok.Getter;
 
 import java.time.LocalDateTime;

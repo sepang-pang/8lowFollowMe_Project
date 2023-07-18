@@ -1,6 +1,7 @@
 package com.sparta.followfollowmeproject.comment.controller;
 
-import com.sparta.followfollowmeproject.comment.dto.ApiResponseDto;
+import com.sparta.followfollowmeproject.common.security.UserDetailsImpl;
+import com.sparta.followfollowmeproject.common.dto.ApiResponseDto;
 import com.sparta.followfollowmeproject.comment.dto.CommentRequestDto;
 import com.sparta.followfollowmeproject.comment.dto.CommentResponseDto;
 import com.sparta.followfollowmeproject.comment.service.CommentService;
