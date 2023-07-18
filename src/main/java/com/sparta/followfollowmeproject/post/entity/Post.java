@@ -1,5 +1,6 @@
 package com.sparta.followfollowmeproject.post.entity;
 
+import com.sparta.followfollowmeproject.post.dto.PostRequestDto;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -22,4 +23,13 @@ public class Post {
     private LocalDateTime createdAt;
     private LocalDateTime modifiedAt;
 
+    public Post(PostRequestDto requestDto) {
+        this.title = getTitle();
+        this.content = getContent();
+    }
+
+    public void update(PostRequestDto requestDto) {
+        this.title = requestDto.getTitle();
+        this.content = requestDto.getContent();
+    }
 }
