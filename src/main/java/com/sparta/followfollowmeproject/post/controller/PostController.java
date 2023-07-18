@@ -57,4 +57,11 @@ public class PostController {
         postService.deletePost(id, userDetails.getUser());
         return ResponseEntity.ok().body(new ApiResponseDto("게시글 삭제 성공", 200));
     }
+
+    // 팔로우 한 사용자의 게시글 조회
+    @GetMapping("/following")
+    public ResponseEntity<List<PostResponseDto>> getFollowingPosts( @AuthenticationPrincipal UserDetailsImpl userDetails) {
+        List<PostResponseDto> responseDtoList = postService.getFollowingPosts(userDetails.getUser());
+        return ResponseEntity.ok().body(responseDtoList);
+    }
 }
