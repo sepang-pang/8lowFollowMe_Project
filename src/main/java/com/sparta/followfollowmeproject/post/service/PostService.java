@@ -14,7 +14,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -24,10 +23,6 @@ public class PostService {
     private final FollowRepository followRepository;
 
     public List<PostResponseDto> getAllPosts() {
-//        List<Post> posts = postRepository.findAllByOrderByCreatedAtDesc();
-//
-//        return posts.stream().map(PostResponseDto::new).toList();
-
         return postRepository.findAllByOrderByCreatedAtDesc().stream().map(
                 (Post post) -> new PostResponseDto(post, commentService.getCommentsByPostId(post.getId()))
         ).toList();
@@ -35,12 +30,6 @@ public class PostService {
 
     public PostResponseDto getPostById(Long id) {
         Post post = findPost(id);
-//        if (optionalPost.isPresent()) {
-//            Post post = optionalPost.get();
-//            return new PostResponseDto(post);
-//        } else {
-//            return null;
-//        }
         List<CommentResponseDto> commentList = commentService.getCommentsByPostId(post.getId());
         return new PostResponseDto(post, commentList);
     }
@@ -53,22 +42,22 @@ public class PostService {
     }
 
     // delete 를 참고하여 수정하기
-    public PostResponseDto updatePost(Long id, PostRequestDto requestDto) {
-        Optional<Post> optionalPost = postRepository.findById(id);
-        if (optionalPost.isPresent()) {
-            Post post = optionalPost.get();
-            post.update(requestDto);
-            Post updatedPost = postRepository.save(post);
-            return new PostResponseDto(updatedPost);
-        } else {
-            return null;
+    public PostResponseDto updatePost(Long id, PostRequestDto requestDto, User user) {
+        Post post = findPost(id);
+
+        if (!post.getUser().getUsername().equals(user.getUsername())) {
+            throw new IllegalArgumentException("본인이 아닙니다.");
         }
+
+        post.update(requestDto);
+        Post updatedPost = postRepository.save(post);
+        return new PostResponseDto(updatedPost);
     }
 
     public void deletePost(Long id, User user) {
         Post post = findPost(id);
 
-        if(!post.getUser().getUsername().equals(user.getUsername())) {
+        if (!post.getUser().getUsername().equals(user.getUsername())) {
             throw new IllegalArgumentException("본인이 아닙니다");
         }
         postRepository.delete(post);
@@ -76,7 +65,7 @@ public class PostService {
 
     public Post findPost(Long id) {
         return postRepository.findById(id).orElseThrow(
-                ()-> new IllegalArgumentException("해당 게시글을 찾을 수 없습니다.")
+                () -> new IllegalArgumentException("해당 게시글을 찾을 수 없습니다.")
         );
     }
 
@@ -89,7 +78,7 @@ public class PostService {
                 .map(Follow::getFollowing).toList();
 
         // 팔로우 하는 유저들의 게시글 조회
-       return postRepository.findByUserInOrderByCreatedAtDesc(followingUsers).stream().map(
+        return postRepository.findByUserInOrderByCreatedAtDesc(followingUsers).stream().map(
                 (Post post) -> new PostResponseDto(post, commentService.getCommentsByPostId(post.getId()))
         ).toList();
     }

@@ -43,8 +43,8 @@ public class PostController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<PostResponseDto> updatePost(@PathVariable Long id, @RequestBody PostRequestDto requestDto) {
-        PostResponseDto updatedPost = postService.updatePost(id, requestDto);
+    public ResponseEntity<PostResponseDto> updatePost(@PathVariable Long id, @RequestBody PostRequestDto requestDto, @AuthenticationPrincipal UserDetailsImpl userDetails ) {
+        PostResponseDto updatedPost = postService.updatePost(id, requestDto, userDetails.getUser());
         if (updatedPost != null) {
             return new ResponseEntity<>(updatedPost, HttpStatus.OK);
         } else {
