@@ -2,8 +2,9 @@ package com.sparta.followfollowmeproject.post.service;
 
 
 import com.sparta.followfollowmeproject.comment.dto.CommentResponseDto;
-import com.sparta.followfollowmeproject.comment.entity.Comment;
 import com.sparta.followfollowmeproject.comment.service.CommentService;
+import com.sparta.followfollowmeproject.follow.entity.Follow;
+import com.sparta.followfollowmeproject.follow.repository.FollowRepository;
 import com.sparta.followfollowmeproject.post.dto.PostRequestDto;
 import com.sparta.followfollowmeproject.post.dto.PostResponseDto;
 import com.sparta.followfollowmeproject.post.entity.Post;
@@ -11,7 +12,6 @@ import com.sparta.followfollowmeproject.post.repository.PostRepository;
 import com.sparta.followfollowmeproject.user.entity.User;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.PutMapping;
 
 import java.util.List;
 import java.util.Optional;
@@ -21,6 +21,7 @@ import java.util.Optional;
 public class PostService {
     private final PostRepository postRepository;
     private final CommentService commentService;
+    private final FollowRepository followRepository;
 
     public List<PostResponseDto> getAllPosts() {
 //        List<Post> posts = postRepository.findAllByOrderByCreatedAtDesc();
@@ -80,4 +81,16 @@ public class PostService {
     }
 
 
+    // 팔로우 한 사용자의 게시글만 조회
+    public List<PostResponseDto> getFollowingPosts(User user) {
+        // 로그인 한 사용자가 팔로우한 목록 가져오기
+        List<Follow> follows = followRepository.findAllByFollower(user);
+        List<User> followingUsers = follows.stream()
+                .map(Follow::getFollowing).toList();
+
+        // 팔로우 하는 유저들의 게시글 조회
+       return postRepository.findByUserInOrderByCreatedAtDesc(followingUsers).stream().map(
+                (Post post) -> new PostResponseDto(post, commentService.getCommentsByPostId(post.getId()))
+        ).toList();
+    }
 }
