@@ -23,6 +23,17 @@ public class GlobalExceptionHandler {
         );
     }
 
+    @ExceptionHandler({Exception.class})
+    public ResponseEntity<RestApiException> exceptionHandler(Exception ex) {
+        RestApiException restApiException = new RestApiException(ex.getMessage(), HttpStatus.BAD_REQUEST.value());
+        return new ResponseEntity<>(
+                // HTTP body
+                restApiException,
+                // HTTP status code
+                HttpStatus.BAD_REQUEST
+        );
+    }
+
     @ExceptionHandler({NullPointerException.class})
     public ResponseEntity<RestApiException> nullPointerExceptionHandler(NullPointerException ex) {
         RestApiException restApiException = new RestApiException(ex.getMessage(), HttpStatus.NOT_FOUND.value());
