@@ -33,20 +33,23 @@ public class FollowService {
 
 	// 팔로우
 	@Transactional
-	public void follow(User follower, Long followeeId) {
-		Follow follow = new Follow(follower, findUser(followeeId));
-		followRepository.save(follow);
+	public void follow(User follower, Long followingId) {
+		if (follower.getId().equals(followingId)) {
+			throw new IllegalArgumentException("본인은 팔로우할 수 없습니다.");
+		} else {
+			Follow follow = new Follow(follower, findUser(followingId));
+			followRepository.save(follow);
+		}
 	}
 
 	// 언팔로우
 	@Transactional
-	public void unfollow(User follower, Long followeeId) {
-		Follow follow = followRepository.findByFollowerAndFollowing(follower, findUser(followeeId));
-		if (follow != null) {
-			followRepository.delete(follow);
-		}
+	public void unfollow(User follower, Long followingId) {
+		Follow follow = followRepository.findByFollowerAndFollowing(follower, findUser(followingId));
 		if (follow == null) {
 			throw new IllegalArgumentException("해당 유저를 팔로우하지 않으셨습니다.");
+		} else {
+			followRepository.delete(follow);
 		}
 	}
 

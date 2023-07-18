@@ -3,7 +3,6 @@ package com.sparta.followfollowmeproject.follow.repository;
 import com.sparta.followfollowmeproject.follow.entity.Follow;
 import com.sparta.followfollowmeproject.user.entity.User;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
