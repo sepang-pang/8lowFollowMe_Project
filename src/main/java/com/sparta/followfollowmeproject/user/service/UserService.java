@@ -2,6 +2,7 @@ package com.sparta.followfollowmeproject.user.service;
 
 import com.sparta.followfollowmeproject.advice.custom.DuplicateException;
 import com.sparta.followfollowmeproject.advice.exception.RestApiException;
+import com.sparta.followfollowmeproject.common.dto.ApiResponseDto;
 import com.sparta.followfollowmeproject.common.jwt.JwtUtil;
 import com.sparta.followfollowmeproject.user.dto.SignupRequestDto;
 import com.sparta.followfollowmeproject.user.entity.User;
@@ -11,6 +12,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.MessageSource;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -32,7 +34,7 @@ public class UserService {
     // ADMIN_TOKEN
     private final String ADMIN_TOKEN = "AAABnvxRVklrnYxKZ0aHgTBcXukeZygoC";
 
-    public RestApiException signup(SignupRequestDto requestDto) {
+    public ResponseEntity<ApiResponseDto> signup(SignupRequestDto requestDto) {
         String username = requestDto.getUsername();
         String password = passwordEncoder.encode(requestDto.getPassword());
 
@@ -65,6 +67,6 @@ public class UserService {
         userRepository.save(user);
         log.info("사용자 등록 확인");
         log.info("회원가입 성공");
-        return new RestApiException("회원가입 성공", HttpStatus.OK.value());
+        return ResponseEntity.ok().body(new ApiResponseDto("회원가입 성공",  200));
     }
 }
