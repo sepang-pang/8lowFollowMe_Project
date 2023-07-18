@@ -1,11 +1,11 @@
 package com.sparta.followfollowmeproject.post.entity;
 
+import com.sparta.followfollowmeproject.common.entity.Timestamped;
 import com.sparta.followfollowmeproject.post.dto.PostRequestDto;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import com.sparta.followfollowmeproject.user.entity.User;
+import jakarta.persistence.*;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.time.LocalDateTime;
@@ -13,19 +13,27 @@ import java.time.LocalDateTime;
 @Entity
 @Getter
 @Setter
-public class Post {
+@Table(name = "post")
+@NoArgsConstructor
+public class Post extends Timestamped {
     @Id
     @GeneratedValue(strategy =  GenerationType.IDENTITY)
     private Long id;
-    private String title;
-    private String content;
-    private String userId;
-    private LocalDateTime createdAt;
-    private LocalDateTime modifiedAt;
 
-    public Post(PostRequestDto requestDto) {
-        this.title = getTitle();
-        this.content = getContent();
+    @Column(name = "title", nullable = false)
+    private String title;
+
+    @Column(name = "content", nullable = false)
+    private String content;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "userId", nullable = false)
+    private User user;
+
+    public Post(PostRequestDto requestDto, User user) {
+        this.title = requestDto.getTitle();
+        this.content = requestDto.getContent();
+        this.user  = user;
     }
 
     public void update(PostRequestDto requestDto) {
