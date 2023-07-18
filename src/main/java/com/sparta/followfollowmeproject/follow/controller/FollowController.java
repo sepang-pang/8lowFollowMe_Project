@@ -14,26 +14,26 @@ import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/api/follow")
+@RequestMapping("/api/following")
 public class FollowController {
 	private final FollowService followService;
 
 	// 로그인한 유저의 모든 팔로잉 조회
-	@GetMapping("/following")
+	@GetMapping()
 	public ResponseEntity<List<FollowingListDto>> getFollowingList(@AuthenticationPrincipal UserDetailsImpl userDetails) {
 		List<FollowingListDto> followingList = followService.getFollowingList(userDetails.getUser());
 		return ResponseEntity.ok().body(followingList);
 	}
 
 	// 선택한 user 팔로우
-	@PostMapping("/{followingId}/follow")
+	@PostMapping("/{followingId}/following")
 	public ResponseEntity<ApiResponseDto> follow(@AuthenticationPrincipal UserDetailsImpl userDetails, @PathVariable Long followingId) {
 		followService.follow(userDetails.getUser(), followingId);
 		return ResponseEntity.ok().body(new ApiResponseDto("팔로우가 완료되었습니다.", HttpStatus.OK.value()));
 	}
 
 	// 선택한 user 언팔로우
-	@DeleteMapping("/{followingId}/unfollow")
+	@DeleteMapping("/{followingId}/unfollowing")
 	public ResponseEntity<ApiResponseDto> unfollow(@AuthenticationPrincipal UserDetailsImpl userDetails, @PathVariable Long followingId) {
 		followService.unfollow(userDetails.getUser(), followingId);
 		return ResponseEntity.ok().body(new ApiResponseDto("언팔로우가 완료되었습니다.", HttpStatus.OK.value()));
