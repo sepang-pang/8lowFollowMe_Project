@@ -1,6 +1,7 @@
 package com.sparta.followfollowmeproject.comment.entity;
 
 import com.sparta.followfollowmeproject.comment.dto.CommentRequestDto;
+import com.sparta.followfollowmeproject.common.entity.Timestamped;
 import com.sparta.followfollowmeproject.post.entity.Post;
 import com.sparta.followfollowmeproject.user.entity.User;
 import jakarta.persistence.*;
