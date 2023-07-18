@@ -1,6 +1,7 @@
 package com.sparta.followfollowmeproject.post.entity;
 
 import com.sparta.followfollowmeproject.common.entity.Timestamped;
+import com.sparta.followfollowmeproject.like.post.entity.PostLike;
 import com.sparta.followfollowmeproject.post.dto.PostRequestDto;
 import com.sparta.followfollowmeproject.user.entity.User;
 import jakarta.persistence.*;
@@ -8,7 +9,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Getter
@@ -29,6 +31,9 @@ public class Post extends Timestamped {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "userId", nullable = false)
     private User user;
+
+    @OneToMany(mappedBy = "post", cascade = CascadeType.REMOVE)
+    private List<PostLike> postLikes = new ArrayList<>();
 
     public Post(PostRequestDto requestDto, User user) {
         this.title = requestDto.getTitle();

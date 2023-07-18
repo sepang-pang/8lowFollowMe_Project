@@ -3,9 +3,11 @@ package com.sparta.followfollowmeproject.post.controller;
 
 import com.sparta.followfollowmeproject.common.dto.ApiResponseDto;
 import com.sparta.followfollowmeproject.common.security.UserDetailsImpl;
+import com.sparta.followfollowmeproject.like.post.service.PostLikeService;
 import com.sparta.followfollowmeproject.post.dto.PostRequestDto;
 import com.sparta.followfollowmeproject.post.dto.PostResponseDto;
 import com.sparta.followfollowmeproject.post.service.PostService;
+import com.sun.jdi.request.DuplicateRequestException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -19,6 +21,7 @@ import java.util.List;
 @RequestMapping("/api/posts")
 public class PostController {
     private final PostService postService;
+    private final PostLikeService postLikeService;
 
     @GetMapping
     public ResponseEntity<List<PostResponseDto>> getAllPosts() {
@@ -56,5 +59,24 @@ public class PostController {
     public ResponseEntity<ApiResponseDto> deletePost(@PathVariable Long id, @AuthenticationPrincipal UserDetailsImpl userDetails) {
         postService.deletePost(id, userDetails.getUser());
         return ResponseEntity.ok().body(new ApiResponseDto("게시글 삭제 성공", 200));
+    }
+
+    // 팔로우 한 사용자의 게시글 조회
+    @GetMapping("/following")
+    public ResponseEntity<List<PostResponseDto>> getFollowingPosts( @AuthenticationPrincipal UserDetailsImpl userDetails) {
+        List<PostResponseDto> responseDtoList = postService.getFollowingPosts(userDetails.getUser());
+        return ResponseEntity.ok().body(responseDtoList);
+    }
+
+    @PostMapping("/posts/{id}/like")
+    public ResponseEntity<ApiResponseDto> likePost(@AuthenticationPrincipal UserDetailsImpl userDetails, @PathVariable Long id) {
+        postLikeService.likePost(id, userDetails.getUser()); // 수정된 부분
+        return ResponseEntity.status(HttpStatus.ACCEPTED).body(new ApiResponseDto("게시글 좋아요 성공", HttpStatus.ACCEPTED.value()));
+    }
+
+    @DeleteMapping("/posts/{id}/like")
+    public ResponseEntity<ApiResponseDto> deleteLikePost(@AuthenticationPrincipal UserDetailsImpl userDetails, @PathVariable Long id) {
+        postLikeService.deleteLikePost(id, userDetails.getUser()); // 수정된 부분
+        return ResponseEntity.status(HttpStatus.ACCEPTED).body(new ApiResponseDto("게시글 좋아요 취소 성공", HttpStatus.ACCEPTED.value()));
     }
 }

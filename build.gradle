@@ -27,6 +27,9 @@ dependencies {
 	// MySQL
 	implementation 'mysql:mysql-connector-java:8.0.28'
 
+	// json
+	implementation 'org.json:json:20230227'
+
 	// validation
 	implementation group: 'org.springframework.boot', name: 'spring-boot-starter-validation'
 
