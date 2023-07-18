@@ -26,14 +26,14 @@ public class FollowController {
 	}
 
 	// 선택한 user 팔로우
-	@PostMapping("/{followingId}")
+	@PostMapping("/{followingId}/follow")
 	public ResponseEntity<ApiResponseDto> follow(@AuthenticationPrincipal UserDetailsImpl userDetails, @PathVariable Long followingId) {
 		followService.follow(userDetails.getUser(), followingId);
 		return ResponseEntity.ok().body(new ApiResponseDto("팔로우가 완료되었습니다.", HttpStatus.OK.value()));
 	}
 
 	// 선택한 user 언팔로우
-	@DeleteMapping("/{followingId}")
+	@DeleteMapping("/{followingId}/unfollow")
 	public ResponseEntity<ApiResponseDto> unfollow(@AuthenticationPrincipal UserDetailsImpl userDetails, @PathVariable Long followingId) {
 		followService.unfollow(userDetails.getUser(), followingId);
 		return ResponseEntity.ok().body(new ApiResponseDto("언팔로우가 완료되었습니다.", HttpStatus.OK.value()));
