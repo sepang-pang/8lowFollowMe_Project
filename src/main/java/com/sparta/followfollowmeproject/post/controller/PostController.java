@@ -1,6 +1,7 @@
 package com.sparta.followfollowmeproject.post.controller;
 
-import com.sparta.followfollowmeproject.post.dto.PostDTO;
+
+import com.sparta.followfollowmeproject.post.entity.Post;
 import com.sparta.followfollowmeproject.post.service.PostService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -16,14 +17,14 @@ public class PostController {
     private final PostService postService;
 
     @GetMapping
-    public ResponseEntity<List<PostDTO>> getAllPosts() {
-        List<PostDTO> posts = postService.getAllPosts();
+    public ResponseEntity<List<Post>> getAllPosts() {
+        List<Post> posts = postService.getAllPosts();
         return new ResponseEntity<>(posts, HttpStatus.OK);
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<PostDTO> getPostById(@PathVariable Long id) {
-        PostDTO post = postService.getPostById(id);
+    public ResponseEntity<Post> getPostById(@PathVariable Long id) {
+        Post post = postService.getPostById(id);
         if (post != null) {
             return new ResponseEntity<>(post, HttpStatus.OK);
         } else {
@@ -32,14 +33,14 @@ public class PostController {
     }
 
     @PostMapping
-    public ResponseEntity<PostDTO> createPost(@RequestBody PostDTO postDTO) {
-        PostDTO createdPost = postService.createPost(postDTO);
+    public ResponseEntity<Post> createPost(@RequestBody Post post) {
+        Post createdPost = postService.createPost(post);
         return new ResponseEntity<>(createdPost, HttpStatus.CREATED);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<PostDTO> updatePost(@PathVariable Long id, @RequestBody PostDTO postDTO) {
-        PostDTO updatedPost = postService.updatePost(id, postDTO);
+    public ResponseEntity<Post> updatePost(@PathVariable Long id, @RequestBody Post post) {
+        Post updatedPost = postService.updatePost(id, post);
         if (updatedPost != null) {
             return new ResponseEntity<>(updatedPost, HttpStatus.OK);
         } else {
