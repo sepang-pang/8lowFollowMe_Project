@@ -1,4 +1,4 @@
-package com.sparta.followfollowmeproject.comment.entity;
+package com.sparta.followfollowmeproject.common.entity;
 
 import jakarta.persistence.*;
 import lombok.Getter;
