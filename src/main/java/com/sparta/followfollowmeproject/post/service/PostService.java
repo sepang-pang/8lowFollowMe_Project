@@ -41,7 +41,7 @@ public class PostService {
         return new PostResponseDto(post);
     }
 
-    // delete 를 참고하여 수정하기
+    // delete 를 참고하여 수정하기!
     public PostResponseDto updatePost(Long id, PostRequestDto requestDto, User user) {
         Post post = findPost(id);
 
