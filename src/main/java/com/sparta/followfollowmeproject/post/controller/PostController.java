@@ -20,7 +20,6 @@ import java.util.List;
 @RequestMapping("/api/posts")
 public class PostController {
     private final PostService postService;
-    private final PostLikeService postLikeService;
 
     @GetMapping
     public ResponseEntity<List<PostResponseDto>> getAllPosts() {
