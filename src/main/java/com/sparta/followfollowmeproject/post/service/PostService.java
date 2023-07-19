@@ -5,17 +5,16 @@ import com.sparta.followfollowmeproject.comment.dto.CommentResponseDto;
 import com.sparta.followfollowmeproject.comment.service.CommentService;
 import com.sparta.followfollowmeproject.follow.entity.Follow;
 import com.sparta.followfollowmeproject.follow.repository.FollowRepository;
-import com.sparta.followfollowmeproject.like.post.entity.PostLike;
-import com.sparta.followfollowmeproject.like.post.repository.PostLikeRepository;
+
 import com.sparta.followfollowmeproject.post.dto.PostRequestDto;
 import com.sparta.followfollowmeproject.post.dto.PostResponseDto;
 import com.sparta.followfollowmeproject.post.entity.Post;
 import com.sparta.followfollowmeproject.post.repository.PostRepository;
 import com.sparta.followfollowmeproject.user.entity.User;
-import com.sun.jdi.request.DuplicateRequestException;
+
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
+
 
 import java.util.List;
 import java.util.Optional;
@@ -26,7 +25,6 @@ public class PostService {
     private final PostRepository postRepository;
     private final CommentService commentService;
     private final FollowRepository followRepository;
-    private final PostLikeRepository postLikeRepository;
 
     public List<PostResponseDto> getAllPosts() {
 //        List<Post> posts = postRepository.findAllByOrderByCreatedAtDesc();

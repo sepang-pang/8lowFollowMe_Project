@@ -7,7 +7,6 @@ import com.sparta.followfollowmeproject.like.post.service.PostLikeService;
 import com.sparta.followfollowmeproject.post.dto.PostRequestDto;
 import com.sparta.followfollowmeproject.post.dto.PostResponseDto;
 import com.sparta.followfollowmeproject.post.service.PostService;
-import com.sun.jdi.request.DuplicateRequestException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -68,15 +67,5 @@ public class PostController {
         return ResponseEntity.ok().body(responseDtoList);
     }
 
-    @PostMapping("/posts/{id}/like")
-    public ResponseEntity<ApiResponseDto> likePost(@AuthenticationPrincipal UserDetailsImpl userDetails, @PathVariable Long id) {
-        postLikeService.likePost(id, userDetails.getUser()); // 수정된 부분
-        return ResponseEntity.status(HttpStatus.ACCEPTED).body(new ApiResponseDto("게시글 좋아요 성공", HttpStatus.ACCEPTED.value()));
-    }
 
-    @DeleteMapping("/posts/{id}/like")
-    public ResponseEntity<ApiResponseDto> deleteLikePost(@AuthenticationPrincipal UserDetailsImpl userDetails, @PathVariable Long id) {
-        postLikeService.deleteLikePost(id, userDetails.getUser()); // 수정된 부분
-        return ResponseEntity.status(HttpStatus.ACCEPTED).body(new ApiResponseDto("게시글 좋아요 취소 성공", HttpStatus.ACCEPTED.value()));
-    }
 }
