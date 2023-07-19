@@ -10,8 +10,11 @@ import com.sparta.followfollowmeproject.post.dto.PostResponseDto;
 import com.sparta.followfollowmeproject.post.entity.Post;
 import com.sparta.followfollowmeproject.post.repository.PostRepository;
 import com.sparta.followfollowmeproject.user.entity.User;
+import com.sparta.followfollowmeproject.user.entity.UserRoleEnum;
+
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
@@ -23,36 +26,28 @@ public class PostService {
     private final CommentService commentService;
     private final FollowRepository followRepository;
 
+    @Transactional(readOnly = true)
     public List<PostResponseDto> getAllPosts() {
-//        List<Post> posts = postRepository.findAllByOrderByCreatedAtDesc();
-//
-//        return posts.stream().map(PostResponseDto::new).toList();
-
         return postRepository.findAllByOrderByCreatedAtDesc().stream().map(
                 (Post post) -> new PostResponseDto(post, commentService.getCommentsByPostId(post.getId()))
         ).toList();
     }
 
+    @Transactional(readOnly = true)
     public PostResponseDto getPostById(Long id) {
         Post post = findPost(id);
-//        if (optionalPost.isPresent()) {
-//            Post post = optionalPost.get();
-//            return new PostResponseDto(post);
-//        } else {
-//            return null;
-//        }
         List<CommentResponseDto> commentList = commentService.getCommentsByPostId(post.getId());
         return new PostResponseDto(post, commentList);
     }
 
-
+    @Transactional
     public PostResponseDto createPost(PostRequestDto requestDto, User user) {
         Post post = new Post(requestDto, user);
         postRepository.save(post);
         return new PostResponseDto(post);
     }
 
-    // delete 를 참고하여 수정하기
+    @Transactional
     public PostResponseDto updatePost(Long id, PostRequestDto requestDto) {
         Optional<Post> optionalPost = postRepository.findById(id);
         if (optionalPost.isPresent()) {
@@ -64,14 +59,15 @@ public class PostService {
             return null;
         }
     }
-
+    @Transactional
     public void deletePost(Long id, User user) {
         Post post = findPost(id);
 
-        if(!post.getUser().getUsername().equals(user.getUsername())) {
+        if(post.getUser().getUsername().equals(user.getUsername()) || user.getRole().equals(UserRoleEnum.ADMIN)) {
+            postRepository.delete(post);
+        } else {
             throw new IllegalArgumentException("본인이 아닙니다");
         }
-        postRepository.delete(post);
     }
 
     public Post findPost(Long id) {
@@ -89,7 +85,7 @@ public class PostService {
                 .map(Follow::getFollowing).toList();
 
         // 팔로우 하는 유저들의 게시글 조회
-       return postRepository.findByUserInOrderByCreatedAtDesc(followingUsers).stream().map(
+        return postRepository.findByUserInOrderByCreatedAtDesc(followingUsers).stream().map(
                 (Post post) -> new PostResponseDto(post, commentService.getCommentsByPostId(post.getId()))
         ).toList();
     }
