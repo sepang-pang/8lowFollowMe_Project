@@ -12,6 +12,7 @@ import com.sparta.followfollowmeproject.post.repository.PostRepository;
 import com.sparta.followfollowmeproject.user.entity.User;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
@@ -82,6 +83,7 @@ public class PostService {
 
 
     // 팔로우 한 사용자의 게시글만 조회
+    @Transactional(readOnly=true)
     public List<PostResponseDto> getFollowingPosts(User user) {
         // 로그인 한 사용자가 팔로우한 목록 가져오기
         List<Follow> follows = followRepository.findAllByFollower(user);
