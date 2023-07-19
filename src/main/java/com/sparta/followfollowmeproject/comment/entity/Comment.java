@@ -1,5 +1,6 @@
 package com.sparta.followfollowmeproject.comment.entity;
 
+import com.sparta.followfollowmeproject.admin.entity.Admin;
 import com.sparta.followfollowmeproject.comment.dto.CommentRequestDto;
 import com.sparta.followfollowmeproject.common.entity.Timestamped;
 import com.sparta.followfollowmeproject.post.entity.Post;
@@ -30,6 +31,10 @@ public class Comment  extends Timestamped {
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "userId", nullable = false)
 	private User user;
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "admin_id", nullable = false)
+	private Admin admin;
 
 	@Column(name = "likeCnt")
 	private long likeCnt;

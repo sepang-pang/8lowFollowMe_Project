@@ -62,7 +62,7 @@ public class PostService {
         Post post = findPost(id);
 
         if (post.getUser().getUsername().equals(user.getUsername()) || user.getRole().equals(UserRoleEnum.ADMIN)) {
-            postRepository.delete(post);
+            postRepository.delete(post); // 작성자, 어드민 둘 다 처리 ->
         } else {
             throw new IllegalArgumentException("본인이 아닙니다");
         }
