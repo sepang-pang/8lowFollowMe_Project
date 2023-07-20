@@ -1,5 +1,6 @@
 package com.sparta.followfollowmeproject.postMedia.entity;
 
+import com.sparta.followfollowmeproject.comment.dto.CommentRequestDto;
 import com.sparta.followfollowmeproject.common.entity.Timestamped;
 import com.sparta.followfollowmeproject.post.entity.Post;
 import jakarta.persistence.*;
@@ -26,6 +27,10 @@ public class PostMedia extends Timestamped {
 
 	public PostMedia(Post post, String mdeiaUrl) {
 		this.post = post;
+		this.mdeiaUrl = mdeiaUrl;
+	}
+
+	public void update(String mdeiaUrl) {
 		this.mdeiaUrl = mdeiaUrl;
 	}
 }
