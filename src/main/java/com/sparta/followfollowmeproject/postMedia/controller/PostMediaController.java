@@ -1,11 +1,12 @@
 package com.sparta.followfollowmeproject.postMedia.controller;
 
 import com.sparta.followfollowmeproject.common.dto.ApiResponseDto;
+import com.sparta.followfollowmeproject.common.security.UserDetailsImpl;
 import com.sparta.followfollowmeproject.postMedia.dto.PostMediaResponseDto;
 import com.sparta.followfollowmeproject.postMedia.service.PostMediaService;
-import com.sparta.followfollowmeproject.postMedia.service.S3UploadService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -16,7 +17,6 @@ import java.util.List;
 @RequiredArgsConstructor
 public class PostMediaController {
 
-	private final S3UploadService s3UploadService;
 	private final PostMediaService postMediaService;
 
 	// 선택한 게시글의 미디어 조회
@@ -28,35 +28,22 @@ public class PostMediaController {
 
 	// 선택한 게시글에 미디어 저장
 	@PostMapping("/posts/{postId}/media")
-	public ResponseEntity<PostMediaResponseDto> uploadMedia(@PathVariable Long postId, @RequestParam("media") MultipartFile multipartFile) throws IOException {
-		// AWS S3 저장
-		String mediaUrl = s3UploadService.uploadFile(multipartFile);
-		// DB 저장
-		PostMediaResponseDto postMediaResponseDto = postMediaService.uploadUrl(postId, mediaUrl);
+	public ResponseEntity<PostMediaResponseDto> uploadMedia(@PathVariable Long postId, @RequestParam("media") MultipartFile multipartFile, @AuthenticationPrincipal UserDetailsImpl userDetails) throws IOException {
+		PostMediaResponseDto postMediaResponseDto = postMediaService.uploadMedia(postId, multipartFile, userDetails.getUser());
 		return ResponseEntity.ok().body(postMediaResponseDto);
 	}
 
 	// 선택한 미디어 수정
 	@PutMapping("/posts/{postId}/media/{mediaId}")
-	public ResponseEntity<PostMediaResponseDto> updateMedia(@PathVariable Long postId, @PathVariable Long mediaId, @RequestParam("media") MultipartFile multipartFile) throws IOException {
-		// AWS S3 삭제
-		String deletedMediaUrl = postMediaService.findById(mediaId).getMdeiaUrl();
-		s3UploadService.deleteFile(deletedMediaUrl);
-		// AWS S3 저장
-		String updatedMediaUrl = s3UploadService.uploadFile(multipartFile);
-		// DB 수정
-		PostMediaResponseDto postMediaResponseDto = postMediaService.updateUrl(postId, mediaId, updatedMediaUrl);
+	public ResponseEntity<PostMediaResponseDto> updateMedia(@PathVariable Long postId, @PathVariable Long mediaId, @RequestParam("media") MultipartFile multipartFile, @AuthenticationPrincipal UserDetailsImpl userDetails) throws IOException {
+		PostMediaResponseDto postMediaResponseDto = postMediaService.updateMedia(postId, mediaId, multipartFile, userDetails.getUser());
 		return ResponseEntity.ok().body(postMediaResponseDto);
 	}
 
 	// 선택한 미디어 삭제
 	@DeleteMapping("/posts/{postId}/media/{mediaId}")
-	public ResponseEntity<ApiResponseDto> deleteMedia(@PathVariable Long postId, @PathVariable Long mediaId) throws IOException {
-		// AWS S3 삭제
-		String mediaUrl = postMediaService.findById(mediaId).getMdeiaUrl();
-		s3UploadService.deleteFile(mediaUrl);
-		// DB 삭제
-		postMediaService.deleteUrl(postId, mediaId);
-		return ResponseEntity.ok().body(new ApiResponseDto("미디어 삭제 성공", 200));
+	public ResponseEntity<ApiResponseDto> deleteMedia(@PathVariable Long postId, @PathVariable Long mediaId, @AuthenticationPrincipal UserDetailsImpl userDetails) throws IOException {
+		postMediaService.deleteMedia(postId, mediaId, userDetails.getUser());
+		return ResponseEntity.ok().body(new ApiResponseDto("해당 미디어 삭제를 성공했습니다.", 200));
 	}
 }

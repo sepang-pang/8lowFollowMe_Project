@@ -8,6 +8,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
 import java.util.UUID;
 
 @Service
@@ -36,8 +38,16 @@ public class S3UploadService {
 	}
 
 	// AWS S3 삭제
-	public void deleteFile(String mediaUrl) throws IOException {
-		String s3FileName = mediaUrl.replace("https://followfollowme.s3.ap-northeast-2.amazonaws.com/","");
-		amazonS3.deleteObject(bucket, s3FileName);
+	public void deleteFile(String mediaUrl) {
+		StringBuilder address = new StringBuilder("https://" + bucket + ".s3.ap-northeast-2.amazonaws.com/");
+		String fileName = mediaUrl.replace(address, "");
+		String decodedUrl = null;
+		try {
+			decodedUrl = URLDecoder.decode(fileName, "UTF-8");
+			System.out.println(decodedUrl);
+		} catch (UnsupportedEncodingException e) {
+			e.printStackTrace();
+		}
+		amazonS3.deleteObject(bucket, decodedUrl);
 	}
 }
