@@ -41,6 +41,11 @@ public class JwtAuthorizationFilter extends OncePerRequestFilter {
                 return;
             }
 
+            if (jwtUtil.isTokenBlacklisted(tokenValue)) {
+                log.error("Token is blacklisted");
+                return;
+            }
+
             Claims info = jwtUtil.getUserInfoFromToken(tokenValue);
 
             try {
