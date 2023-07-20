@@ -1,12 +1,10 @@
 package com.sparta.followfollowmeproject.user.controller;
 
-import com.sparta.followfollowmeproject.advice.exception.RestApiException;
 import com.sparta.followfollowmeproject.common.dto.ApiResponseDto;
 import com.sparta.followfollowmeproject.user.dto.SignupRequestDto;
 import com.sparta.followfollowmeproject.user.service.UserService;
 import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
