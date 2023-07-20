@@ -1,7 +1,7 @@
 package com.sparta.followfollowmeproject.user.entity;
 
 
-import com.sparta.followfollowmeproject.admin.entity.Admin;
+import com.sparta.followfollowmeproject.admin.user.management.dto.UserManagementRequestDto;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -30,14 +30,16 @@ public class User {
     @Enumerated(value = EnumType.STRING)
     private UserRoleEnum role;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "admin_id", nullable = false)
-    private Admin admin;
+    private boolean isBlocked;
 
     public User(String username, String password, String email, UserRoleEnum role) {
         this.username = username;
         this.password = password;
         this.email = email;
         this.role = role;
+    }
+
+    public void promotionUserRole(UserManagementRequestDto requestDto) {
+        this.role = UserRoleEnum.valueOf(requestDto.getRole());
     }
 }
