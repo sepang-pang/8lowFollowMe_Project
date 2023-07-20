@@ -1,4 +1,4 @@
-package com.sparta.followfollowmeproject.multimedia.config;
+package com.sparta.followfollowmeproject.postMedia.config;
 
 import com.amazonaws.auth.AWSCredentials;
 import com.amazonaws.auth.AWSStaticCredentialsProvider;
