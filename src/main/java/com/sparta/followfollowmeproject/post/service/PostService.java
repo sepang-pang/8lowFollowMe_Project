@@ -5,7 +5,6 @@ import com.sparta.followfollowmeproject.comment.dto.CommentResponseDto;
 import com.sparta.followfollowmeproject.comment.service.CommentService;
 import com.sparta.followfollowmeproject.follow.entity.Follow;
 import com.sparta.followfollowmeproject.follow.repository.FollowRepository;
-
 import com.sparta.followfollowmeproject.post.dto.PostRequestDto;
 import com.sparta.followfollowmeproject.post.dto.PostResponseDto;
 import com.sparta.followfollowmeproject.post.entity.Post;
@@ -14,8 +13,6 @@ import com.sparta.followfollowmeproject.user.entity.User;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-
-
 import java.util.List;
 import java.util.Optional;
 
