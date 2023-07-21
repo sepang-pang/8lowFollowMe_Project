@@ -103,7 +103,8 @@
 <br/>
 
 ## ERD(Entity Relationship Diagram)
-![img_14.png](img_14.png)
+<img width="849" alt="8로팔로미 erd 230722" src="https://github.com/sepang-pang/8lowFollowMe_Project/assets/131599243/03a368f9-fde5-4f7b-9d10-8d6b0681367f">
+
 
 ****
 <br/>
@@ -112,13 +113,14 @@
 <details>
 <summary>상세보기</summary>
 
-![img_7.png](img_7.png)
-![img_8.png](img_8.png)
-![img_9.png](img_9.png)
-![img_10.png](img_10.png)
-![img_11.png](img_11.png)
-![img_12.png](img_12.png)
-![img_13.png](img_13.png)
+![슬라이드1](https://github.com/sepang-pang/8lowFollowMe_Project/assets/131599243/0dee8919-87b9-457e-afd0-45fde9be392c)
+![슬라이드2](https://github.com/sepang-pang/8lowFollowMe_Project/assets/131599243/aae81068-a5d8-470e-bff3-bdf1fcc6ee28)
+![슬라이드3](https://github.com/sepang-pang/8lowFollowMe_Project/assets/131599243/877cef3a-0735-4bab-9dc3-4b7aaef82d13)
+![슬라이드4](https://github.com/sepang-pang/8lowFollowMe_Project/assets/131599243/ebb4d55b-4a55-4f00-ad50-9557841f60c9)
+![슬라이드5](https://github.com/sepang-pang/8lowFollowMe_Project/assets/131599243/7b4fa0b2-6a39-42d9-870f-363f708069df)
+![슬라이드6](https://github.com/sepang-pang/8lowFollowMe_Project/assets/131599243/1b038432-ae5a-41f4-a22a-3478a3499690)
+![슬라이드7](https://github.com/sepang-pang/8lowFollowMe_Project/assets/131599243/0d317de9-07ca-4722-8bbb-b05b31ed661a)
+
 
 <br/><br/>
 <br/>
@@ -134,33 +136,39 @@
 <summary>상세보기</summary>
 
 ### 사용자 인증 기능
-  ![img.png](img.png)
+  <img width="631" alt="스크린샷 2023-07-22 030327" src="https://github.com/sepang-pang/8lowFollowMe_Project/assets/131599243/1599db62-66f5-40ab-86c4-2475b7ff4bac">
+
 
   <br>
 
 ### 게시글
-  ![img_1.png](img_1.png)
-  ![img_2.png](img_2.png)
+  <img width="400" alt="스크린샷 2023-07-22 030415" src="https://github.com/sepang-pang/8lowFollowMe_Project/assets/131599243/39293623-0258-4709-bcfb-9a3472c532a0">
+<img width="420" alt="스크린샷 2023-07-22 030437" src="https://github.com/sepang-pang/8lowFollowMe_Project/assets/131599243/7340eb0f-72a5-45a5-8ec1-24181e38ba3d">
+
 
   <br>
 
 ### 댓글
-  ![img_3.png](img_3.png)
+  <img width="392" alt="스크린샷 2023-07-22 030504" src="https://github.com/sepang-pang/8lowFollowMe_Project/assets/131599243/288cf0aa-5ac8-46a5-ad33-2c1ade1a959d">
+
 
   <br>
 
 ### 좋아요
-  ![img_4.png](img_4.png)
+  <img width="404" alt="스크린샷 2023-07-22 030547" src="https://github.com/sepang-pang/8lowFollowMe_Project/assets/131599243/b4be998a-2720-44f0-9abe-8774134e4135">
+
 
   <br>
 
 ### 팔로우
-  ![img_5.png](img_5.png)
+  <img width="413" alt="스크린샷 2023-07-22 030602" src="https://github.com/sepang-pang/8lowFollowMe_Project/assets/131599243/10c806aa-bbd1-40a8-86aa-fbf8b81e4e75">
+
 
   <br>
 
-### 팔로우
-  ![img_6.png](img_6.png)
+### 미디어
+  <img width="408" alt="스크린샷 2023-07-22 030630" src="https://github.com/sepang-pang/8lowFollowMe_Project/assets/131599243/7d945a2f-4896-4370-bef6-450e1388cb43">
+
 
 <br/><br/>
 <br/>
