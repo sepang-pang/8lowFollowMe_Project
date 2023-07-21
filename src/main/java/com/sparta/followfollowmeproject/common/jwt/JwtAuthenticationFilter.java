@@ -2,7 +2,7 @@ package com.sparta.followfollowmeproject.common.jwt;
 
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.sparta.followfollowmeproject.advice.exception.RestApiException;
+import com.sparta.followfollowmeproject.common.dto.exception.RestApiException;
 import com.sparta.followfollowmeproject.common.security.UserDetailsImpl;
 import com.sparta.followfollowmeproject.user.dto.LoginRequestDto;
 import com.sparta.followfollowmeproject.user.entity.UserRoleEnum;

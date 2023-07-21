@@ -20,6 +20,7 @@ public class FollowService {
 	private final UserRepository userRepository;
 
 	// 팔로잉 목록 조회
+	@Transactional(readOnly=true)
 	public List<FollowingListDto> getFollowingList(User follower) {
 		List<Follow> follows = followRepository.findAllByFollower(follower);
 		List<FollowingListDto> followingList = new ArrayList<>();

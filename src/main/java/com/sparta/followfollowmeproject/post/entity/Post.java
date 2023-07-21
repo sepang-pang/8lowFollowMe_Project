@@ -1,5 +1,6 @@
 package com.sparta.followfollowmeproject.post.entity;
 
+import com.sparta.followfollowmeproject.admin.entity.Admin;
 import com.sparta.followfollowmeproject.common.entity.Timestamped;
 import com.sparta.followfollowmeproject.like.post.entity.PostLike;
 import com.sparta.followfollowmeproject.post.dto.PostRequestDto;
@@ -8,9 +9,10 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.springframework.boot.autoconfigure.kafka.KafkaProperties;
 
-import java.util.ArrayList;
-import java.util.List;
+
+import java.time.LocalDateTime;
 
 @Entity
 @Getter
@@ -32,8 +34,9 @@ public class Post extends Timestamped {
     @JoinColumn(name = "userId", nullable = false)
     private User user;
 
-    @OneToMany(mappedBy = "post", cascade = CascadeType.REMOVE)
-    private List<PostLike> postLikes = new ArrayList<>();
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "admin_id", nullable = false)
+    private Admin admin;
 
     public Post(PostRequestDto requestDto, User user) {
         this.title = requestDto.getTitle();
