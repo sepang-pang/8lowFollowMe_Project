@@ -1,5 +1,6 @@
 package com.sparta.followfollowmeproject.comment.entity;
 
+import com.sparta.followfollowmeproject.admin.entity.Admin;
 import com.sparta.followfollowmeproject.comment.dto.CommentRequestDto;
 import com.sparta.followfollowmeproject.common.entity.Timestamped;
 import com.sparta.followfollowmeproject.like.comment.entity.CommentLike;
@@ -35,7 +36,7 @@ public class Comment  extends Timestamped {
 	@JoinColumn(name = "userId", nullable = false)
 	private User user;
 
-	@Column(name = "likeCnt") // 댓글 좋아요 수
+	@Column(name = "likeCnt")
 	private long likeCnt;
 
 	@OneToMany(mappedBy = "comment", cascade = CascadeType.REMOVE) // 댓글 좋아요
