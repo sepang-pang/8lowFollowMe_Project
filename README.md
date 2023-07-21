@@ -7,7 +7,8 @@
 ## 개발 기간
 2023.07.17. ~ 2023.07.24.
 
-## S.A. 링크 (https://www.notion.so/8-8-be0865ec00a24d918fdd86ff7578cba8)
+## S.A. 링크 
+https://www.notion.so/8-8-be0865ec00a24d918fdd86ff7578cba8
 
 ****
 
@@ -136,39 +137,34 @@
 <summary>상세보기</summary>
 
 ### 사용자 인증 기능
-  <img width="631" alt="스크린샷 2023-07-22 030327" src="https://github.com/sepang-pang/8lowFollowMe_Project/assets/131599243/1599db62-66f5-40ab-86c4-2475b7ff4bac">
-
+  <img width="551" alt="스크린샷 2023-07-22 032741" src="https://github.com/sepang-pang/8lowFollowMe_Project/assets/131599243/aa455c3c-fb94-4078-baaf-f4fa690e305e">
 
   <br>
 
 ### 게시글
   <img width="400" alt="스크린샷 2023-07-22 030415" src="https://github.com/sepang-pang/8lowFollowMe_Project/assets/131599243/39293623-0258-4709-bcfb-9a3472c532a0">
+   <br>
 <img width="420" alt="스크린샷 2023-07-22 030437" src="https://github.com/sepang-pang/8lowFollowMe_Project/assets/131599243/7340eb0f-72a5-45a5-8ec1-24181e38ba3d">
-
 
   <br>
 
 ### 댓글
   <img width="392" alt="스크린샷 2023-07-22 030504" src="https://github.com/sepang-pang/8lowFollowMe_Project/assets/131599243/288cf0aa-5ac8-46a5-ad33-2c1ade1a959d">
 
-
   <br>
 
 ### 좋아요
-  <img width="404" alt="스크린샷 2023-07-22 030547" src="https://github.com/sepang-pang/8lowFollowMe_Project/assets/131599243/b4be998a-2720-44f0-9abe-8774134e4135">
-
+  <img width="548" alt="스크린샷 2023-07-22 032721" src="https://github.com/sepang-pang/8lowFollowMe_Project/assets/131599243/9c5192e8-4c13-4e9c-88de-93c624de76e6">
 
   <br>
 
 ### 팔로우
   <img width="413" alt="스크린샷 2023-07-22 030602" src="https://github.com/sepang-pang/8lowFollowMe_Project/assets/131599243/10c806aa-bbd1-40a8-86aa-fbf8b81e4e75">
 
-
   <br>
 
 ### 미디어
   <img width="408" alt="스크린샷 2023-07-22 030630" src="https://github.com/sepang-pang/8lowFollowMe_Project/assets/131599243/7d945a2f-4896-4370-bef6-450e1388cb43">
-
 
 <br/><br/>
 <br/>
