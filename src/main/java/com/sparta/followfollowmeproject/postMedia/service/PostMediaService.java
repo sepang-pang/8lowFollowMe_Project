@@ -24,12 +24,12 @@ public class PostMediaService {
 	private final PostService postService;
 
 	@Transactional(readOnly = true)
-	// 선택한 게시글의 미디어 조회
+	// 선택한 게시글의 미디어 전체 조회
 	public List<PostMediaResponseDto> getMediaByPostId(Long postId) {
 		return postMediaRepository.findAllByPostOrderByCreatedAt(postService.findPost(postId)).stream().map(PostMediaResponseDto::new).toList();
 	}
 
-	// DB 업로드
+	// 미디어 S3 업로드 및 URL DB 저장
 	@Transactional
 	public PostMediaResponseDto uploadMedia(Long postId, MultipartFile multipartFile, User user) throws IOException {
 		Post post = postService.findPost(postId);
@@ -53,7 +53,8 @@ public class PostMediaService {
 		}
 	}
 
-	// DB 수정
+	// 미디어 S3 삭제 및 재업로드 및 URL DB 수정
+	@Transactional
 	public PostMediaResponseDto updateMedia(Long postId, Long mediaId, MultipartFile multipartFile, User user) throws IOException {
 		Post post = postService.findPost(postId);
 		PostMedia postMedia = findById(mediaId);
@@ -84,7 +85,7 @@ public class PostMediaService {
 		}
 	}
 
-	// DB 삭제
+	// 미디어 S3 삭제 및 URL DB 삭제
 	@Transactional
 	public void deleteMedia(Long postId, Long mediaId, User user) {
 		Post post = postService.findPost(postId);
