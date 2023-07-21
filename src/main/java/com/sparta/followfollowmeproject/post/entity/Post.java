@@ -61,6 +61,5 @@ public class Post extends Timestamped {
     public boolean getIsPinned() {
         return isPinned;
     }
-  }
 }
 
