@@ -117,7 +117,7 @@ public class CommentService {
 			);
 		}
 
-	@Transactional
+	@Transactional // 좋아요
 	public void likeComment(Long id, User user) {
 		Comment comment = findComment(id);
 
@@ -129,7 +129,7 @@ public class CommentService {
 		}
 	}
 
-	@Transactional
+	@Transactional // 좋아요 취소
 	public void deleteLikeComment(Long id, User user) {
 		Comment comment = findComment(id);
 		Optional<CommentLike> commentLikeOptional = commentLikeRepository.findByUserAndComment(user, comment);

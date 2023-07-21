@@ -35,10 +35,10 @@ public class Comment  extends Timestamped {
 	@JoinColumn(name = "userId", nullable = false)
 	private User user;
 
-	@Column(name = "likeCnt")
+	@Column(name = "likeCnt") // 댓글 좋아요 수
 	private long likeCnt;
 
-	@OneToMany(mappedBy = "comment", cascade = CascadeType.REMOVE)
+	@OneToMany(mappedBy = "comment", cascade = CascadeType.REMOVE) // 댓글 좋아요
 	private List<CommentLike> commentLikes = new ArrayList<>();
 
 	public Comment(Post post, CommentRequestDto requestDto, User user) {
