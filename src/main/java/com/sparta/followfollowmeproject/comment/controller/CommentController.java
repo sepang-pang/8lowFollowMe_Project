@@ -48,24 +48,16 @@ public class CommentController {
 		return ResponseEntity.ok().body(new ApiResponseDto("해당 댓글의 삭제를 완료했습니다.", HttpStatus.OK.value()));
 	}
 
-	@PostMapping("/comments/{id}/like")
+	@PostMapping("/{postId}/comments/{commentId}/like")
 	public ResponseEntity<ApiResponseDto> likeComment(@AuthenticationPrincipal UserDetailsImpl userDetails, @PathVariable Long id) {
-		try {
-			commentService.likeComment(id, userDetails.getUser());
-		} catch (DuplicateRequestException e) {
-			return ResponseEntity.badRequest().body(new ApiResponseDto(e.getMessage(), HttpStatus.BAD_REQUEST.value()));
-		}
+		commentService.likeComment(id, userDetails.getUser());
 
 		return ResponseEntity.status(HttpStatus.ACCEPTED).body(new ApiResponseDto("댓글 좋아요 성공", HttpStatus.ACCEPTED.value()));
 	}
 
-	@DeleteMapping("/comments/{id}/like")
+	@DeleteMapping("/{postId}/comments/{commentId}/deletelike")
 	public ResponseEntity<ApiResponseDto> deleteLikeComment(@AuthenticationPrincipal UserDetailsImpl userDetails, @PathVariable Long id) {
-		try {
-			commentService.deleteLikeComment(id, userDetails.getUser());
-		} catch (IllegalArgumentException e) {
-			return ResponseEntity.badRequest().body(new ApiResponseDto(e.getMessage(), HttpStatus.BAD_REQUEST.value()));
-		}
+		commentService.deleteLikeComment(id, userDetails.getUser());
 
 		return ResponseEntity.status(HttpStatus.ACCEPTED).body(new ApiResponseDto("댓글 좋아요 취소 성공", HttpStatus.ACCEPTED.value()));
 	}
