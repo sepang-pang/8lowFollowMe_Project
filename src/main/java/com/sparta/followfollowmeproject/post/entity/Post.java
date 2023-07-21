@@ -1,12 +1,15 @@
 package com.sparta.followfollowmeproject.post.entity;
 
 import com.sparta.followfollowmeproject.common.entity.Timestamped;
+import com.sparta.followfollowmeproject.like.post.entity.PostLike;
 import com.sparta.followfollowmeproject.post.dto.PostRequestDto;
 import com.sparta.followfollowmeproject.user.entity.User;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.springframework.boot.autoconfigure.kafka.KafkaProperties;
+import java.time.LocalDateTime;
 
 @Entity
 @Getter
@@ -27,10 +30,6 @@ public class Post extends Timestamped {
     @JoinColumn(name = "userId", nullable = false)
     private User user;
 
-//    @ManyToOne(fetch = FetchType.LAZY)
-//    @JoinColumn(name = "admin_id", nullable = false)
-//    private Admin admin;
-
     @Column(name = "is_notice", nullable = false) // 공지사항 여부를 나타내는 속성
     private boolean isNotice;                    // true면 공지사항, false면 일반 게시글
 
@@ -50,6 +49,7 @@ public class Post extends Timestamped {
         this.content = requestDto.getContent();
     }
 
+
     public void setNotice(boolean notice) {
         this.isNotice = notice;
     }
@@ -61,4 +61,6 @@ public class Post extends Timestamped {
     public boolean getIsPinned() {
         return isPinned;
     }
+  }
 }
+
