@@ -1,4 +1,4 @@
-package com.sparta.followfollowmeproject.advice.exception;
+package com.sparta.followfollowmeproject.common.dto.exception;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

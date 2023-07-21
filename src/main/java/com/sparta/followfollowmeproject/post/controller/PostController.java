@@ -3,6 +3,7 @@ package com.sparta.followfollowmeproject.post.controller;
 
 import com.sparta.followfollowmeproject.common.dto.ApiResponseDto;
 import com.sparta.followfollowmeproject.common.security.UserDetailsImpl;
+import com.sparta.followfollowmeproject.like.post.service.PostLikeService;
 import com.sparta.followfollowmeproject.post.dto.PostRequestDto;
 import com.sparta.followfollowmeproject.post.dto.PostResponseDto;
 import com.sparta.followfollowmeproject.post.service.PostService;
@@ -64,4 +65,6 @@ public class PostController {
         List<PostResponseDto> responseDtoList = postService.getFollowingPosts(userDetails.getUser());
         return ResponseEntity.ok().body(responseDtoList);
     }
+
+
 }

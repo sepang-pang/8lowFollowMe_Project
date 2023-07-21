@@ -2,6 +2,7 @@ package com.sparta.followfollowmeproject.post.entity;
 
 import com.sparta.followfollowmeproject.admin.entity.Admin;
 import com.sparta.followfollowmeproject.common.entity.Timestamped;
+import com.sparta.followfollowmeproject.like.post.entity.PostLike;
 import com.sparta.followfollowmeproject.post.dto.PostRequestDto;
 import com.sparta.followfollowmeproject.user.entity.User;
 import jakarta.persistence.*;
@@ -9,6 +10,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.springframework.boot.autoconfigure.kafka.KafkaProperties;
+
 
 import java.time.LocalDateTime;
 

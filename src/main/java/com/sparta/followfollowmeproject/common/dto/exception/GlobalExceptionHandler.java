@@ -1,4 +1,4 @@
-package com.sparta.followfollowmeproject.advice.exception;
+package com.sparta.followfollowmeproject.common.dto.exception;
 
 import com.sparta.followfollowmeproject.advice.custom.DuplicateException;
 import org.springframework.http.HttpStatus;

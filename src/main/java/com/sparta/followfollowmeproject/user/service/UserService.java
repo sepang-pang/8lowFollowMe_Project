@@ -1,7 +1,6 @@
 package com.sparta.followfollowmeproject.user.service;
 
 import com.sparta.followfollowmeproject.advice.custom.DuplicateException;
-import com.sparta.followfollowmeproject.advice.exception.RestApiException;
 import com.sparta.followfollowmeproject.common.dto.ApiResponseDto;
 import com.sparta.followfollowmeproject.common.jwt.JwtUtil;
 import com.sparta.followfollowmeproject.user.dto.SignupRequestDto;
@@ -11,12 +10,10 @@ import com.sparta.followfollowmeproject.user.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.MessageSource;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import java.util.Locale;
 import java.util.Optional;
 
 

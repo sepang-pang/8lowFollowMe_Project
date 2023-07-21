@@ -68,7 +68,7 @@ public class CommentService {
 			throw new EntityNotFoundException("해당 페이지를 찾을 수 없습니다.");
 		}
 		// 다른 유저가 삭제를 시도할 경우 예외 처리
-			// 게시글 작성자(post.user) 와 요청자(user) 가 같은지 또는 Admin 인지 체크 (아니면 예외발생)
+		// 게시글 작성자(post.user) 와 요청자(user) 가 같은지 또는 Admin 인지 체크 (아니면 예외발생)
 		if (!(user.getRole().equals(UserRoleEnum.ADMIN) || comment.getUser().getUsername().equals(user.getUsername()))) {
 			throw new RejectedExecutionException("작성자만 삭제할 수 있습니다.");
 		}
