@@ -31,7 +31,7 @@ public class User {
     private UserRoleEnum role;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "admin_id", nullable = false)
+    @JoinColumn(name = "admin_id", nullable = true)
     private Admin admin;
 
     public User(String username, String password, String email, UserRoleEnum role) {

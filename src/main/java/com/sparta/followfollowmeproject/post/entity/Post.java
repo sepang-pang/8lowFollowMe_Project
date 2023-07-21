@@ -35,7 +35,7 @@ public class Post extends Timestamped {
     private User user;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "admin_id", nullable = false)
+    @JoinColumn(name = "admin_id", nullable = true)
     private Admin admin;
 
     public Post(PostRequestDto requestDto, User user) {

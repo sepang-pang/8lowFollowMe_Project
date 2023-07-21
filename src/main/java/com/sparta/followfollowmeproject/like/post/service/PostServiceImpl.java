@@ -18,6 +18,7 @@ public class PostServiceImpl implements PostLikeService {
     private final PostLikeRepository postLikeRepository;
     private final PostRepository postRepository;
 
+    // 좋아요
     @Override
     @Transactional
     public void likePost(Long id, User user) {
@@ -32,6 +33,7 @@ public class PostServiceImpl implements PostLikeService {
         }
     }
 
+    // 좋아요 취소
     @Override
     @Transactional
     public void deleteLikePost(Long id, User user) {
@@ -47,6 +49,7 @@ public class PostServiceImpl implements PostLikeService {
         }
     }
 
+    // 게시글 찾기
     @Override
     public Post findPost(long id) {
         return postRepository.findById(id).orElseThrow(() ->
@@ -54,6 +57,7 @@ public class PostServiceImpl implements PostLikeService {
         );
     }
 
+    // 게시글 작성자와 요청자가 같은지 확인
     @Override
     public boolean isOwnPost(Long id, User user) {
         Post post = findPost(id);

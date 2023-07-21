@@ -4,10 +4,13 @@ import com.sparta.followfollowmeproject.comment.dto.CommentRequestDto;
 import com.sparta.followfollowmeproject.comment.dto.CommentResponseDto;
 import com.sparta.followfollowmeproject.comment.entity.Comment;
 import com.sparta.followfollowmeproject.comment.repository.CommentRepository;
+import com.sparta.followfollowmeproject.like.comment.entity.CommentLike;
+import com.sparta.followfollowmeproject.like.comment.repository.CommentLikeRepository;
 import com.sparta.followfollowmeproject.post.entity.Post;
 import com.sparta.followfollowmeproject.post.repository.PostRepository;
 import com.sparta.followfollowmeproject.user.entity.User;
 import com.sparta.followfollowmeproject.user.entity.UserRoleEnum;
+import com.sun.jdi.request.DuplicateRequestException;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -15,13 +18,16 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.concurrent.RejectedExecutionException;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
 public class CommentService {
 	private final CommentRepository commentRepository;
 	private final PostRepository postRepository;
+	private final CommentLikeRepository commentLikeRepository;
 
 	// 선택한 게시글에 대한 댓글 전체 조회
 	@Transactional(readOnly=true)
@@ -90,4 +96,46 @@ public class CommentService {
 				new EntityNotFoundException("선택한 게시글은 존재하지 않습니다.")
 		);
 	}
+
+
+	@Transactional // 대댓글 작성
+	public CommentResponseDto createReply(Long postId, Long parentId, CommentRequestDto requestDto, User user) {
+		Post post = findPost(postId);
+		Comment parentComment = findComment(parentId);
+		Comment comment = new Comment(post, requestDto, user, parentComment);
+		Comment savedComment = commentRepository.save(comment);
+		return new CommentResponseDto(savedComment);
+	}
+
+	@Transactional(readOnly = true) // 대댓글 조회
+	public List<CommentResponseDto> getRepliesByCommentId(Long commentId) {
+		Comment parentComment = findComment(commentId);
+		List<Comment> replies = commentRepository.findAllByParentCommentOrderByCreatedAtDesc(parentComment);
+		return replies.stream().map(CommentResponseDto::new).collect(Collectors.toList());
+	}
+
+	@Transactional // 좋아요
+	public void likeComment(Long id, User user) {
+		Comment comment = findComment(id);
+
+		if (commentLikeRepository.existsByUserAndComment(user, comment)) {
+			throw new DuplicateRequestException("이미 좋아요 한 댓글 입니다.");
+		} else {
+			CommentLike commentLike = new CommentLike(user, comment);
+			commentLikeRepository.save(commentLike);
+		}
+	}
+
+	@Transactional // 좋아요 취소
+	public void deleteLikeComment(Long id, User user) {
+		Comment comment = findComment(id);
+		Optional<CommentLike> commentLikeOptional = commentLikeRepository.findByUserAndComment(user, comment);
+		if (commentLikeOptional.isPresent()) {
+			commentLikeRepository.delete(commentLikeOptional.get());
+		} else {
+			throw new IllegalArgumentException("해당 댓글에 취소할 좋아요가 없습니다.");
+		}
+	}
+
+
 }

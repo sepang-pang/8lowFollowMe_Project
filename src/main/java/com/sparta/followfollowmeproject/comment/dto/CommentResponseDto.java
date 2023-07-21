@@ -15,6 +15,7 @@ public class CommentResponseDto extends ApiResponseDto {
 	private String content;
 	private long likeCnt;
 
+
 	public CommentResponseDto(Comment comment) {
 		this.id = comment.getId();
 		this.username = comment.getUser().getUsername();
