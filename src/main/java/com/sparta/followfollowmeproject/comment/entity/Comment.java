@@ -36,14 +36,10 @@ public class Comment  extends Timestamped {
 	@JoinColumn(name = "userId", nullable = false)
 	private User user;
 
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "admin_id", nullable = false)
-	private Admin admin;
-
 	@Column(name = "likeCnt")
 	private long likeCnt;
 
-	@OneToMany(mappedBy = "comment", cascade = CascadeType.REMOVE)
+	@OneToMany(mappedBy = "comment", cascade = CascadeType.REMOVE) // 댓글 좋아요
 	private List<CommentLike> commentLikes = new ArrayList<>();
 
 	public Comment(Post post, CommentRequestDto requestDto, User user) {

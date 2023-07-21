@@ -48,14 +48,14 @@ public class CommentController {
 		return ResponseEntity.ok().body(new ApiResponseDto("해당 댓글의 삭제를 완료했습니다.", HttpStatus.OK.value()));
 	}
 
-	@PostMapping("/{postId}/comments/{commentId}/like")
+	@PostMapping("/{postId}/comments/{commentId}/like") // 댓글 좋아요
 	public ResponseEntity<ApiResponseDto> likeComment(@AuthenticationPrincipal UserDetailsImpl userDetails, @PathVariable Long id) {
 		commentService.likeComment(id, userDetails.getUser());
 
 		return ResponseEntity.status(HttpStatus.ACCEPTED).body(new ApiResponseDto("댓글 좋아요 성공", HttpStatus.ACCEPTED.value()));
 	}
 
-	@DeleteMapping("/{postId}/comments/{commentId}/deletelike")
+	@DeleteMapping("/{postId}/comments/{commentId}/deletelike") // 댓글 좋아요 취소
 	public ResponseEntity<ApiResponseDto> deleteLikeComment(@AuthenticationPrincipal UserDetailsImpl userDetails, @PathVariable Long id) {
 		commentService.deleteLikeComment(id, userDetails.getUser());
 
