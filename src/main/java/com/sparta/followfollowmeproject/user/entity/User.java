@@ -29,8 +29,9 @@ public class User {
     @Column(nullable = false)
     @Enumerated(value = EnumType.STRING)
     private UserRoleEnum role;
-
     private boolean isBlocked = false;
+    private Long kakaoId;
+
 
     public User(String username, String password, String email, UserRoleEnum role) {
         this.username = username;
@@ -39,11 +40,24 @@ public class User {
         this.role = role;
     }
 
+
     public void promotionUserRole(UserManagementRequestDto requestDto) {
         this.role = UserRoleEnum.valueOf(requestDto.getRole());
     }
 
     public void switchBlock() {
         this.isBlocked = !this.isBlocked;
+      
+    public User(String username, String password, String email, UserRoleEnum role, Long kakaoId) {
+        this.username = username;
+        this.password = password;
+        this.email = email;
+        this.role = role;
+        this.kakaoId =kakaoId;
+    }
+
+    public User kakaoIdUpdate(Long kakaoId) {
+        this.kakaoId = kakaoId;
+        return this;
     }
 }
