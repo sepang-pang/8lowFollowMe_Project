@@ -41,6 +41,7 @@ public class JwtAuthorizationFilter extends OncePerRequestFilter {
                 return;
             }
 
+            // 블랙리스트 토큰 인가 불가
             if (jwtUtil.isTokenBlacklisted(tokenValue)) {
                 log.error("Token is blacklisted");
                 return;

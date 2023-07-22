@@ -1,7 +1,6 @@
 package com.sparta.followfollowmeproject.user.controller;
 
 import com.sparta.followfollowmeproject.common.dto.ApiResponseDto;
-import com.sparta.followfollowmeproject.common.jwt.JwtUtil;
 import com.sparta.followfollowmeproject.user.dto.SignupRequestDto;
 import com.sparta.followfollowmeproject.user.service.UserService;
 import jakarta.servlet.http.HttpServletRequest;
@@ -37,8 +36,8 @@ public class UserController {
     }
 
     @DeleteMapping("/user/logout")
-    public void logout(HttpServletRequest request) {
-        userService.logOut(request);
+    public ResponseEntity<ApiResponseDto> logout(HttpServletRequest request) {
+       return userService.logOut(request);
     }
 
 }

@@ -72,10 +72,11 @@ public class UserService {
         return ResponseEntity.ok().body(new ApiResponseDto("회원가입 성공", 200));
     }
 
-    public void logOut(HttpServletRequest request) {
+    public ResponseEntity<ApiResponseDto> logOut(HttpServletRequest request) {
         String token = jwtUtil.getJwtFromHeader(request);
         if (StringUtils.hasText(token)) {
             jwtUtil.addToBlacklist(token);
         }
+        return ResponseEntity.ok().body(new ApiResponseDto("로그아웃 성공", 200));
     }
 }
