@@ -82,23 +82,6 @@ public class CommentService {
 		commentRepository.delete(findComment(commentId));
 	}
 
-	// id에 따른 댓글 찾기
-	private Comment findComment(Long commentId) {
-		return commentRepository.findById(commentId).orElseThrow(() ->
-				// 댓글이 존재하지 않을 경우 예외 처리
-				new EntityNotFoundException("선택한 댓글은 존재하지 않습니다.")
-		);
-	}
-
-	// id에 따른 게시글 찾기
-	private Post findPost(Long postId) {
-		return postRepository.findById(postId).orElseThrow(() ->
-				new EntityNotFoundException("선택한 게시글은 존재하지 않습니다.")
-		);
-	}
-
-
-
 	@Transactional // 대댓글 작성
 	public CommentResponseDto createReply(Long postId, Long parentId, CommentRequestDto requestDto, User user) {
 		Post post = findPost(postId);
@@ -117,8 +100,9 @@ public class CommentService {
 
 
 	@Transactional // 좋아요
-	public void likeComment(Long id, User user) {
-		Comment comment = findComment(id);
+	public void likeComment(Long postId, Long commentId, User user) {
+		findPost(postId);
+		Comment comment = findComment(commentId);
 
 		if (commentLikeRepository.existsByUserAndComment(user, comment)) {
 			throw new DuplicateRequestException("이미 좋아요 한 댓글 입니다.");
@@ -129,13 +113,31 @@ public class CommentService {
 	}
 
 	@Transactional // 좋아요 취소
-	public void deleteLikeComment(Long id, User user) {
-		Comment comment = findComment(id);
+	public void deleteLikeComment(Long postId, Long commentId, User user) {
+		findPost(postId);
+		Comment comment = findComment(commentId);
 		Optional<CommentLike> commentLikeOptional = commentLikeRepository.findByUserAndComment(user, comment);
 		if (commentLikeOptional.isPresent()) {
 			commentLikeRepository.delete(commentLikeOptional.get());
 		} else {
 			throw new IllegalArgumentException("해당 댓글에 취소할 좋아요가 없습니다.");
 		}
+	}
+
+	//------- 공통 메서드 -------//
+
+	// id에 따른 댓글 찾기
+	private Comment findComment(Long commentId) {
+		return commentRepository.findById(commentId).orElseThrow(() ->
+				// 댓글이 존재하지 않을 경우 예외 처리
+				new EntityNotFoundException("선택한 댓글은 존재하지 않습니다.")
+		);
+	}
+
+	// id에 따른 게시글 찾기
+	private Post findPost(Long postId) {
+		return postRepository.findById(postId).orElseThrow(() ->
+				new EntityNotFoundException("선택한 게시글은 존재하지 않습니다.")
+		);
 	}
 }
