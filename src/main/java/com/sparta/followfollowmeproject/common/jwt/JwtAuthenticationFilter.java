@@ -1,13 +1,11 @@
 package com.sparta.followfollowmeproject.common.jwt;
 
-
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.sparta.followfollowmeproject.advice.exception.RestApiException;
+import com.sparta.followfollowmeproject.common.dto.ApiResponseDto;
 import com.sparta.followfollowmeproject.common.security.UserDetailsImpl;
 import com.sparta.followfollowmeproject.user.dto.LoginRequestDto;
 import com.sparta.followfollowmeproject.user.entity.UserRoleEnum;
 import jakarta.servlet.FilterChain;
-import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.extern.slf4j.Slf4j;
@@ -47,11 +45,11 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
     }
 
     @Override
-    protected void successfulAuthentication(HttpServletRequest request, HttpServletResponse response, FilterChain chain, Authentication authResult) throws IOException, ServletException {
+    protected void successfulAuthentication(HttpServletRequest request, HttpServletResponse response, FilterChain chain, Authentication authResult) throws IOException {
         log.info("로그인 성공 및 JWT 생성");
         response.setContentType("application/json");
         response.setCharacterEncoding("UTF-8");
-        response.getWriter().write(new ObjectMapper().writeValueAsString(new RestApiException("로그인 성공", HttpStatus.OK.value())));
+        response.getWriter().write(new ObjectMapper().writeValueAsString(new ApiResponseDto("로그인 성공", HttpStatus.OK.value())));
 
         String username = ((UserDetailsImpl) authResult.getPrincipal()).getUsername();
         UserRoleEnum role = ((UserDetailsImpl) authResult.getPrincipal()).getUser().getRole();
