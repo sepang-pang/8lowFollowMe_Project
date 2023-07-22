@@ -63,17 +63,19 @@ public class Post extends Timestamped {
         this.content = requestDto.getContent();
     }
 
-
-    public void setNotice(boolean notice) {
-        this.isNotice = notice;
-    }
-
-    public void setIsPinned(boolean isPinned) {
-        this.isPinned = isPinned;
-    }
-
     public boolean getIsPinned() {
         return isPinned;
+    }
+
+
+    // 공지사항 등록 메서드
+    public void markAsNotice(boolean isNotice) {
+        this.isNotice = isNotice;
+    }
+
+    // 공지사항 상단 고정 메서드
+    public void switchPin(boolean isPinned) {
+        this.isPinned = isPinned;
     }
 }
 
