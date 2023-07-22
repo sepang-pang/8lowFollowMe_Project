@@ -49,15 +49,15 @@ public class CommentController {
 	}
 
 	@PostMapping("/{postId}/comments/{commentId}/like") // 댓글 좋아요
-	public ResponseEntity<ApiResponseDto> likeComment(@AuthenticationPrincipal UserDetailsImpl userDetails, @PathVariable Long id) {
-		commentService.likeComment(id, userDetails.getUser());
+	public ResponseEntity<ApiResponseDto> likeComment(@AuthenticationPrincipal UserDetailsImpl userDetails, @PathVariable Long postId, @PathVariable Long commentId) {
+		commentService.likeComment(postId, commentId, userDetails.getUser());
 
 		return ResponseEntity.status(HttpStatus.ACCEPTED).body(new ApiResponseDto("댓글 좋아요 성공", HttpStatus.ACCEPTED.value()));
 	}
 
-	@DeleteMapping("/{postId}/comments/{commentId}/deletelike") // 댓글 좋아요 취소
-	public ResponseEntity<ApiResponseDto> deleteLikeComment(@AuthenticationPrincipal UserDetailsImpl userDetails, @PathVariable Long id) {
-		commentService.deleteLikeComment(id, userDetails.getUser());
+	@DeleteMapping("/{postId}/comments/{commentId}/deleteLike") // 댓글 좋아요 취소
+	public ResponseEntity<ApiResponseDto> deleteLikeComment(@AuthenticationPrincipal UserDetailsImpl userDetails, @PathVariable Long postId, @PathVariable Long commentId) {
+		commentService.deleteLikeComment(postId, commentId, userDetails.getUser());
 
 		return ResponseEntity.status(HttpStatus.ACCEPTED).body(new ApiResponseDto("댓글 좋아요 취소 성공", HttpStatus.ACCEPTED.value()));
 	}
