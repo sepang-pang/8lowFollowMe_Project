@@ -30,7 +30,7 @@ public class User {
     @Enumerated(value = EnumType.STRING)
     private UserRoleEnum role;
 
-    private boolean isBlocked;
+    private boolean isBlocked = false;
 
     public User(String username, String password, String email, UserRoleEnum role) {
         this.username = username;
@@ -41,5 +41,9 @@ public class User {
 
     public void promotionUserRole(UserManagementRequestDto requestDto) {
         this.role = UserRoleEnum.valueOf(requestDto.getRole());
+    }
+
+    public void switchBlock() {
+        this.isBlocked = !this.isBlocked;
     }
 }
