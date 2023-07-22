@@ -38,6 +38,9 @@ dependencies {
 	// Security
 	implementation 'org.springframework.boot:spring-boot-starter-security'
 
+	// Redis
+	implementation 'org.springframework.boot:spring-boot-starter-data-redis'
+
 	// thymeleaf, web, lombok
 	implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
 	implementation 'org.springframework.boot:spring-boot-starter-web'

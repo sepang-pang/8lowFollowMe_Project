@@ -30,12 +30,6 @@ public class UserManagementController {
         return userManagementService.getUserList();
     }
 
-    // 회원 삭제
-    @DeleteMapping("/users")
-    public ResponseEntity<ApiResponseDto> deleteUser(@RequestParam("username") String username) {
-        return userManagementService.deleteUser(username);
-    }
-
     // 운영진 승격
     @PutMapping("/users")
     public ResponseEntity<ApiResponseDto> promotionUserRole(@RequestParam("username") String username,
@@ -45,5 +39,21 @@ public class UserManagementController {
 
     // 회원 정보 수정 -> 프로필이 완성되면 그것과 연계하여 구현 예정
 
-    // 회원 차단 ->
+    // 회원 차단
+    @PutMapping("/users/block")
+    public ResponseEntity<ApiResponseDto> blockUser(@RequestParam("username") String username) {
+        return userManagementService.blockUser(username);
+    }
+
+    // 회원 차단
+    @PutMapping("/users/unblock")
+    public ResponseEntity<ApiResponseDto> unblockUser(@RequestParam("username") String username) {
+        return userManagementService.unblockUser(username);
+    }
+
+    // 회원 삭제
+    @DeleteMapping("/users")
+    public ResponseEntity<ApiResponseDto> deleteUser(@RequestParam("username") String username) {
+        return userManagementService.deleteUser(username);
+    }
 }
