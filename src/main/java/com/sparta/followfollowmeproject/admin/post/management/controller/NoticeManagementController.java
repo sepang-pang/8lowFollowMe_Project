@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/admin/notice")
+@RequestMapping("api/admin/notice")
 @RequiredArgsConstructor
 @Secured(UserRoleEnum.Authority.ADMIN)
 public class NoticeManagementController {

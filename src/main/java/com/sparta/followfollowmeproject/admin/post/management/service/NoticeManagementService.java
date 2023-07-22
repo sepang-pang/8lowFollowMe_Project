@@ -22,8 +22,8 @@ public class NoticeManagementService {
 
     public NoticeManagementResponseDto createNotice(PostRequestDto requestDto, User admin) {
         Post post = new Post(requestDto, admin);
-        post.setNotice(true); // 공지사항으로 설정
-        post.setIsPinned(post.getIsPinned()); // 상단에 고정 여부 설정
+        post.markAsNotice(true); // 공지사항으로 설정
+        post.switchPin(true); // 상단에 고정 여부 설정
         Post savedPost = postRepository.save(post);
         return new NoticeManagementResponseDto(savedPost);
     }
@@ -49,10 +49,6 @@ public class NoticeManagementService {
     public void deleteNotice(Long noticeId, User admin) {
         Post findNotice = findNotice(noticeId);
         postRepository.delete(findNotice);
-    }
-    private boolean isAdmin(User admin) {
-        UserRoleEnum userRoleEnum = admin.getRole();
-        return userRoleEnum == UserRoleEnum.ADMIN;
     }
 
     private Post findNotice(Long noticeId) {
