@@ -2,10 +2,14 @@ package com.sparta.followfollowmeproject.user.entity;
 
 
 import com.sparta.followfollowmeproject.admin.user.management.dto.UserManagementRequestDto;
+import com.sparta.followfollowmeproject.follow.entity.Follow;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Getter
@@ -33,6 +37,12 @@ public class User {
     private boolean isBlocked = false;
 
     private Long kakaoId;
+
+    @OneToMany(mappedBy = "follower", cascade = CascadeType.REMOVE)
+    private final List<Follow> followerList = new ArrayList<>();
+
+    @OneToMany(mappedBy = "following", cascade = CascadeType.REMOVE)
+    private final List<Follow> folloingList = new ArrayList<>();
 
 
     public User(String username, String password, String email, UserRoleEnum role) {
