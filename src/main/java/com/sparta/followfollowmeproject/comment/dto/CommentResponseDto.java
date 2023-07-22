@@ -13,7 +13,6 @@ public class CommentResponseDto extends ApiResponseDto {
 	private LocalDateTime createdAt;
 	private LocalDateTime modifiedAt;
 	private String content;
-	private long likeCnt;
 
 	public CommentResponseDto(Comment comment) {
 		this.id = comment.getId();
@@ -21,6 +20,5 @@ public class CommentResponseDto extends ApiResponseDto {
 		this.createdAt = comment.getCreatedAt();
 		this.modifiedAt = comment.getModifiedAt();
 		this.content = comment.getContent();
-		this.likeCnt = comment.getLikeCnt();
 	}
 }
