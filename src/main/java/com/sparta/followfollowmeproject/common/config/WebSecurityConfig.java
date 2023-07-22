@@ -6,7 +6,6 @@ import com.sparta.followfollowmeproject.common.jwt.JwtUtil;
 import com.sparta.followfollowmeproject.common.security.UserDetailsServiceImpl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.boot.autoconfigure.security.servlet.PathRequest;
-import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -22,12 +21,12 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 
 @Configuration
 @EnableWebSecurity // Spring Security 지원을 가능하게 함
+@EnableGlobalMethodSecurity(securedEnabled = true)
 @RequiredArgsConstructor
 @EnableGlobalMethodSecurity(securedEnabled = true) // @Secured 활성화
 public class WebSecurityConfig {
 
     private final JwtUtil jwtUtil;
-    private final MessageSource messageSource;
     private final UserDetailsServiceImpl userDetailsService;
     private final AuthenticationConfiguration authenticationConfiguration;
 
