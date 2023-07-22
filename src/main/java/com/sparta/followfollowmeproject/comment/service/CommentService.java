@@ -98,6 +98,7 @@ public class CommentService {
 	}
 
 
+
 	@Transactional // 대댓글 작성
 	public CommentResponseDto createReply(Long postId, Long parentId, CommentRequestDto requestDto, User user) {
 		Post post = findPost(postId);
@@ -113,6 +114,7 @@ public class CommentService {
 		List<Comment> replies = commentRepository.findAllByParentCommentOrderByCreatedAtDesc(parentComment);
 		return replies.stream().map(CommentResponseDto::new).collect(Collectors.toList());
 	}
+
 
 	@Transactional // 좋아요
 	public void likeComment(Long id, User user) {
@@ -136,6 +138,4 @@ public class CommentService {
 			throw new IllegalArgumentException("해당 댓글에 취소할 좋아요가 없습니다.");
 		}
 	}
-
-
 }

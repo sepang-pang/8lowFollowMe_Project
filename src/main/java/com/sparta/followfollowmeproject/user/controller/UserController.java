@@ -3,15 +3,13 @@ package com.sparta.followfollowmeproject.user.controller;
 import com.sparta.followfollowmeproject.common.dto.ApiResponseDto;
 import com.sparta.followfollowmeproject.user.dto.SignupRequestDto;
 import com.sparta.followfollowmeproject.user.service.UserService;
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
@@ -35,6 +33,11 @@ public class UserController {
             return ResponseEntity.badRequest().body(new ApiResponseDto("회원가입 실패", 400));
         }
         return userService.signup(requestDto);
+    }
+
+    @DeleteMapping("/user/logout")
+    public ResponseEntity<ApiResponseDto> logout(HttpServletRequest request) {
+       return userService.logOut(request);
     }
 
 }
