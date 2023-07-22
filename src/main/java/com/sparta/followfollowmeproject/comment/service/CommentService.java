@@ -20,6 +20,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 import java.util.Optional;
 import java.util.concurrent.RejectedExecutionException;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -95,6 +96,25 @@ public class CommentService {
 				new EntityNotFoundException("선택한 게시글은 존재하지 않습니다.")
 		);
 	}
+
+
+
+	@Transactional // 대댓글 작성
+	public CommentResponseDto createReply(Long postId, Long parentId, CommentRequestDto requestDto, User user) {
+		Post post = findPost(postId);
+		Comment parentComment = findComment(parentId);
+		Comment comment = new Comment(post, requestDto, user, parentComment);
+		Comment savedComment = commentRepository.save(comment);
+		return new CommentResponseDto(savedComment);
+	}
+
+	@Transactional(readOnly = true) // 대댓글 조회
+	public List<CommentResponseDto> getRepliesByCommentId(Long commentId) {
+		Comment parentComment = findComment(commentId);
+		List<Comment> replies = commentRepository.findAllByParentCommentOrderByCreatedAtDesc(parentComment);
+		return replies.stream().map(CommentResponseDto::new).collect(Collectors.toList());
+	}
+
 
 	@Transactional // 좋아요
 	public void likeComment(Long id, User user) {

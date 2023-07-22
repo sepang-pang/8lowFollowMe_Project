@@ -36,7 +36,7 @@ public class PostController {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
-
+    // 게시글 작성
     @PostMapping
     public ResponseEntity<PostResponseDto> createPost(@RequestBody PostRequestDto requestDto, @AuthenticationPrincipal UserDetailsImpl userDetails) {
         PostResponseDto createdPost = postService.createPost(requestDto, userDetails.getUser());

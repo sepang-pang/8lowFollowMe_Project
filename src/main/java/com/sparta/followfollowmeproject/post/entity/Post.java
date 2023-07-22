@@ -34,7 +34,6 @@ public class Post extends Timestamped {
     @JoinColumn(name = "userId", nullable = false)
     private User user;
 
-
     @Column(name = "is_notice", nullable = false) // 공지사항 여부를 나타내는 속성
     private boolean isNotice;                    // true면 공지사항, false면 일반 게시글
 
@@ -49,6 +48,7 @@ public class Post extends Timestamped {
 
     @OneToMany(mappedBy = "post", cascade = CascadeType.REMOVE)
     private List<PostMedia> postMediaList;
+
 
     public Post(PostRequestDto requestDto, User user) {
         this.title = requestDto.getTitle();

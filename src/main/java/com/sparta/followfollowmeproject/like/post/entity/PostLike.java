@@ -24,6 +24,7 @@ public class PostLike extends Timestamped {
     @JoinColumn(name = "post_id")
     private Post post;
 
+    // 좋아요 수
     @Column(name = "like_count", nullable = false)
     private int likeCount = 0;
 

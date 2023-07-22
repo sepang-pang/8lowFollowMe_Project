@@ -14,6 +14,7 @@ public class CommentResponseDto extends ApiResponseDto {
 	private LocalDateTime modifiedAt;
 	private String content;
 
+
 	public CommentResponseDto(Comment comment) {
 		this.id = comment.getId();
 		this.username = comment.getUser().getUsername();
