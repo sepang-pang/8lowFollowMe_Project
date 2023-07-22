@@ -45,7 +45,7 @@ public class UserManagementController {
         return userManagementService.blockUser(username);
     }
 
-    // 회원 차단
+    // 회원 차단 해제
     @PutMapping("/users/unblock")
     public ResponseEntity<ApiResponseDto> unblockUser(@RequestParam("username") String username) {
         return userManagementService.unblockUser(username);
