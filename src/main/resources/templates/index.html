@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <title>8llow Me!</title>
+    <link rel="stylesheet" href="/resources/static/css/reset.css">
+    <link rel="stylesheet" href="/resources/static/css/common.css">
+    <link rel="stylesheet" href="/resources/static/css/style.css">
+    <link rel="shortcut icon" href="/resources/static/imags/1.jpg">
+</head>
+
+<body>
+<section id="container">
+    <header id="header">
+        <section class="inner">
+
+            <h1 class="logo">
+                <a href="index.html">
+                    <div class="sprite_insta_icon"></div>
+                    <div class="sprite_write_logo"></div>
+                </a>
+            </h1>
+
+            <div class="search_box">
+                <input type="text" placeholder="검색" id="search-field">
+
+                <div class="fake_field">
+                    <span class="sprite_small_search_icon"></span>
+                    <span>검색</span>
+                </div>
+            </div>
+
+            <div class="right_icons">
+                <a href="new_post.html">
+                    <div class="sprite_camera_icon"></div>
+                </a>
+                <a href="login.html">
+                    <div class="sprite_compass_icon"></div>
+                </a>
+                <a href="followlist.html">
+                    <div class="sprite_heart_icon_outline"></div>
+                </a>
+                <a href="profile.html">
+                    <div class="sprite_user_icon_outline"></div>
+                </a>
+            </div>
+        </section>
+    </header>
+
+
+    <section id="main_container">
+        <div class="inner">
+
+            <div class="contents_box">
+                <article class="contents">
+                    <header class="top">
+                        <div class="user_container">
+                            <div class="profile_img">
+                                <img src='/resources/static/imags/5.jpg' alt="프로필이미지">
+                            </div>
+                            <div class="user_name">
+                                <div class="nick_name m_text">ohschang</div>
+                                <div class="country s_text">Yeongju, South Korea</div>
+                            </div>
+                        </div>
+
+                        <div class="sprite_more_icon" data-name="more" style="cursor: pointer;">
+                            <ul class="toggle_box">
+                                <li><input type="submit" class="follow" value="팔로우" data-name="follow"></li>
+                                <li class="clickable">수정</li>
+                                <li class="clickable">삭제</li>
+                            </ul>
+                        </div>
+                    </header>
+
+                    <div class="img_section">
+                        <div class="trans_inner">
+                            <div><img src="/resources/static/imags/9.jpg" alt="visual01"></div>
+                        </div>
+                    </div>
+
+                    <div class="bottom_icons">
+                        <div class="left_icons">
+                            <div class="heart_btn">
+                                <div class="sprite_heart_icon_outline" name="39" data-name="heartbeat"></div>
+                            </div>
+                            <div class="sprite_bubble_icon"></div>
+                            <div class="sprite_share_icon" data-name="share"></div>
+                        </div>
+                        <div class="right_icon">
+                            <div class="sprite_bookmark_outline" data-name="bookmark"></div>
+                        </div>
+                    </div>
+
+                    <div class="likes m_text">
+                        좋아요
+                        <span id="like-count-39">1,557</span>
+                        <span id="bookmark-count-39"></span>
+                        개
+                    </div>
+
+                    <div class="comment_container">
+                        <div class="comment" id="comment-list-ajax-post37">
+                            <div class="comment-detail">
+                                <div class="nick_name m_text">ohschang</div>
+                                <div>악어가 너무 무서워용~!</div>
+                            </div>
+                        </div>
+                        <div class="small_heart">
+                            <div class="sprite_small_heart_icon_outline" style="cursor: pointer;"></div>
+                        </div>
+                    </div>
+
+                    <div class="timer">10분 전</div>
+
+                    <div class="comment_field" id="add-comment-post37">
+                        <input type="text" placeholder="댓글달기...">
+                        <div class="upload_btn m_text" data-name="comment">게시</div>
+                    </div>
+                </article>
+
+
+                <div class="side_box">
+                    <div class="user_profile">
+                        <div class="profile_thumb">
+                            <img src="/resources/static/imags/5.jpg" alt="프로필사진">
+                        </div>
+                        <div class="detail">
+                            <div class="id m_text">ohschang</div>
+                            <div class="ko_name">오세창</div>
+                        </div>
+                    </div>
+
+
+                    <article class="story">
+                        <header class="story_header">
+                            <div>스토리</div>
+                            <div class="more">모두 보기</div>
+                        </header>
+
+                        <div class="scroll_inner">
+                            <div class="thumb_user">
+                                <div class="profile_thumb">
+                                    <img src="/resources/static/imags/5.jpg" alt="프로필사진">
+                                </div>
+                                <div class="detail">
+                                    <div class="id">ohschang</div>
+                                    <div class="time">발표 중</div>
+                                </div>
+                            </div>
+                            <div class="thumb_user">
+                                <div class="profile_thumb">
+                                    <img src="/resources/static/imags/4.jpg" alt="프로필사진">
+                                </div>
+                                <div class="detail">
+                                    <div class="id">king__jinhyuk</div>
+                                    <div class="time">접속 중</div>
+                                </div>
+                            </div>
+                            <div class="thumb_user">
+                                <div class="profile_thumb">
+                                    <img src="/resources/static/imags/03.jpg" alt="프로필사진">
+                                </div>
+                                <div class="detail">
+                                    <div class="id">manager_skeleton</div>
+                                    <div class="time">30분 전</div>
+                                </div>
+                            </div>
+                            <div class="thumb_user">
+                                <div class="profile_thumb">
+                                    <img src="/resources/static/imags/7.jpg" alt="프로필사진">
+                                </div>
+                                <div class="detail">
+                                    <div class="id">hg._.low</div>
+                                    <div class="time">1시간 전</div>
+                                </div>
+                            </div>
+                            <div class="thumb_user">
+                                <div class="profile_thumb">
+                                    <img src="/resources/static/imags/6.jpg" alt="프로필사진">
+                                </div>
+                                <div class="detail">
+                                    <div class="id">66_ggombi_99</div>
+                                    <div class="time">6시간 전</div>
+                                </div>
+                            </div>
+                        </div>
+                    </article>
+
+
+                    <article class="recommend">
+                        <header class="reco_header">
+                            <div>회원님을 위한 추천</div>
+                            <div class="more">모두 보기</div>
+                        </header>
+
+                        <div class="thumb_user">
+                            <div class="profile_thumb">
+                                <img src="/resources/static/imags/4.jpg" alt="프로필사진">
+                            </div>
+                            <div class="detail">
+                                <div class="id">king__jinhyuk</div>
+                                <div class="time">접속 중</div>
+                            </div>
+                        </div>
+                        <div class="thumb_user">
+                            <div class="profile_thumb">
+                                <img src="/resources/static/imags/03.jpg" alt="프로필사진">
+                            </div>
+                            <div class="detail">
+                                <div class="id">manager_skeleton</div>
+                                <div class="time">30분 전</div>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+            </div>
+    </section>
+</section>
+
+<script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+<script src="/resources/static/js/main.js"></script>
+<script>
+    document.querySelector('.sprite_more_icon').addEventListener('click', function () {
+        var toggleBox = this.querySelector('.toggle_box');
+        toggleBox.style.display = toggleBox.style.display === 'none' ? 'block' : 'none';
+    });
+
+    document.querySelector('.follow').addEventListener('click', function (event) {
+        this.value = this.value === '팔로우' ? '팔로우 취소' : '팔로우';
+        event.stopPropagation();  /* 클릭 이벤트가 상위 요소로 전파되는 것을 막음 */
+    });
+</script>
+
+
+</body>
+</html>

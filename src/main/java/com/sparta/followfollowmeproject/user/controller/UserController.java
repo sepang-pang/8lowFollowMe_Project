@@ -1,6 +1,7 @@
 package com.sparta.followfollowmeproject.user.controller;
 
 import com.sparta.followfollowmeproject.common.dto.ApiResponseDto;
+import com.sparta.followfollowmeproject.user.dto.LoginRequestDto;
 import com.sparta.followfollowmeproject.user.dto.SignupRequestDto;
 import com.sparta.followfollowmeproject.user.service.UserService;
 import jakarta.validation.Valid;
@@ -24,9 +25,10 @@ public class UserController {
     public UserController(UserService userService) {
         this.userService = userService;
     }
+
     @PostMapping("/user/signup")
-    public ResponseEntity<ApiResponseDto> signup(@RequestBody @Valid SignupRequestDto requestDto, BindingResult bindingResult){
-        // Validation 예외처리
+    public ResponseEntity<ApiResponseDto> signup(@RequestBody @Valid SignupRequestDto requestDto, BindingResult bindingResult) {
+
         List<FieldError> fieldErrors = bindingResult.getFieldErrors();
         if (fieldErrors.size() > 0) {
             for (FieldError fieldError : bindingResult.getFieldErrors()) {

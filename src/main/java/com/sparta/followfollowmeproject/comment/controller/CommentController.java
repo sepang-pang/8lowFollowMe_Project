@@ -62,6 +62,4 @@ public class CommentController {
 		return ResponseEntity.status(HttpStatus.ACCEPTED).body(new ApiResponseDto("댓글 좋아요 취소 성공", HttpStatus.ACCEPTED.value()));
 	}
 
-
-
 }

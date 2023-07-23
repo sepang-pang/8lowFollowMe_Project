@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <title>8llow Me!</title>
+    <link rel="stylesheet" type="text/css" href="css/style2.css">
+    <link rel="shortcut icon" href="imgs/1.jpg">
+    <link rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" href="css/common.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/login.css">
+
+    <style>
+
+        .user-img {
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            margin-right: 5px;
+            margin-top: 20px;
+        }
+
+        .follow-btn {
+            background: none;
+            border: none;
+        }
+
+        .container {
+            width: 60%;
+            margin: auto;
+        }
+
+        table tr {
+            padding: 20px 0;
+        }
+
+        tr {
+            padding: 50px 0;
+        }
+
+        .less-emphasized {
+            color: #888;
+        }
+
+        strong {
+            font-weight: 900;
+        }
+
+        .follow-box {
+            border: 3px solid #80edf4;
+            border-radius: 10px;
+            padding: 7px;
+            text-align: center;
+            margin: auto;
+            background-color: white;
+            ustify-content: center;
+        }
+    </style>
+
+</head>
+
+<body>
+<section id="container">
+    <header id="header">
+        <section class="h_inner">
+            <h1 class="logo">
+                <a href="index.html">
+                    <div class="sprite_insta_icon"></div>
+                    <div>
+                        <div class="sprite_write_logo"></div>
+                    </div>
+                </a>
+            </h1>
+
+            <div class="search_field">
+                <input type="text" placeholder="검색" tabindex="0">
+
+                <div class="fake_field">
+                    <span class=sprite_small_search_icon></span>
+                    <span>검색</span>
+                </div>
+            </div>
+
+            <div class="right_icons">
+                <a href="new_post.html">
+                    <div class="sprite_camera_icon"></div>
+                </a>
+                <a href="login.html">
+                    <div class="sprite_compass_icon"></div>
+                </a>
+                <a href="followlist.html">
+                    <div class="sprite_heart_icon_outline"></div>
+                </a>
+                <a href="profile.html">
+                    <div class="sprite_user_icon_outline"></div>
+                </a>
+            </div>
+        </section>
+    </header>
+
+    <div class="container follow-box">
+        <table>
+            <tr>
+                <td><img class="user-img" img src="imgs/6.jpg" alt="User 1"></td>
+                <td><strong>66_ggombi_99</strong> 님이 회원님을 팔로우하기 시작했습니다.&nbsp;
+                    <span class="less-emphasized">방금</span></td>
+
+                <td>
+                    <button class="follow-btn" data-follow="false">♡</button>
+                </td>
+            </tr>
+            <tr>
+                <td><img class="user-img" img src="imgs/7.jpg" alt="User 1"></td>
+                <td><strong>hg._.low</strong> 님이 회원님을 팔로우하기 시작했습니다.&nbsp;
+                    <span class="less-emphasized">1일</span></td>
+
+                <td>
+                    <button class="follow-btn" data-follow="false">♡</button>
+                </td>
+            </tr>
+            <tr>
+                <td><img class="user-img" img src="imgs/4.jpg" alt="User 2"></td>
+                <td><strong>king__jinhyuk</strong> 님이 회원님을 팔로우하기 시작했습니다.&nbsp;
+                    <span class="less-emphasized">2일</span></td>
+                <td>
+                    <button class="follow-btn" data-follow="false">♡</button>
+                </td>
+            </tr>
+        </table>
+    </div>
+</section>
+
+<script>
+    const buttons = document.querySelectorAll('.follow-btn');
+
+    buttons.forEach(btn => {
+        btn.addEventListener('click', function () {
+            const isFollowed = this.dataset.follow === 'true';
+            this.dataset.follow = !isFollowed;
+            this.textContent = isFollowed ? '♡' : '❤️';
+        });
+    });
+</script>
+
+</body>
+</html>
