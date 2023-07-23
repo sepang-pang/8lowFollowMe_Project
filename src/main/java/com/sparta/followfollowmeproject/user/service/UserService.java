@@ -20,13 +20,12 @@ import java.util.Optional;
 @Service
 @Slf4j(topic = "UserService 로그")
 @RequiredArgsConstructor
-public class UserService {
+public class    UserService {
 
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
     private final MessageSource messageSource;
     private final JwtUtil jwtUtil;
-
 
     // ADMIN_TOKEN
     private final String ADMIN_TOKEN = "AAABnvxRVklrnYxKZ0aHgTBcXukeZygoC";
