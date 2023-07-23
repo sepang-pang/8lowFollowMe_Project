@@ -3,14 +3,7 @@ package com.sparta.followfollowmeproject.like.post.entity;
 import com.sparta.followfollowmeproject.common.entity.Timestamped;
 import com.sparta.followfollowmeproject.post.entity.Post;
 import com.sparta.followfollowmeproject.user.entity.User;
-import jakarta.persistence.Entity;
-import jakarta.persistence.FetchType;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -31,8 +24,25 @@ public class PostLike extends Timestamped {
     @JoinColumn(name = "post_id")
     private Post post;
 
+    // 좋아요 수
+    @Column(name = "like_count", nullable = false)
+    private int likeCount = 0;
+
+
     public PostLike(User user, Post post) {
         this.user = user;
         this.post = post;
+    }
+
+    // likeCount를 증가시키는 메서드
+    public void increaseLikeCount() {
+        this.likeCount++;
+    }
+
+    // likeCount를 감소시키는 메서드
+    public void decreaseLikeCount() {
+        if (this.likeCount > 0) {
+            this.likeCount--;
+        }
     }
 }

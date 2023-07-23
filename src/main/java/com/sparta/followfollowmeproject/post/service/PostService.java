@@ -1,11 +1,15 @@
 package com.sparta.followfollowmeproject.post.service;
 
 
+import com.sparta.followfollowmeproject.advice.custom.PostNotFoundException;
 import com.sparta.followfollowmeproject.comment.dto.CommentResponseDto;
 import com.sparta.followfollowmeproject.comment.service.CommentService;
 import com.sparta.followfollowmeproject.follow.entity.Follow;
 import com.sparta.followfollowmeproject.follow.repository.FollowRepository;
+<<<<<<< HEAD
 
+=======
+>>>>>>> 169f5811b0e0641165b20024f21addd871191b8b
 import com.sparta.followfollowmeproject.post.dto.PostRequestDto;
 import com.sparta.followfollowmeproject.post.dto.PostResponseDto;
 import com.sparta.followfollowmeproject.post.entity.Post;
@@ -13,10 +17,14 @@ import com.sparta.followfollowmeproject.post.repository.PostRepository;
 import com.sparta.followfollowmeproject.user.entity.User;
 import com.sparta.followfollowmeproject.user.entity.UserRoleEnum;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.access.AccessDeniedException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+<<<<<<< HEAD
 
 
+=======
+>>>>>>> 169f5811b0e0641165b20024f21addd871191b8b
 import java.util.List;
 
 @Service
@@ -53,7 +61,7 @@ public class PostService {
         if (post.getUser().getUsername().equals(user.getUsername()) || user.getRole().equals(UserRoleEnum.ADMIN)) {
             post.update(requestDto);
         } else {
-            throw new IllegalArgumentException("본인이 아닙니다.");
+            throw new AccessDeniedException("본인이 아닙니다.");
         }
 
         Post updatedPost = postRepository.save(post);
@@ -66,14 +74,14 @@ public class PostService {
         if (post.getUser().getUsername().equals(user.getUsername()) || user.getRole().equals(UserRoleEnum.ADMIN)) {
             postRepository.delete(post); // 작성자, 어드민 둘 다 처리 ->
         } else {
-            throw new IllegalArgumentException("본인이 아닙니다");
+            throw new AccessDeniedException("본인이 아닙니다");
         }
 
     }
 
     public Post findPost(Long id) {
         return postRepository.findById(id).orElseThrow(
-                () -> new IllegalArgumentException("해당 게시글을 찾을 수 없습니다.")
+                () -> new PostNotFoundException("해당 게시글을 찾을 수 없습니다.")
         );
     }
 
