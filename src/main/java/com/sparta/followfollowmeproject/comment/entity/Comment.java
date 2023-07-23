@@ -1,6 +1,5 @@
 package com.sparta.followfollowmeproject.comment.entity;
 
-import com.sparta.followfollowmeproject.admin.entity.Admin;
 import com.sparta.followfollowmeproject.comment.dto.CommentRequestDto;
 import com.sparta.followfollowmeproject.common.entity.Timestamped;
 import com.sparta.followfollowmeproject.like.comment.entity.CommentLike;
