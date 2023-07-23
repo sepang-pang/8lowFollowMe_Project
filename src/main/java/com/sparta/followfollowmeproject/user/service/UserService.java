@@ -1,19 +1,26 @@
 package com.sparta.followfollowmeproject.user.service;
 
 import com.sparta.followfollowmeproject.advice.custom.DuplicateException;
+import com.sparta.followfollowmeproject.advice.custom.PasswordMismatchException;
+import com.sparta.followfollowmeproject.advice.custom.RecentPasswordException;
 import com.sparta.followfollowmeproject.common.dto.ApiResponseDto;
 import com.sparta.followfollowmeproject.common.jwt.JwtUtil;
+import com.sparta.followfollowmeproject.user.change.password.entity.PasswordManager;
+import com.sparta.followfollowmeproject.user.change.password.repository.PasswordManagerRepository;
+import com.sparta.followfollowmeproject.user.dto.ChangePasswordDto;
 import com.sparta.followfollowmeproject.user.dto.SignupRequestDto;
 import com.sparta.followfollowmeproject.user.entity.User;
 import com.sparta.followfollowmeproject.user.entity.UserRoleEnum;
 import com.sparta.followfollowmeproject.user.repository.UserRepository;
+import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.context.MessageSource;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.StringUtils;
+import java.util.List;
 import java.util.Optional;
 
 
@@ -23,44 +30,24 @@ import java.util.Optional;
 public class UserService {
 
     private final UserRepository userRepository;
+    private final PasswordManagerRepository passwordManagerRepository;
     private final PasswordEncoder passwordEncoder;
-    private final MessageSource messageSource;
     private final JwtUtil jwtUtil;
 
     // ADMIN_TOKEN
     private final String ADMIN_TOKEN = "AAABnvxRVklrnYxKZ0aHgTBcXukeZygoC";
 
-/*    public ResponseEntity<ApiResponseDto> login(String email, String password) {
-        // 1. 데이터베이스에서 email에 해당하는 사용자 찾기
-        Optional<User> userOptional = userRepository.findByEmail(email);
-
-        // 2. 사용자가 없거나 비밀번호가 일치하지 않는 경우, 로그인 실패
-        if (userOptional.isEmpty()) {
-            log.error(email + "에 해당하는 사용자를 찾을 수 없습니다.");
-            return ResponseEntity.badRequest().body(new ApiResponseDto("로그인 실패: 사용자를 찾을 수 없습니다.", 400));
-        }
-
-        // 3. 세션 또는 JWT 생성 후 반환
-        User user = userOptional.get();
-        if (!passwordEncoder.matches(password, user.getPassword())) {
-            log.error(email + ": 비밀번호가 일치하지 않습니다.");
-            return ResponseEntity.badRequest().body(new ApiResponseDto("로그인 실패: 비밀번호가 일치하지 않습니다.", 400));
-        }
-        String accessToken = jwtUtil.createToken(user.getUsername(), user.getRole().toString());
-        log.info(email + "로그인 성공");
-        return ResponseEntity.ok().body(new ApiResponseDto("로그인 성공", 200));
-    }*/
 
     public ResponseEntity<ApiResponseDto> signup(SignupRequestDto requestDto) {
         String username = requestDto.getUsername();
         String password = passwordEncoder.encode(requestDto.getPassword());
+
 
         // 회원 중복 확인
         Optional<User> checkUsername = userRepository.findByUsername(username);
         if (checkUsername.isPresent()) {
             throw new DuplicateException("중복되는 회원입니다.");
         }
-
 
         // email 중복확인
         String email = requestDto.getEmail();
@@ -84,6 +71,70 @@ public class UserService {
         userRepository.save(user);
         log.info("사용자 등록 확인");
         log.info("회원가입 성공");
+
+
+        // 최초 비밀번호 저장
+        PasswordManager passwordManager = new PasswordManager(password, user);
+        passwordManagerRepository.save(passwordManager);
+        log.info("최초 비밀번호 저장");
+
         return ResponseEntity.ok().body(new ApiResponseDto("회원가입 성공", 200));
+    }
+
+    // 로그아웃
+    public ResponseEntity<ApiResponseDto> logOut(HttpServletRequest request) {
+        String token = jwtUtil.getJwtFromHeader(request);
+        if (StringUtils.hasText(token)) {
+            jwtUtil.addToBlacklist(token);
+        }
+        return ResponseEntity.ok().body(new ApiResponseDto("로그아웃 성공", 200));
+    }
+
+    // 비밀번호 변경
+    @Transactional
+    public ResponseEntity<ApiResponseDto> changePassword(ChangePasswordDto changePasswordDto, User user) {
+
+        // 현재 비밀번호 확인
+        log.info("현재 비밀번호 확인");
+        if (!passwordEncoder.matches(changePasswordDto.getCurrentPassword(), user.getPassword())) {
+            throw new PasswordMismatchException("현재 비밀번호가 일치하지 않습니다.");
+        }
+
+        // 변경 비밀번호 일치 확인
+        log.info("비밀번호 일치 확인");
+        if (!changePasswordDto.getFirstInputPassword().equals(changePasswordDto.getSecondInputPassword())) {
+            throw new PasswordMismatchException("새로운 비밀번호가 일치하지 않습니다");
+        }
+
+        // 최근 세 번 안에 사용한 비밀번호 확인
+        log.info("비밀번호 변경 내역 조회");
+        List<PasswordManager> passwordHistory = passwordManagerRepository.findTop3ByUserOrderByCreatedAtDesc(user);
+
+        // 변경 비밀번호 암호화
+        log.info("최근 세 번 안에 이용한 비밀번호 확인");
+        for (PasswordManager passwordManager : passwordHistory) {
+            String recentPassword = passwordManager.getPassword();
+            if (passwordEncoder.matches(changePasswordDto.getSecondInputPassword(), recentPassword)) {
+                throw new RecentPasswordException("최근 세 번 안에 사용한 비밀번호입니다.");
+            }
+        }
+
+        // 변경 비밀번호 암호화
+        String newPassword = passwordEncoder.encode(changePasswordDto.getSecondInputPassword());
+        user.updatePassword(newPassword);
+
+        // 비밀번호 저장
+        log.info("PasswordManager DB 저장");
+        PasswordManager passwordManager = new PasswordManager(newPassword, user);
+
+        // DB 저장
+        log.info("User DB 저장");
+        userRepository.save(user);
+        passwordManagerRepository.save(passwordManager);
+
+
+        // 상태값 반환
+        return ResponseEntity.ok().body(new ApiResponseDto("비밀번호 변경 성공", 200));
+
     }
 }

@@ -13,23 +13,23 @@ import lombok.Setter;
 @Table(name = "postMedia")
 @NoArgsConstructor
 public class PostMedia extends Timestamped {
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
-	@Column(name = "mdeiaUrl", nullable = false)
-	String mdeiaUrl;
+    @Column(name = "mediaUrl", nullable = false)
+    String mediaUrl;
 
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "postId", nullable = false)
-	private Post post;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "postId", nullable = false)
+    private Post post;
 
-	public PostMedia(Post post, String mdeiaUrl) {
-		this.post = post;
-		this.mdeiaUrl = mdeiaUrl;
-	}
+    public PostMedia(Post post, String mediaUrl) {
+        this.post = post;
+        this.mediaUrl = mediaUrl;
+    }
 
-	public void update(String mdeiaUrl) {
-		this.mdeiaUrl = mdeiaUrl;
-	}
+    public void update(String mediaUrl) {
+        this.mediaUrl = mediaUrl;
+    }
 }

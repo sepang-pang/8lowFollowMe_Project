@@ -1,11 +1,13 @@
 package com.sparta.followfollowmeproject.common.jwt;
 
+import com.sparta.followfollowmeproject.common.redis.RedisUtil;
 import com.sparta.followfollowmeproject.user.entity.UserRoleEnum;
 import io.jsonwebtoken.*;
 import io.jsonwebtoken.security.Keys;
 import jakarta.annotation.PostConstruct;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
@@ -25,6 +27,14 @@ public class JwtUtil {
     public static final String BEARER_PREFIX = "Bearer ";
     // 토큰 만료시간
     private final long TOKEN_TIME = 60 * 60 * 1000L; // 60분
+
+    private final RedisUtil redisUtil;
+
+    @Autowired
+    public JwtUtil(RedisUtil redisUtil) {
+        this.redisUtil = redisUtil;
+    }
+
 
     @Value("${jwt.secret.key}") // Base64 Encode 한 SecretKey
     private String secretKey;
@@ -77,6 +87,18 @@ public class JwtUtil {
             log.error("JWT claims is empty, 잘못된 JWT 토큰 입니다.");
         }
         return false;
+    }
+
+    public void addToBlacklist(String token) {
+        // 토큰 만료 시간을 구해서 블랙리스트에 추가 (토큰의 남은 유효 시간)
+        Date expirationDate = Jwts.parserBuilder().setSigningKey(key).build().parseClaimsJws(token).getBody().getExpiration();
+        long remainingTime = expirationDate.getTime() - System.currentTimeMillis();
+        redisUtil.setBlackList(token, "", remainingTime / 1000); // Redis에 초 단위로 저장
+    }
+
+    // 토큰이 블랙리스트에 있는지 확인
+    public boolean isTokenBlacklisted(String token) {
+        return redisUtil.hasKeyBlackList(token);
     }
 
     // 토큰에서 사용자 정보 가져오기

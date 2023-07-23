@@ -6,6 +6,13 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link rel="stylesheet" type="text/css" href="/css/style.css">
+    <script src="https://code.jquery.com/jquery-3.7.0.min.js"
+            integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/js-cookie@3.0.5/dist/js.cookie.min.js"></script>
+
+
     <title>8llow Me!</title>
     <link rel="stylesheet" href="/css/reset.css">
     <link rel="stylesheet" href="/css/common.css">
@@ -1025,15 +1032,17 @@
 
                 <h1 class="login title"></h1>
 
-                <form action="#">
+                <!-- 로그인 폼의 action 속성을 /api/user/login으로 설정 -->
+                <!-- ID와 비밀번호 입력 필드의 name 속성을 각각 username과 password로 설정 -->
+                <form action="/api/user/login" method="POST" onsubmit="submitLoginForm(event)">
                     <p class="login_user_name">
-                        <label for="user_name"></label>
-                        <input type="text" id="user_name" placeholder="ID">
+                        <label for="username"></label>
+                        <input type="text" id="username" name="username" placeholder="ID" required>
                     </p>
 
                     <p class="login_user_password">
-                        <label for="user_password"></label>
-                        <input type="password" id="user_password" placeholder="Password">
+                        <label for="password"></label>
+                        <input type="password" id="password" name="password" placeholder="Password" required>
                     </p>
 
                     <input type="submit" id="submit_btn" value="Login" class="submit_btn">
@@ -1042,7 +1051,7 @@
 
             <div class="bottom_box">
                 <div>
-                    <span>8llow ME가 처음이신가요?</span>&nbsp;&nbsp;<a href="http://localhost:8080/api/user/signup">Sign up</a>
+                    <span>8llow ME가 처음이신가요?</span>&nbsp;&nbsp;<a href="/api/user/signup">Sign up</a>
                 </div>
             </div>
             <br>
@@ -1050,7 +1059,8 @@
             <div class="bottom_box">
                 <div>
                     <span>
-                        <button class="button2">Social Login&nbsp;&nbsp;[[ Click ]]</button>
+
+                        <button class="button2" onclick="redirectToKakao()">Kakao Login</button>
                     </span>
                 </div>
             </div>
@@ -1058,6 +1068,42 @@
     </div>
 </section>
 
+<script th:inline="javascript">
+    function redirectToKakao() {
+        var kakaoUrl = /*[[${kakaoUrl}]]*/ '';
+        window.location.href = kakaoUrl;
+    }
 
-</body>
-</html>
+    // 로그인 폼의 submit 이벤트를 처리하는 이벤트 핸들러
+    function submitLoginForm(event) {
+        // 기본 이벤트 동작을 취소함
+        event.preventDefault();
+
+        // 로그인 폼의 데이터를 가져옴
+        var formData = new FormData(event.target);
+
+        // AJAX 요청을 사용하여 서버에 로그인 정보를 전송함
+        fetch('/api/user/login', {
+            method: 'POST',
+            body: formData
+        })
+            .then(function (response) {
+                if (response.ok) {
+                    // 서버에서 로그인이 성공하면, 사용자를 index 페이지로 이동시킴
+                    window.location.href = '/index.html';
+                } else {
+                    // 서버에서 로그인이 실패하면, "로그인에 실패하셨습니다."라는 팝업을 띄움
+                    alert('로그인에 실패하셨습니다.');
+                }
+            });
+    }
+</script>
+
+<script th:inline="">
+    $(document).ready(function () {
+        // 토큰 삭제
+        Cookies.remove('Authorization', {path: '/'});
+    });
+</script>
+
+</html>|

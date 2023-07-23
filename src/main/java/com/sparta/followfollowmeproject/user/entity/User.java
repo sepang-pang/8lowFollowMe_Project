@@ -1,18 +1,24 @@
 package com.sparta.followfollowmeproject.user.entity;
 
 
-import com.sparta.followfollowmeproject.admin.entity.Admin;
+import com.sparta.followfollowmeproject.admin.user.management.dto.UserManagementRequestDto;
+import com.sparta.followfollowmeproject.common.entity.Timestamped;
+import com.sparta.followfollowmeproject.follow.entity.Follow;
+import com.sparta.followfollowmeproject.user.change.password.entity.PasswordManager;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Getter
 @Setter
 @NoArgsConstructor
 @Table(name = "users")
-public class User {
+public class User extends Timestamped {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -30,14 +36,48 @@ public class User {
     @Enumerated(value = EnumType.STRING)
     private UserRoleEnum role;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "admin_id", nullable = true)
-    private Admin admin;
+    private boolean isBlocked = false;
+
+    private Long kakaoId;
+
+    @OneToMany(mappedBy = "follower", cascade = CascadeType.REMOVE)
+    private final List<Follow> followerList = new ArrayList<>();
+
+    @OneToMany(mappedBy = "following", cascade = CascadeType.REMOVE)
+    private final List<Follow> folloingList = new ArrayList<>();
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.PERSIST)
+    private final List<PasswordManager> passwordManagerList = new ArrayList<>();
 
     public User(String username, String password, String email, UserRoleEnum role) {
         this.username = username;
         this.password = password;
         this.email = email;
         this.role = role;
+    }
+
+
+    public void promotionUserRole(UserManagementRequestDto requestDto) {
+        this.role = UserRoleEnum.valueOf(requestDto.getRole());
+    }
+
+    public void switchBlock() {
+        this.isBlocked = !this.isBlocked;
+    }
+    public User(String username, String password, String email, UserRoleEnum role, Long kakaoId) {
+        this.username = username;
+        this.password = password;
+        this.email = email;
+        this.role = role;
+        this.kakaoId = kakaoId;
+    }
+
+    public User kakaoIdUpdate(Long kakaoId) {
+        this.kakaoId = kakaoId;
+        return this;
+    }
+
+    public void updatePassword(String newPassword) {
+        this.password = newPassword;
     }
 }
