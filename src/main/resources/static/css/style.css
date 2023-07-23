@@ -231,7 +231,7 @@ body{
 }
 
 .sprite_heart_icon_outline.on {
-    background: url('../imags/background01.png') no-repeat -26px -261px;
+    background: url('image/background01.png') no-repeat -26px -261px;
 }
 
 .contents .likes{
@@ -300,7 +300,7 @@ body{
     position: relative;
     display: inline-block;
     cursor: pointer;  /* 마우스를 올리면 포인터가 표시됩니다 */
-    background: url('../imags/background01.png') no-repeat -301px -218px;  /* 'sprite_more_icon.png'는 당신의 이미지 경로 */
+    background: url('image/background01.png') no-repeat -301px -218px;  /* 'sprite_more_icon.png'는 당신의 이미지 경로 */
     width: 50px;  /* 이것은 당신의 이미지의 실제 너비에 맞게 조정해야 합니다 */
     height: 50px;  /* 이것은 당신의 이미지의 실제 높이에 맞게 조정해야 합니다 */
 }
