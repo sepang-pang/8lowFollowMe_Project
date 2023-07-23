@@ -11,4 +11,11 @@ public class ViewController {
         return "index";
     }
 
+    @GetMapping("/api/user/login-page")
+    public String loginPage() {
+        return "login";
+    }
+
+
+
 }
