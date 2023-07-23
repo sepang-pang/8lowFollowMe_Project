@@ -16,6 +16,10 @@ public class ViewController {
         return "login";
     }
 
+    @GetMapping("/api/user/signup")
+    public String showSignupPage() {
+        return "signup";
+    }
 
 
 }

@@ -24,10 +24,6 @@ public class UserController {
         this.userService = userService;
     }
 
-    @GetMapping("/user/signup")
-    public String showSignupPage() {
-        return "signup";
-    }
 
     @PostMapping("/user/signup")
     public ResponseEntity<ApiResponseDto> signup(@RequestBody @Valid SignupRequestDto requestDto, BindingResult bindingResult) {
