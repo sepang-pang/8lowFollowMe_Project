@@ -1,15 +1,12 @@
 package com.sparta.followfollowmeproject.profile.entity;
 
+import com.sparta.followfollowmeproject.common.entity.Timestamped;
 import com.sparta.followfollowmeproject.profile.dto.ProfileRequestDto;
-import com.sparta.followfollowmeproject.user.entity.Timestamped;
 import com.sparta.followfollowmeproject.user.entity.User;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
 
 @Entity
 @Getter

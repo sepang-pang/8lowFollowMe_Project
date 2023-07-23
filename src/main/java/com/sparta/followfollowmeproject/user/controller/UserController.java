@@ -1,12 +1,15 @@
 package com.sparta.followfollowmeproject.user.controller;
 
 import com.sparta.followfollowmeproject.common.dto.ApiResponseDto;
+import com.sparta.followfollowmeproject.common.security.UserDetailsImpl;
+import com.sparta.followfollowmeproject.user.dto.ChangePasswordDto;
 import com.sparta.followfollowmeproject.user.dto.SignupRequestDto;
 import com.sparta.followfollowmeproject.user.service.UserService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.*;
@@ -38,6 +41,11 @@ public class UserController {
     @DeleteMapping("/user/logout")
     public ResponseEntity<ApiResponseDto> logout(HttpServletRequest request) {
        return userService.logOut(request);
+    }
+
+    @PutMapping("/user/change-password")
+    private ResponseEntity<ApiResponseDto> changePassword(@RequestBody ChangePasswordDto changePasswordDto, @AuthenticationPrincipal UserDetailsImpl userDetails) {
+        return userService.changePassword(changePasswordDto, userDetails.getUser());
     }
 
 }

@@ -3,6 +3,7 @@ package com.sparta.followfollowmeproject.user.entity;
 
 import com.sparta.followfollowmeproject.admin.user.management.dto.UserManagementRequestDto;
 import com.sparta.followfollowmeproject.follow.entity.Follow;
+import com.sparta.followfollowmeproject.user.change.password.entity.PasswordManager;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -44,6 +45,8 @@ public class User {
     @OneToMany(mappedBy = "following", cascade = CascadeType.REMOVE)
     private final List<Follow> folloingList = new ArrayList<>();
 
+    @OneToMany(mappedBy = "user", cascade = CascadeType.PERSIST)
+    private final List<PasswordManager> passwordManagerList = new ArrayList<>();
 
     public User(String username, String password, String email, UserRoleEnum role) {
         this.username = username;
@@ -71,5 +74,9 @@ public class User {
     public User kakaoIdUpdate(Long kakaoId) {
         this.kakaoId = kakaoId;
         return this;
+    }
+
+    public void updatePassword(String newPassword) {
+        this.password = newPassword;
     }
 }
