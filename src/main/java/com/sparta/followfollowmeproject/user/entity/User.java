@@ -2,6 +2,7 @@ package com.sparta.followfollowmeproject.user.entity;
 
 
 import com.sparta.followfollowmeproject.admin.user.management.dto.UserManagementRequestDto;
+import com.sparta.followfollowmeproject.common.entity.Timestamped;
 import com.sparta.followfollowmeproject.follow.entity.Follow;
 import com.sparta.followfollowmeproject.user.change.password.entity.PasswordManager;
 import jakarta.persistence.*;
@@ -17,7 +18,7 @@ import java.util.List;
 @Setter
 @NoArgsConstructor
 @Table(name = "users")
-public class User {
+public class User extends Timestamped {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
