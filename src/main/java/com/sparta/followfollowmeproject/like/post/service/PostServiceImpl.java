@@ -3,6 +3,8 @@ package com.sparta.followfollowmeproject.like.post.service;
 import java.util.Optional;
 
 
+import com.sparta.followfollowmeproject.advice.custom.LikeNotFoundException;
+import com.sparta.followfollowmeproject.advice.custom.PostNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import com.sun.jdi.request.DuplicateRequestException;
@@ -45,7 +47,7 @@ public class PostServiceImpl implements PostLikeService {
             postLikeRepository.save(postLike);  // 좋아요 카운터가 감소한 상태를 저장합니다
             postLikeRepository.delete(postLike);
         } else {
-            throw new IllegalArgumentException("해당 게시글에 취소할 좋아요가 없습니다.");
+            throw new LikeNotFoundException("해당 게시글에 취소할 좋아요가 없습니다.");
         }
     }
 
@@ -53,7 +55,7 @@ public class PostServiceImpl implements PostLikeService {
     @Override
     public Post findPost(long id) {
         return postRepository.findById(id).orElseThrow(() ->
-                new IllegalArgumentException("선택한 게시글은 존재하지 않습니다.")
+                new PostNotFoundException("선택한 게시글은 존재하지 않습니다.")
         );
     }
 

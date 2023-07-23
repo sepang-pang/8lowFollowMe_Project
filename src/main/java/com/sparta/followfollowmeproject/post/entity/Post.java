@@ -30,6 +30,9 @@ public class Post extends Timestamped {
     @Column(name = "content", nullable = false)
     private String content;
 
+    @Column(name = "hashtag")
+    private String hashtag;
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "userId", nullable = false)
     private User user;

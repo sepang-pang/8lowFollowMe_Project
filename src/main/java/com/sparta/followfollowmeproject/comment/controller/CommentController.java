@@ -1,5 +1,6 @@
 package com.sparta.followfollowmeproject.comment.controller;
 
+import com.sparta.followfollowmeproject.advice.custom.CommentNotFoundException;
 import com.sparta.followfollowmeproject.common.security.UserDetailsImpl;
 import com.sparta.followfollowmeproject.common.dto.ApiResponseDto;
 import com.sparta.followfollowmeproject.comment.dto.CommentRequestDto;
@@ -36,27 +37,27 @@ public class CommentController {
 
 	// 선택한 댓글 수정
 	@PutMapping("/{postId}/comments/{commentId}")
-	public ResponseEntity<ApiResponseDto> updateComment(@PathVariable Long postId, @PathVariable Long commentId, @RequestBody CommentRequestDto requestDto, @AuthenticationPrincipal UserDetailsImpl userDetails) {
+	public ResponseEntity<ApiResponseDto> updateComment(@PathVariable Long postId, @PathVariable Long commentId, @RequestBody CommentRequestDto requestDto, @AuthenticationPrincipal UserDetailsImpl userDetails) throws CommentNotFoundException {
 		CommentResponseDto responseDto = commentService.updateComment(postId, commentId, requestDto, userDetails.getUser());
 		return ResponseEntity.ok().body(responseDto);
 	}
 
 	// 선택한 댓글 삭제
 	@DeleteMapping("/{postId}/comments/{commentId}")
-	public ResponseEntity<ApiResponseDto> deleteComment(@PathVariable Long postId, @PathVariable Long commentId, @AuthenticationPrincipal UserDetailsImpl userDetails) {
+	public ResponseEntity<ApiResponseDto> deleteComment(@PathVariable Long postId, @PathVariable Long commentId, @AuthenticationPrincipal UserDetailsImpl userDetails) throws CommentNotFoundException {
 		commentService.deleteComment(postId, commentId, userDetails.getUser());
 		return ResponseEntity.ok().body(new ApiResponseDto("해당 댓글의 삭제를 완료했습니다.", HttpStatus.OK.value()));
 	}
 
 	@PostMapping("/{postId}/comments/{commentId}/like") // 댓글 좋아요
-	public ResponseEntity<ApiResponseDto> likeComment(@AuthenticationPrincipal UserDetailsImpl userDetails, @PathVariable Long postId, @PathVariable Long commentId) {
+	public ResponseEntity<ApiResponseDto> likeComment(@AuthenticationPrincipal UserDetailsImpl userDetails, @PathVariable Long postId, @PathVariable Long commentId) throws CommentNotFoundException {
 		commentService.likeComment(postId, commentId, userDetails.getUser());
 
 		return ResponseEntity.status(HttpStatus.ACCEPTED).body(new ApiResponseDto("댓글 좋아요 성공", HttpStatus.ACCEPTED.value()));
 	}
 
 	@DeleteMapping("/{postId}/comments/{commentId}/deleteLike") // 댓글 좋아요 취소
-	public ResponseEntity<ApiResponseDto> deleteLikeComment(@AuthenticationPrincipal UserDetailsImpl userDetails, @PathVariable Long postId, @PathVariable Long commentId) {
+	public ResponseEntity<ApiResponseDto> deleteLikeComment(@AuthenticationPrincipal UserDetailsImpl userDetails, @PathVariable Long postId, @PathVariable Long commentId) throws CommentNotFoundException {
 		commentService.deleteLikeComment(postId, commentId, userDetails.getUser());
 
 		return ResponseEntity.status(HttpStatus.ACCEPTED).body(new ApiResponseDto("댓글 좋아요 취소 성공", HttpStatus.ACCEPTED.value()));

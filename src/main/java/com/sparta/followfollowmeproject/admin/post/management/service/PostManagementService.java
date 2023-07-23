@@ -1,5 +1,6 @@
 package com.sparta.followfollowmeproject.admin.post.management.service;
 
+import com.sparta.followfollowmeproject.advice.custom.PostNotFoundException;
 import com.sparta.followfollowmeproject.post.dto.PostRequestDto;
 import com.sparta.followfollowmeproject.post.dto.PostResponseDto;
 import com.sparta.followfollowmeproject.post.entity.Post;
@@ -39,7 +40,7 @@ public class PostManagementService {
 
     private Post findPost(Long postId) {
         return postRepository.findById(postId).orElseThrow(() ->
-                new IllegalArgumentException("해당 게시글은 존재하지 않습니다.")
+                new PostNotFoundException("해당 게시글은 존재하지 않습니다.")
         );
     }
 }

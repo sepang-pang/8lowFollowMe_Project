@@ -4,11 +4,13 @@ import com.sparta.followfollowmeproject.admin.entity.UserBlackList;
 import com.sparta.followfollowmeproject.admin.repository.UserBlackListRepository;
 import com.sparta.followfollowmeproject.admin.user.management.dto.UserManagementRequestDto;
 import com.sparta.followfollowmeproject.admin.user.management.dto.UserManagementResponseDto;
+import com.sparta.followfollowmeproject.advice.custom.UserNotFoundException;
 import com.sparta.followfollowmeproject.common.dto.ApiResponseDto;
 import com.sparta.followfollowmeproject.user.entity.User;
 import com.sparta.followfollowmeproject.user.entity.UserRoleEnum;
 import com.sparta.followfollowmeproject.user.repository.UserRepository;
 import com.sparta.followfollowmeproject.user.service.UserService;
+import com.sun.jdi.request.DuplicateRequestException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
@@ -61,7 +63,7 @@ public class UserManagementService {
 
         // 이미 관리자일 경우 예외 반환
         if(user.getRole().equals(UserRoleEnum.valueOf(requestDto.getRole()))) {
-            throw new IllegalArgumentException("이미 관리자입니다.");
+            throw new DuplicateRequestException("이미 관리자입니다.");
         }
 
         // 회원 Role 변경
@@ -80,7 +82,7 @@ public class UserManagementService {
 
         // 블랙리스트
         if(user.isBlocked()) {
-            throw new IllegalArgumentException("이미 차단된 유저입니다.");
+            throw new DuplicateRequestException("이미 차단된 유저입니다.");
         }
 
         UserBlackList userBlackList = new UserBlackList(user);
@@ -110,7 +112,7 @@ public class UserManagementService {
     // 유저 찾기 메서드
     public User findUser(String username) {
         return userRepository.findByUsername(username)
-                .orElseThrow(() -> new IllegalArgumentException("해당 유저는 존재하지 않습니다"));
+                .orElseThrow(() -> new UserNotFoundException("해당 유저는 존재하지 않습니다"));
     }
 
 
