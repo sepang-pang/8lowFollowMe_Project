@@ -1,5 +1,8 @@
 package com.sparta.followfollowmeproject.follow.service;
 
+import com.sparta.followfollowmeproject.advice.custom.NotExistException;
+import com.sparta.followfollowmeproject.advice.custom.SelfFollowNotAllowedException;
+import com.sparta.followfollowmeproject.advice.custom.UserNotFoundException;
 import com.sparta.followfollowmeproject.follow.repository.FollowRepository;
 import com.sparta.followfollowmeproject.user.entity.User;
 import com.sparta.followfollowmeproject.user.repository.UserRepository;
@@ -36,7 +39,7 @@ public class FollowService {
 	@Transactional
 	public void follow(User follower, Long followingId) {
 		if (follower.getId().equals(followingId)) {
-			throw new IllegalArgumentException("본인은 팔로우할 수 없습니다.");
+			throw new SelfFollowNotAllowedException("본인은 팔로우할 수 없습니다.");
 		} else {
 			Follow follow = new Follow(follower, findUser(followingId));
 			followRepository.save(follow);
@@ -57,7 +60,7 @@ public class FollowService {
 	// user id로 User 찾기
 	private User findUser(Long userId) {
 		return userRepository.findById(userId).orElseThrow(() ->
-				new IllegalArgumentException("선택한 유저는 존재하지 않습니다.")
+				new UserNotFoundException("선택한 유저는 존재하지 않습니다.")
 		);
 	}
 }

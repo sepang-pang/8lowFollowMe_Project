@@ -1,6 +1,7 @@
 package com.sparta.followfollowmeproject.admin.post.management.service;
 
 import com.sparta.followfollowmeproject.admin.post.management.dto.NoticeManagementResponseDto;
+import com.sparta.followfollowmeproject.advice.custom.NotExistException;
 import com.sparta.followfollowmeproject.post.dto.PostRequestDto;
 import com.sparta.followfollowmeproject.post.entity.Post;
 import com.sparta.followfollowmeproject.post.repository.PostRepository;
@@ -53,7 +54,7 @@ public class NoticeManagementService {
 
     private Post findNotice(Long noticeId) {
         return postRepository.findByIdAndIsNoticeTrue(noticeId)
-                .orElseThrow(() -> new IllegalArgumentException("해당 공지는 존재하지 않습니다."));
+                .orElseThrow(() -> new NotExistException("해당 공지는 존재하지 않습니다."));
     }
 }
 

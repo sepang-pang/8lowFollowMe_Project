@@ -1,6 +1,8 @@
 package com.sparta.followfollowmeproject.user.service;
 
 import com.sparta.followfollowmeproject.advice.custom.DuplicateException;
+import com.sparta.followfollowmeproject.advice.custom.PasswordMismatchException;
+import com.sparta.followfollowmeproject.advice.custom.RecentPasswordException;
 import com.sparta.followfollowmeproject.common.dto.ApiResponseDto;
 import com.sparta.followfollowmeproject.common.jwt.JwtUtil;
 import com.sparta.followfollowmeproject.user.change.password.entity.PasswordManager;
@@ -18,7 +20,6 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
-
 import java.util.List;
 import java.util.Optional;
 
@@ -94,13 +95,13 @@ public class UserService {
         // 현재 비밀번호 확인
         log.info("현재 비밀번호 확인");
         if (!passwordEncoder.matches(changePasswordDto.getCurrentPassword(), user.getPassword())) {
-            throw new IllegalArgumentException("현재 비밀번호가 일치하지 않습니다.");
+            throw new PasswordMismatchException("현재 비밀번호가 일치하지 않습니다.");
         }
 
         // 변경 비밀번호 일치 확인
         log.info("비밀번호 일치 확인");
         if (!changePasswordDto.getFirstInputPassword().equals(changePasswordDto.getSecondInputPassword())) {
-            throw new IllegalArgumentException("새로운 비밀번호가 일치하지 않습니다");
+            throw new PasswordMismatchException("새로운 비밀번호가 일치하지 않습니다");
         }
 
         // 최근 세 번 안에 사용한 비밀번호 확인
@@ -112,7 +113,7 @@ public class UserService {
         for (PasswordManager passwordManager : passwordHistory) {
             String recentPassword = passwordManager.getPassword();
             if (passwordEncoder.matches(changePasswordDto.getSecondInputPassword(), recentPassword)) {
-                throw new IllegalArgumentException("최근 세 번 안에 사용한 비밀번호입니다.");
+                throw new RecentPasswordException("최근 세 번 안에 사용한 비밀번호입니다.");
             }
         }
 
