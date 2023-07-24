@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+
+    <title>8llow Me!</title>
+    <link rel="stylesheet" href="/css/reset.css">
+    <link rel="stylesheet" href="/css/common.css">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/detail-page.css">
+    <link rel="shortcut icon" href="images/2.jpg">
+
+    <style>
+        #main_container {
+        }
+        .btn-mint {
+            background-color: #70e3ea;
+            color: #ffffff;
+            border: none;
+            padding: 10px;
+            text-align: center;
+            display: inline-block;
+            font-size: 16px;
+            margin: 4px 2px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+<header id="header">
+    <section class="inner">
+
+        <h1 class="logo">
+            <a href="index.html">
+                <div class="sprite_insta_icon" ></div>
+                <div class="sprite_write_logo"></div>
+            </a>
+        </h1>
+
+        <div class="search_box">
+            <input type="text" placeholder="검색" id="search-field">
+
+            <div class="fake_field">
+                <span class="sprite_small_search_icon"></span>
+                <span>검색</span>
+            </div>
+        </div>
+
+        <div class="right_icons">
+            <a href="/new-post">
+                <div class="sprite_camera_icon"></div>
+            </a>
+            <a href="/api/user/login-page">
+                <div class="sprite_compass_icon"></div>
+            </a>
+            <a href="/followlist">
+                <div class="sprite_heart_icon_outline"></div>
+            </a>
+            <a href="/profile">
+                <div class="sprite_user_icon_outline"></div>
+            </a>
+        </div>
+    </section>
+</header>
+
+<section id="container">
+    <div id="main_container">
+        <section class="b_inner">
+            <div class="contents_box">
+                <article class="contents cont01">
+                    <div class="img_section">
+                        <div class="trans_inner">
+                            <div><img src="/images/9.jpg" alt=""></div>
+                        </div>
+                    </div>
+
+                    <div class="detail--right_box">
+                        <header class="top">
+                            <div class="user_container">
+                                <div class="profile_img">
+                                    <img src="/images/5.jpg" alt="">
+                                </div>
+                                <div class="user_name">
+                                    <div class="nick_name">ohschang</div>
+                                    <div class="country">Yeongju, South Korea</div>
+                                </div>
+                            </div>
+                        </header>
+
+                        <section class="scroll_section">
+                            <div class="admin_container">
+                                <div class="admin"><img src="/images/5.jpg" alt="user"></div>
+                                <div class="comment">
+                                    <textarea id="admin_comment" rows="4" cols="50">악어가방 하나 장만하러 가볼까요~ 여러분?</textarea>
+                                    <div class="time">2시간</div>
+                                    <button class="btn-mint" onclick="saveComment()">수정하기</button>
+                                    <button class="btn-mint" onclick="cancelEdit()">취소</button>
+                                </div>
+                            </div>
+                        </section>
+                    </div>
+                </article>
+            </div>
+        </section>
+    </div>
+</section>
+
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+<script>
+    function saveComment() {
+        // 여기에 댓글을 저장하는 코드를 작성합니다.
+        var comment = document.getElementById('admin_comment').value;
+        alert('댓글이 수정되었습니다: ' + comment);
+    }
+
+    function cancelEdit() {
+        // 취소 버튼을 누르면 원래 페이지로 돌아갑니다.
+        window.history.back();
+    }
+</script>
+
+</body>
+</html>

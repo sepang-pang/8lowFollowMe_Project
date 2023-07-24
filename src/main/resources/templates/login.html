@@ -1,0 +1,1109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link rel="stylesheet" type="text/css" href="/css/style.css">
+    <script src="https://code.jquery.com/jquery-3.7.0.min.js"
+            integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/js-cookie@3.0.5/dist/js.cookie.min.js"></script>
+
+
+    <title>8llow Me!</title>
+    <link rel="stylesheet" href="/css/reset.css">
+    <link rel="stylesheet" href="/css/common.css">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/login.css">
+    <link rel="shortcut icon" href="images/2.jpg">
+
+    <style>
+        .form_container{
+            width: 350px;
+            margin: 0 auto
+
+        }
+
+        .form_container .form{
+            background-color: #ffffff;
+            border: 1px solid #4ca0af;
+            padding: 0 40px 25px 40px;
+            margin-bottom: 30px;
+        }
+
+
+        .form .title {
+            overflow: hidden;
+            text-indent: 110%;
+            margin: 22px auto 8px;
+        }
+
+
+        .form label{
+            display: inline-block;
+            max-width: 100%;
+            margin-bottom: 5px;
+            font-weight: 700;
+        }
+
+        .form input{
+            width: 100%;
+            background: 0 0;
+            border: 1px solid #efefef;
+            border-radius: 3px;
+            box-sizing: border-box;
+            color: #262626;
+            font-size: 14px;
+            padding: 7px 8px 7px;
+        }
+
+        .form p{
+            margin-bottom: 10px;
+        }
+
+        .form .submit_btn {
+            background-color: #4ca0af;
+            border-color: #4ca0af;
+            color: #ffffff;
+            border-radius: 3px;
+            border-style: solid;
+            border-width: 1px;
+            font-size: 14px;
+            font-weight: 600;
+            line-height: 28px;
+            outline: none;
+            width: 100%;
+            padding: 0;
+            margin-top: 10px;
+            cursor: pointer;
+        }
+
+        .bottom_box{
+            text-align: center;
+            background-color: #fff;
+            border: 1px solid #4ca0af;
+            padding: 20px 40px 25px 40px;
+
+        }
+        .m_text{
+            font-size: 14px;
+            font-weight: bold;
+        }
+
+        .s_text{
+            font-size: 12px;
+        }
+
+
+        body{
+            background:#fafafa;
+        }
+
+        #header{
+            width: 100%;
+            position: absolute;
+            left: 0;
+            top: 0;
+            z-index: 999;
+            background:white;
+            border-bottom:1px solid rgba(0,0,0,0.1);
+        }
+
+        #header.on{
+            position: fixed;
+        }
+
+        #header .inner{
+            width: 975px;
+            height: 77px;
+            margin: 0 auto;
+            display:flex;
+            justify-content: space-between;
+            align-items: center;
+            transition:all 1s;
+        }
+
+        #header.on .inner{
+            height:52px;
+        }
+
+        #header .inner .logo > a{
+            color:transparent;
+        }
+
+        #header .inner .logo .sprite_insta_icon{
+            position: relative;
+            margin-right: 30px;
+        }
+
+        #header .inner .logo .sprite_insta_icon:after{
+            content: '';
+            width: 1px;
+            height: 28px;
+            background: #000;
+            position: absolute;
+            right: -15px;
+            top: -4px;
+            transition:all .5s;
+        }
+        #header .inner .logo div{
+            vertical-align: middle;
+        }
+
+        #header .inner .logo div:nth-child(2){
+            transform:translateY(2px);
+            transition:all .5s;
+        }
+
+        #header.on .inner .logo .sprite_insta_icon:after{
+            opacity: 0;
+        }
+        #header.on .inner .logo div:nth-child(2){
+            opacity: 0;
+        }
+
+        #header .search_box{
+
+            position:relative;
+        }
+
+        #search-field{
+            width: 185px;
+            height: 28px;
+            background:#fafafa;
+            border: 1px solid #dbdbdb;
+            border-radius: 3px;
+            padding:3px 30px;
+            color:#999;
+            font-weight: 400;
+            text-align: left;
+            font-size: 14px;
+            outline:none;
+        }
+
+        #search-field::placeholder{
+            font-size: 0;
+        }
+
+        #search-field:focus::placeholder{
+            font-size: 14px;
+        }
+
+        #header .search_box .fake_field{
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform:translate(-50%,-50%);
+            pointer-events: none;
+        }
+
+        #search-field:focus ~ .fake_field > span:nth-child(1){
+            transform:translateX(-105px);
+        }
+
+        #search-field:focus ~ .fake_field > span:nth-child(2){
+            display: none;
+        }
+
+        #header .right_icons{
+            width: 132px;
+            display: flex;
+            justify-content: space-between;
+        }
+        #header .right_icons > div{
+
+        }
+
+        #main_container{
+            padding-top: 130px;
+            display: flex;
+            justify-content: center;
+        }
+
+        #main_container .inner{
+            width: 935px;
+            position: relative;
+
+        }
+
+        .contents_box{
+
+        }
+
+        .contents{
+            max-width: 614px;
+            border: 1px solid rgba(0,0,0,0.09);
+            border-radius: 3px;
+            margin-bottom: 60px;
+            background: white;
+        }
+
+
+        .contents .top{
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 20px;
+        }
+
+        .contents .top .profile_img{
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            overflow:hidden;
+            margin-right: 10px;
+        }
+
+        .contents .top .profile_img img{
+            width: 100%;
+        }
+
+        .contents .top .user_container{
+            display: flex;
+        }
+        .contents .sprite_more_icon{
+            position: relative;
+        }
+
+        .contents .toggle_box{
+            text-align: center;
+            position: absolute;
+            right: 0;
+            top: 20px;
+            border: 1px solid rgba(0,0,0,0.09);
+            border-radius: 3px;
+            display: none;
+        }
+
+        .contents .sprite_more_icon.on .toggle_box{
+            display: block;
+        }
+
+        .contents .toggle_box > li{
+            padding: 5px 10px;
+            background: white;
+        }
+
+        .contents .toggle_box > li input{
+            border: none;
+            font-size: inherit;
+        }
+
+        .contents .img_section{
+            overflow:hidden;
+        }
+
+        .contents .img_section img{
+            width: 100%;
+        }
+
+        .contents .bottom_icons{
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 20px;
+        }
+
+        .contents .bottom_icons .left_icons{
+            display: flex;
+        }
+
+        .contents .bottom_icons .left_icons > div{
+            margin-right: 10px;
+            cursor:pointer;
+        }
+
+        .contents .bottom_icons .right_icon > div{
+            cursor: pointer;
+        }
+
+        .sprite_heart_icon_outline.on {
+            background: url('images/background01.png') no-repeat -26px -261px;
+        }
+
+        .contents .likes{
+            padding: 5px 20px;
+            color:#262626;
+        }
+
+        .contents .comment_container{
+            display:flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 5px 20px;
+        }
+        .contents .comment_container .comment{
+            display:flex;
+            flex-direction: column;
+            font-size: 14px;
+        }
+
+        .contents .comment_container .comment-detail{
+            display: flex;
+        }
+
+        .contents .comment_container .comment .nick_name{
+            margin-right: 10px;
+        }
+
+        .contents .timer{
+            font-size: 10px;
+            letter-spacing: 0.2px;
+            color:#999;
+            border-bottom: 1px solid rgba(0,0,0,0.09);
+            padding: 10px 20px;
+        }
+
+        .contents .comment_field{
+            min-height:56px;
+            padding: 0 20px;
+            position: relative;
+        }
+
+        .contents .comment_field input{
+            width: 100%;
+            height: 56px;
+            border: none;
+            outline:none;
+            background: transparent;
+        }
+
+        .contents .comment_field input:focus ~ .upload_btn{
+            pointer-events: initial;
+            opacity: 1;
+        }
+
+        .contents .comment_field .upload_btn{
+            color:#3897f0;
+            position: absolute;
+            right: 20px;
+            top: 50%;
+            transform:translateY(-50%);
+            cursor: pointer;
+            opacity: 0.6;
+        }
+
+        #sprite_more_icon {
+            position: relative;
+            display: inline-block;
+            cursor: pointer;  /* 마우스를 올리면 포인터가 표시됩니다 */
+            background: url('images/background01.png') no-repeat -301px -218px;  /* 'sprite_more_icon.png'는 당신의 이미지 경로 */
+            width: 50px;  /* 이것은 당신의 이미지의 실제 너비에 맞게 조정해야 합니다 */
+            height: 50px;  /* 이것은 당신의 이미지의 실제 높이에 맞게 조정해야 합니다 */
+        }
+
+        .side_box{
+            width: 293px;
+            position:absolute;
+            right: 0;
+            top: 0;
+        }
+
+        .side_box.on{
+            position: fixed;
+            top: 80px;
+        }
+        .side_box .profile_thumb{
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            overflow:hidden;
+            margin-right: 10px;
+        }
+
+        .side_box .profile_thumb img{
+            width: 100%;
+            height:100%;
+        }
+
+        .side_box .user_profile{
+            display: flex;
+            align-items: center;
+            font-size: 14px;
+            color:#262626;
+        }
+        .side_box .detail .id{
+            margin-bottom: 5px;
+        }
+
+        .side_box .detail .ko_name{
+            font-size: 12px;
+            color:#999;
+        }
+
+        .side_box > article{
+            border: 1px solid rgba(0,0,0,0.09);
+            border-radius: 3px;
+            margin-bottom: 20px;
+            width: 291px;
+            font-size: 14px;
+            color:#262626;
+            font-weight: bold;
+            background: white;
+        }
+
+        .side_box > article > header{
+            display:flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 15px 20px;
+            color:#999;
+        }
+        .story {
+            margin-top: 10px;
+        }
+
+
+        .side_box > article > header .more{
+            font-size: 12px;
+            color:#262626;
+            cursor:pointer;
+        }
+
+        .thumb_user{
+            display: flex;
+            align-items: center;
+            padding: 10px 20px;
+        }
+
+        .thumb_user .profile_thumb{
+            width: 34px;
+            height: 34px;
+        }
+
+
+        .thumb_user .time{
+            font-size: 10px;
+            letter-spacing: 0.2px;
+            color:#999;
+        }
+
+
+        .side_box .scroll_inner{
+            height: 182px;
+            overflow-x: hidden;
+            overflow-y: auto;
+        }
+
+        .hidden_menu{
+            display:none;
+            width: 600px;
+            /*background: red;*/
+            position: absolute;
+            left: 50%;
+            transform:translateX(-50%);
+            top: 100px;
+            overflow:hidden;
+            border: 1px solid rgba(0,0,0,0.09);
+            border-radius: 3px;
+        }
+
+        .hidden_menu .scroll_inner{
+            height: 100px;
+            width: auto;
+            overflow-x: auto;
+            overflow-y: hidden;
+            display: flex;
+            align-items: center;
+            padding: 0 10px;
+        }
+
+        .hidden_menu .scroll_inner .user{
+            width: 80px;
+            height: 80px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-right: 15px;
+            justify-content: space-between;
+        }
+
+        .hidden_menu .scroll_inner .user .id{
+            font-size: 12px;
+            color:#262626;
+        }
+        .hidden_menu .thumb_img{
+            width: 56px;
+            height: 56px;
+            border-radius: 50%;
+            overflow: hidden;
+        }
+
+        .hidden_menu .thumb_img img{
+            width: 100%;
+            height: 100%;
+        }
+
+        @media screen and (max-width:1000px){
+
+            #header .inner{
+                width: 97.5%;
+            }
+
+            #main_container{
+                padding-top: 220px;
+            }
+            #main_container .inner{
+                width: 93.5%;
+
+            }
+
+            .contents_box{
+                display:flex;
+                flex-direction: column;
+                align-items: center;
+            }
+            .side_box{
+                display: none;
+            }
+
+
+            .hidden_menu{
+                display:block;
+
+            }
+        }
+
+        @media screen and (max-width:650px){
+
+            #header .search_box{
+                display:none;
+            }
+
+            .hidden_menu{
+                width: 95%;
+            }
+        }
+
+        #sprite_more_icon {
+            position: relative;
+            display: inline-block;
+            cursor: pointer;  /* 추가: 마우스 포인터를 클릭 가능한 아이템으로 변경 */
+        }
+
+        .toggle_box {
+            display: none;
+            position: absolute;
+            background-color: #f1f1f1;
+            min-width: 160px;
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+            z-index: 1;
+        }
+
+        .toggle_box li {
+            color: black;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+        }
+
+        .toggle_box .clickable:hover {
+            background-color: #ddd;  /* 추가: 클릭 가능한 아이템의 배경색 변경 */
+        }
+        body {
+            background: #f8f8f8;
+        }
+
+        .sprite_insta_icon {
+            display: inline-block;
+            background-image: url('/images/2.JPG');
+            background-repeat: no-repeat;
+            background-position: 40px 26px;
+            background-size: 48px auto;
+            width: 99px;
+            height: 120px;
+        }
+
+
+        .sprite_write_logo {
+            display: inline-block;
+            background: url('/images/1.jpg') no-repeat 10px 50px;
+            background-size: 350px auto;
+            width: 165px;
+            height: 185px;
+        }
+
+
+        .sprite_compass_icon {
+            display: inline-block;
+            background: url('/images/background01.png') no-repeat -130px -286px;
+            width: 23px;
+            height: 23px;
+        }
+
+        .button2 {
+            display: inline-block;
+            padding: 10px 20px;
+            font-size: 16px;
+            font-weight: 600;
+            color: #ffffff;
+            background-color: #2ab4be;
+            border: none;
+            border-radius: 5px;
+            transition: background-color 0.5s ease;
+        }
+
+        .button2:hover {
+            background-color: #2D9076;
+            cursor: pointer;
+        }
+
+
+        .sprite_user_icon_outline {
+            display: inline-block;
+            background: url('/images/background01.png') no-repeat -272px -182px;
+            width: 22px;
+            height: 24px;
+        }
+
+        .sprite_heart_icon_outline {
+            display: inline-block;
+            background: url('/images/background01.png') no-repeat -52px -261px;
+            width: 24px;
+            height: 22px;
+        }
+
+        .sprite_small_search_icon {
+            display: inline-block;
+            background: url('/images/background01.png') no-repeat -337px -246px;
+            width: 10px;
+            height: 10px;
+        }
+
+        .sprite_more_icon {
+            display: inline-block;
+            background: url('/images/background01.png') no-repeat -301px -218px;
+            width: 15px;
+            height: 3px;
+        }
+
+        .sprite_bubble_icon {
+            display: inline-block;
+            background: url('/images/background01.png') no-repeat -239px -202px;
+            width: 24px;
+            height: 24px;
+        }
+
+        .sprite_share_icon {
+            display: inline-block;
+            background: url('/images/background01.png') no-repeat -324px -52px;
+            width: 21px;
+            height: 24px;
+        }
+
+        .sprite_bookmark_outline {
+            display: inline-block;
+            background: url('/images/background01.png') no-repeat -237px -286px;
+            width: 19px;
+            height: 24px;
+        }
+        .sprite_bookmark_outline.on {
+            background: url('/images/background01.png') no-repeat -159px -286px;
+            width: 19px;
+            height: 24px;
+        }
+
+        .sprite_small_heart_icon_outline {
+            display: inline-block;
+            background: url('/images/background01.png') no-repeat -323px -274px;
+            width: 12px;
+            height: 11px;
+        }
+
+        .sprite_camera_icon {
+            display: inline-block;
+            background: url('/images/background01.png') no-repeat -271px -104px;
+            width: 24px;
+            height: 22px;
+        }
+
+        .login titlo {
+            display: inline-block;
+        }
+
+        .sprite_plus_icon {
+            display: inline-block;
+            background: url('/images/background01.png') no-repeat -187px -202px;
+            width: 23px;
+            height: 23px;
+        }
+
+
+        #container {
+            background: #fafafa;
+            display: flex;
+            justify-content: center;
+            flex-direction: column;
+        }
+
+        #header {
+            width: 100%;
+            position: absolute;
+            left: 0;
+            top: 0;
+            z-index: 9999;
+            border-bottom: 1px solid rgba(0, 0, 0, .0975);
+            background: #fff;
+            display: flex;
+            order: 0;
+
+        }
+
+        #header.on {
+            position: fixed;
+        }
+
+        #header.on .h_inner {
+            height: 52px;
+        }
+
+        #header .h_inner {
+            width: 975px;
+            height: 77px;
+            margin: 0 auto;
+            position: relative;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: all 0.4s 0.2s ease;
+        }
+
+        #header.on .logo div:nth-child(2),
+        #header.on .logo div:nth-child(1):after {
+            opacity: 0;
+        }
+
+        #header .h_inner .logo {
+
+        }
+
+        #header .h_inner .logo div {
+            position: relative;
+        }
+
+        #header .h_inner .logo div:nth-child(1) {
+            margin-right: 30px;
+        }
+
+        #header .h_inner .logo div:nth-child(2) {
+            transform: translateY(3px);
+            transition: all 0.4s 0.2s ease;
+        }
+
+        #header .h_inner .logo > a > div:nth-child(1):after {
+            content: '';
+            width: 1px;
+            height: 28px;
+            background: #000;
+            position: absolute;
+            right: -15px;
+            top: -3px;
+            transition: all 0.4s 0.2s ease;
+        }
+
+        #header .h_inner .logo > a {
+            display: flex;
+            align-items: center;
+        }
+
+        #header .search_field {
+
+
+        }
+
+        #header .search_field input {
+            width: 185px;
+            height: 28px;
+            background: #fafafa;
+            border: solid 1px #dbdbdb;
+            border-radius: 3px;
+            padding: 3px 30px 3px 30px;
+            color: #999;
+            font-weight: 400;
+            text-align: left;
+            font-size: 14px;
+            outline: none;
+        }
+
+        #header .search_field input:focus ~ .fake_field span:nth-child(1){
+            transform:translateX(-75px);
+        }
+        #header .search_field input:focus ~ .fake_field span:nth-child(2){
+            display: none;
+        }
+        #header .search_field input::placeholder {
+            font-size: 0;
+            color: gray;
+            text-indent: 10px;
+
+        }
+
+        #header .search_field input:focus::placeholder {
+            font-size: 15px;
+        }
+
+        #header .right_icons {
+            width: 132px;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        #header .right_icons > div > a {
+            display: block;
+            width: 100%;
+            height: 100%;
+        }
+
+        #header .fake_field {
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            color: gray;
+            pointer-events: none;
+        }
+
+        #main_container {
+            /*height: 100vh;*/
+            padding-top: 135px;
+            display: flex;
+            justify-content: center;
+            order: 1;
+        }
+
+
+        #main_container .b_inner{
+            width:935px;
+            position: relative;
+        }
+
+
+        @media screen and (max-width: 1100px) {
+            #main_container {
+                padding-top: 220px;
+            }
+
+            #header .h_inner {
+                padding: 0 20px;
+            }
+
+            #main_container .b_inner{
+                width:initial !important;
+                max-width:935px;
+            }
+
+            .side_box {
+                display: none;
+            }
+
+            .b_inner .contents_box {
+                float: none;
+            }
+
+            .contents {
+                max-width: 600px;
+                margin: 0 auto 40px;
+            }
+
+            .hidden_menu {
+                display: block;
+                opacity: 1;
+            }
+        }
+
+        @media screen and (max-width: 620px) {
+
+            body {
+                overflow-x: hidden;
+            }
+
+            #main_container {
+                padding-top: 181px;
+
+            }
+
+            #header .search_field {
+                display: none;
+            }
+
+            .hidden_menu {
+                width: 100%;
+                top: 77px;
+            }
+        }
+
+        @media screen and (max-width: 480px) {
+        }
+        html, body, div, span, applet, object, iframe,
+        h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+        a, abbr, acronym, address, big, cite, code,
+        del, dfn, em, img, ins, kbd, q, s, samp,
+        small, strike, strong, sub, sup, tt, var,
+        b, u, i, center,
+        dl, dt, dd, ol, ul, li,
+        fieldset, form, label, legend,
+        table, caption, tbody, tfoot, thead, tr, th, td,
+        article, aside, canvas, details, embed,
+        figure, figcaption, footer, header, hgroup,
+        menu, nav, output, ruby, section, summary,
+        time, mark, audio, video {
+            margin: 0;
+            padding: 0;
+            border: 0;
+            font-size: 100%;
+            font: inherit;
+            vertical-align: baseline;
+        }
+
+        article, aside, details, figcaption, figure,
+        footer, header, hgroup, menu, nav, section {
+            display: block;
+        }
+        body {
+            line-height: 1;
+        }
+        ol, ul {
+            list-style: none;
+        }
+        blockquote, q {
+            quotes: none;
+        }
+        blockquote:before, blockquote:after,
+        q:before, q:after {
+            content: '';
+            content: none;
+        }
+        table {
+            border-collapse: collapse;
+            border-spacing: 0;
+        }
+    </style>
+
+</head>
+<body>
+
+<section id="container">
+    <header id="header">
+        <section class="h_inner">
+
+            <h1 class="logo">
+                <a href="index.html">
+                    <div class="sprite_insta_icon"></div>
+                    <div>
+                        <div class="sprite_write_logo"></div>
+                    </div>
+                </a>
+            </h1>
+
+            <div class="search_field">
+                <input type="text" placeholder="검색" tabindex="0">
+
+                <div class="fake_field">
+                    <span class=sprite_small_search_icon></span>
+                    <span>검색</span>
+                </div>
+            </div>
+
+            <div class="right_icons">
+                <a href="/new-post">
+                    <div class="sprite_camera_icon"></div>
+                </a>
+                <a href="/api/user/login-page">
+                    <div class="sprite_compass_icon"></div>
+                </a>
+                <a href="/followlist">
+                    <div class="sprite_heart_icon_outline"></div>
+                </a>
+                <a href="/profile">
+                    <div class="sprite_user_icon_outline"></div>
+                </a>
+            </div>
+        </section>
+    </header>
+
+    <div id="main_container">
+
+        <div class="form_container">
+
+            <div class="form">
+
+                <h1 class="login title"></h1>
+
+                <!-- 로그인 폼의 action 속성을 /api/user/login으로 설정 -->
+                <!-- ID와 비밀번호 입력 필드의 name 속성을 각각 username과 password로 설정 -->
+                <form action="/api/user/login" method="POST" onsubmit="submitLoginForm(event)">
+                    <p class="login_user_name">
+                        <label for="username"></label>
+                        <input type="text" id="username" name="username" placeholder="ID" required>
+                    </p>
+
+                    <p class="login_user_password">
+                        <label for="password"></label>
+                        <input type="password" id="password" name="password" placeholder="Password" required>
+                    </p>
+
+                    <input type="submit" id="submit_btn" value="Login" class="submit_btn">
+                </form>
+            </div>
+
+            <div class="bottom_box">
+                <div>
+                    <span>8llow ME가 처음이신가요?</span>&nbsp;&nbsp;<a href="/api/user/signup">Sign up</a>
+                </div>
+            </div>
+            <br>
+
+            <div class="bottom_box">
+                <div>
+                    <span>
+
+                        <button class="button2" onclick="redirectToKakao()">Kakao Login</button>
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<script th:inline="javascript">
+    function redirectToKakao() {
+        var kakaoUrl = /*[[${kakaoUrl}]]*/ '';
+        window.location.href = kakaoUrl;
+    }
+
+    // 로그인 폼의 submit 이벤트를 처리하는 이벤트 핸들러
+    function submitLoginForm(event) {
+        // 기본 이벤트 동작을 취소함
+        event.preventDefault();
+
+        // 로그인 폼의 데이터를 가져옴
+        var formData = new FormData(event.target);
+
+        // AJAX 요청을 사용하여 서버에 로그인 정보를 전송함
+        fetch('/api/user/login', {
+            method: 'POST',
+            body: formData
+        })
+            .then(function (response) {
+                if (response.ok) {
+                    // 서버에서 로그인이 성공하면, 사용자를 index 페이지로 이동시킴
+                    window.location.href = '/index.html';
+                } else {
+                    // 서버에서 로그인이 실패하면, "로그인에 실패하셨습니다."라는 팝업을 띄움
+                    alert('로그인에 실패하셨습니다.');
+                }
+            });
+    }
+</script>
+
+<script th:inline="">
+    $(document).ready(function () {
+        // 토큰 삭제
+        Cookies.remove('Authorization', {path: '/'});
+    });
+</script>
+
+</html>|

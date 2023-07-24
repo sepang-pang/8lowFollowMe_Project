@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+
+    <title>8llow Me!</title>
+    <link rel="stylesheet" href="/css/reset.css">
+    <link rel="stylesheet" href="/css/common.css">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/profile.css">
+    <link rel="shortcut icon" href="images/2.jpg">
+
+    <style>
+        .mylist_contents,
+        .bookmark_contents {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+        }
+
+        .pic {
+            width: 100%;
+            height: 200px;
+            overflow: hidden;
+        }
+
+        .pic img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+    </style>
+
+</head>
+
+<body>
+<section id="container">
+    <header id="header">
+        <section class="inner">
+
+            <h1 class="logo">
+                <a href="index.html">
+                    <div class="sprite_insta_icon"></div>
+                    <div class="sprite_write_logo"></div>
+                </a>
+            </h1>
+
+            <div class="search_box">
+                <input type="text" placeholder="검색" id="search-field">
+
+                <div class="fake_field">
+                    <span class="sprite_small_search_icon"></span>
+                    <span>검색</span>
+                </div>
+            </div>
+
+            <div class="right_icons">
+                <a href="/new-post">
+                    <div class="sprite_camera_icon"></div>
+                </a>
+                <a href="/api/user/login-page">
+                    <div class="sprite_compass_icon"></div>
+                </a>
+                <a href="/followlist">
+                    <div class="sprite_heart_icon_outline"></div>
+                </a>
+                <a href="/profile">
+                    <div class="sprite_user_icon_outline"></div>
+                </a>
+            </div>
+        </section>
+    </header>
+
+
+    <div id="main_container">
+
+        <section class="b_inner">
+
+            <div class="hori_cont">
+                <div class="profile_wrap">
+                    <div class="profile_img">
+                        <img src="/images/5.jpg" alt="영주고라파덕">
+                    </div>
+                </div>
+
+                <div class="detail">
+                    <div class="top">
+                        <div class="user_name">ohschang</div>
+                        <a href="userinfo.html" class="profile_edit">Profile</a>
+                        <a href="#" class="logout">Log out</a>
+                    </div>
+
+                    <ul class="middle">
+                        <li>
+                            <span>게시물</span>
+                            528
+                        </li>
+                        <li>
+                            <span>팔로워</span>
+                            63.5만
+                        </li>
+                        <li>
+                            <span>팔로우</span>
+                            724
+                        </li>
+                    </ul>
+                    <p class="about">
+                        <span class="nick_name">게시물</span>
+                        <span class="book_mark">저장된 게시물</span>
+                    </p>
+                </div>
+            </div>
+
+            <div class="mylist_contents contents_container active">
+                <div class="pic">
+                    <a href="#"><img src="/images/8llowme2.jpg" alt=""></a>
+                </div>
+                <div class="pic">
+                    <a href="#"><img src="/images/8llowmeground01.jpg" alt=""></a>
+                </div>
+                <div class="pic">
+                    <a href="#"> <img src="/images/8llowme2.jpg" alt=""></a>
+                </div>
+                <div class="pic">
+                    <a href="#"> <img src="/images/3453454.jpg" alt=""></a>
+                </div>
+                <div class="pic">
+                    <a href="#"> <img src="/images/3243243243244232.JPG" alt=""></a>
+                </div>
+                <div class="pic">
+                    <a href="#"> <img src="/images/3453454.jpg" alt=""></a>
+                </div>
+                <div class="pic">
+                    <a href="#"> <img src="/images/8llowme2.jpg" alt=""></a>
+                </div>
+                <div class="pic">
+                    <a href="#"> <img src="/images/8llowmeground01.jpg" alt=""></a>
+                </div>
+                <div class="pic">
+                    <a href="#"> <img src="/images/8llowme2.jpg" alt=""></a>
+                </div>
+            </div>
+            <div class="bookmark_contents contents_container"></div>
+        </section>
+    </div>
+</section>
+
+
+<script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+<script src="js/profile.js"></script>
+<script>
+    // When a .pic element is clicked...
+    document.querySelectorAll('.pic').forEach(function(pic) {
+        pic.addEventListener('click', function(e) {
+            e.preventDefault();
+            // Perform an AJAX request
+            var xhr = new XMLHttpRequest();
+            xhr.open('GET', 'detail-page.html', true);
+            xhr.onreadystatechange = function() {
+                if (this.readyState === 4 && this.status === 200) {
+                    // When the AJAX request is successful, replace the body's contents
+                    document.body.innerHTML = this.responseText;
+                }
+            };
+            xhr.send();
+        });
+    });
+</script>
+
+
+</body>
+</html>
