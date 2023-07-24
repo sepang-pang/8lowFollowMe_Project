@@ -4,7 +4,8 @@
 
 ****
 
-#### [참고] 이슈 및 트러블 슈팅 정리 -> Github Issues (https://github.com/sepang-pang/8lowFollowMe_Project/issues)
+#### [참고] 이슈 및 트러블 슈팅 정리, 아쉽게 구현하지 못한 기능들
+-> Github Issues (https://github.com/sepang-pang/8lowFollowMe_Project/issues)
 
 ****
 
