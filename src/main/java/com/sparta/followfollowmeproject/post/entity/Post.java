@@ -81,4 +81,3 @@ public class Post extends Timestamped {
         this.isPinned = isPinned;
     }
 }
-

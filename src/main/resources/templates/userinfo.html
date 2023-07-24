@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <link rel="stylesheet" type="text/css" href="css/style2.css">
+    <title>8llow Me!</title>
+    <link rel="shortcut icon" href="images/2.jpg">
+    <link rel="stylesheet" href="/css/reset.css">
+    <link rel="stylesheet" href="/css/common.css">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/login.css">
+
+    <style>
+        body {
+            background-color: white;
+            font-family: Arial, sans-serif;
+            color: white;
+            justify-content: center
+            justify-content: center;
+        }
+        .container {
+            width: 30%;
+            background-color: #c2e8ef;
+            border-radius: 25px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 85vh;
+            justify-content: center;
+            padding-left: 20%;
+            margin-top: -40px;
+
+        }
+        .form-group {
+            margin-bottom: 10px;
+            width: 100%;
+            justify-content: center;
+            align-items: center;
+
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 10px;
+        }
+        .form-group input,
+        .form-group textarea,
+        .file-upload{
+            width: 120%;
+            padding: 15px;
+            font-size: 15px;
+            border: 1px solid white;
+            align-items: center;
+            justify-content: center;
+
+        }
+        .form-group input[type="submit"] {
+            background-color: white;
+            color: #80edf4;
+            cursor: pointer;
+        }
+        .form-group input[type="submit"]:hover {
+            background-color: #80edf4;
+            color: white;
+        }
+
+        #profile-picture-display {
+            border-radius: 50%;
+            width: 100px;
+            height: 100px;
+            margin-bottom: 15px;
+            object-fit: cover;
+            float: left;
+        }
+        #profile-picture {
+            float: right;
+            background-color: #80edf4;
+            color: white;
+        }
+
+        #profile-picture {
+            display: none;
+        }
+
+        .file-upload {
+            background-color: #4ca0af;
+            color: white;
+            padding: 10px 11px;
+            cursor: pointer;
+            text-align: center;
+            border: 1px solid white;
+        }
+
+        .file-upload:hover {
+            background-color: white;
+            color: #4ca0af;
+        }
+
+        .file-name {
+            margin-top: 10px;
+        }
+    </style>
+</head>
+
+<body>
+<header id="header">
+    <section class="h_inner">
+        <h1 class="logo">
+            <a href="index.html">
+                <div class="sprite_insta_icon"></div>
+                <div>
+                    <div class="sprite_write_logo"></div>
+                </div>
+            </a>
+        </h1>
+
+        <div class="search_field">
+            <input type="text" placeholder="검색" tabindex="0">
+
+            <div class="fake_field">
+                <span class=sprite_small_search_icon></span>
+                <span>검색</span>
+            </div>
+        </div>
+
+        <div class="right_icons">
+            <a href="/new-post">
+                <div class="sprite_camera_icon"></div>
+            </a>
+            <a href="/api/user/login-page">
+                <div class="sprite_compass_icon"></div>
+            </a>
+            <a href="/followlist">
+                <div class="sprite_heart_icon_outline"></div>
+            </a>
+            <a href="/profile">
+                <div class="sprite_user_icon_outline"></div>
+            </a>
+        </div>
+    </section>
+</header>
+
+<div class="container">
+    <img src="/images/2.jpg" alt="Some description" style="position: fixed; left: 25px; top: 16%; width: 48%;">
+    <form action="/submit_profile" method="post">
+        <div class="form-group">
+            <label for="profile-picture">Profile Picture</label>
+            <img id="profile-picture-display" src="/images/5.jpg" alt="Profile Picture">
+            <br><br><br><br><br><br><br>
+            <label for="profile-picture" class="file-upload">Choose File</label>
+            <input type="file" id="profile-picture" name="profile-picture">
+            <div class="file-name" id="file-name"></div>
+        </div>
+
+        <div class="form-group">
+            <label for="username">Username</label>
+            <input type="text" id="username" name="username">
+        </div>
+        <div class="form-group">
+            <label for="gender">Gender</label>
+            <input type="text" id="gender" name="gender">
+        </div>
+        <div class="form-group">
+            <label for="introduction">Introduction</label>
+            <textarea id="introduction" name="introduction" rows="5"></textarea>
+        </div>
+        <div class="form-group">
+            <input type="submit" value="Submit">
+        </div>
+    </form>
+</div>
+<script>
+    document.getElementById('profile-picture').addEventListener('change', function(e) {
+        document.getElementById('file-name').textContent = e.target.files[0].name;
+    });
+</script>
+</body>
+</html>

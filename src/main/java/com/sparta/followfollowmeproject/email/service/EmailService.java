@@ -40,20 +40,6 @@ public class EmailService {
         authCode = key.toString();
     }
 
-//    //메일 양식 세팅
-//    public void setMailForm(String subject, String body, String email) throws MessagingException {
-//
-//        createAuthCode();
-//
-//        MimeMessage message = mailSender.createMimeMessage();
-//
-//        MimeMessageHelper mimeMessageHelper = new MimeMessageHelper(message,true,"UTF-8");
-//        mimeMessageHelper.setTo(email); //수신자
-//        mimeMessageHelper.setSubject(subject); //메일 제목
-//        mimeMessageHelper.setText(body,true);//메일 내용
-//        sendMail(mimeMessageHelper.getMimeMessage());
-//
-//    }
 
     public MimeMessage createEmailForm(String email) throws MessagingException, UnsupportedEncodingException {
 

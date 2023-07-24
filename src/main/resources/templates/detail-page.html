@@ -1,21 +1,413 @@
 <!DOCTYPE html>
-
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
 
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
 
     <title>8llow Me!</title>
-    <link rel="stylesheet" href="/css/reset.css">
     <link rel="stylesheet" href="/css/common.css">
     <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/detail-page.css">
     <link rel="shortcut icon" href="images/2.jpg">
 
+
     <style>
+        .contents{
+            max-width:933px;
+            display: flex;
+            border: 1px solid rgba(0,0,0,.0975);
+            border-radius: 3px;
+            background: #fff;
+        }
+
+        .contents .img_section{
+            overflow: hidden;
+            max-width: 598px;
+            border-right: 1px solid rgba(0,0,0,.0975);
+        }
+
+        .contents .img_section .trans_inner{
+            /*width: 2448px;*/
+            font-size: 0;
+        }
+
+        .contents .img_section .trans_inner > div{
+            width: 100%;
+            display: inline-block;
+        }
+        .contents .img_section .trans_inner img{
+            width: 100%;
+            height: 100%;
+        }
+
+
+        .user_container{
+            display: flex;
+            align-items: center;
+        }
+
+        .user_container .profile_img{
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            overflow: hidden;
+            margin-right: 10px;
+        }
+
+        .user_container .profile_img img{
+            height: 100%;
+            width: 100%;
+        }
+
+        .user_container .user_name{
+            color:#262626;
+        }
+        .user_container .nick_name{
+            font-size: 14px;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+
+        .contents .top{
+
+        }
+        .top .more_detail{
+            position: absolute;
+            right: -60px;
+            top: 40px;
+            background:white;
+            border: 1px solid rgba(0,0,0,.0975);
+            border-radius: 3px;
+            z-index: 100;
+            box-shadow: 2px 2px 2px rgba(128, 128, 128, 0.34);
+            /*display: none;*/
+            transform-origin: left top;
+            transform:scale(0);
+            transition:all 0.3s ;
+        }
+
+        .sprite_more_icon.on .more_detail{
+            transform:scale(1);
+        }
+
+        .top .more_detail > li{
+            padding: 10px 20px;
+            cursor: pointer;
+        }
+
+        .top .more_detail > li:hover{
+            background:gray;
+        }
+        .user_container .country{
+            font-size: 12px;
+        }
+
+        .contents .img_section{
+            overflow: hidden;
+        }
+
+        .contents .img_section .trans_inner{
+            font-size: 0;
+        }
+
+        .contents .img_section .trans_inner > div{
+            width: 100%;
+            display: inline-block;
+        }
+        .contents .img_section .trans_inner img{
+            width: 100%;
+            height: 100%;
+        }
+
+        .detail--right_box{
+            max-width:335px;
+            width: 100%;
+        }
+
+
+        .detail--right_box .top{
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 13px 17px;
+            position: relative;
+
+            border-bottom: 1px solid rgba(0,0,0,.0975);
+        }
+
+        .detail--right_box .top .sprite_more_icon{
+            cursor: pointer;
+            padding: 5px 5px;
+        }
+
+        .scroll_section{
+            padding:12px 16px;
+            overflow-x: hidden;
+            overflow-y: scroll;
+        }
+        .scroll_section .admin_container{
+            margin-bottom: 10px;
+        }
+
+        .scroll_section .user_container-detail{
+            margin-bottom: 10px;
+        }
+        .scroll_section .admin_container,
+        .scroll_section .user_container-detail{
+            display: flex;
+        }
+
+
+        .scroll_section .admin_container .admin,
+        .scroll_section .user_container-detail .user{
+            width: 32px;
+            height: 32px;
+            min-width:32px;
+            border-radius: 50%;
+            overflow:hidden;
+            margin-right: 10px;
+        }
+
+
+
+        .scroll_section .admin_container .admin img,
+        .scroll_section .user_container-detail .user img{
+            width: 100%;
+            height: 100%;
+        }
+
+        .commet_container{
+            padding: 5px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color:#262626;
+            font-size: 14px;
+
+        }
+        .commet_container .nick_name{
+            font-weight: bold;
+            margin-right: 10px;
+            padding: 1px;
+        }
+
+        .commet_container .commet{
+            display: flex;
+
+        }
+
+        .scroll_section .user_id{
+            color:#262626;
+            font-size: 14px;
+            font-weight: bold;
+            margin-right:5px;
+        }
+        .scroll_section .comment{
+            line-height:1.4;
+            position: relative;
+            width: 100%;
+        }
+        .scroll_section .comment .icon_wrap{
+            position: absolute;
+            right: -23px;
+            top: -9px;
+            display: flex;
+            align-items: center;
+        }
+
+        .scroll_section .comment .icon_wrap:hover > div:nth-child(1){
+            display: block;
+        }
+
+        .scroll_section .comment .icon_wrap > div{
+            background: #fff;
+            display: flex;
+            align-items: center;
+            width: 40px;
+            height: 40px;
+            justify-content: center;
+            cursor: pointer;text-align: center;
+        }
+
+        .scroll_section .comment .icon_wrap > div:nth-child(1){
+            display: none;
+            transform: translate(10px,4px);
+        }
+
+        .scroll_section .comment .icon_wrap > div:nth-child(2){
+            background: transparent;
+        }
+
+        .try_comment{
+            font-size: 12px;
+            margin-left: 10px;
+            cursor: pointer;
+        }
+        .scroll_section .comment .time{
+            font-size: 15px;
+            color:#999;
+            margin-top: 10px;
+        }
+
+        .bottom_icons{
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 20px;
+        }
+
+        .bottom_icons .left_icons{
+            display: flex;
+        }
+
+        .bottom_icons .left_icons > div{
+            margin-right: 10px;
+            cursor: pointer;
+        }
+
+        .bottom_icons .left_icons > div.on{
+
+        }
+
+        .sprite_heart_icon_outline.on{
+            background: url('../imgs/background01.png') no-repeat -26px -261px;
+            animation:heart_bounce 1s linear;
+        }
+
+
+        .sprite_bookmark_outline.on{
+
+        }
+
+        .animation-target {
+            animation: animation 1000ms linear both;
+        }
+
+
+        .count_likes{
+            font-weight: bold;
+            font-size: 14px;
+            color:#262626;
+            padding: 5px 20px;
+        }
+
+        .count_bookmark{
+            font-weight: bold;
+            font-size: 14px;
+            color:#262626;
+            padding: 5px 20px;
+        }
+
+        .timer{
+            font-size: 10px;
+            letter-spacing: .2px;
+            color:#999;
+            padding: 10px 20px;
+        }
+
+
+        .commit_field{
+            min-height: 56px;
+            padding: 0 20px;
+            position: relative;
+        }
+
+        .content{
+            font-size: 35px;
+            font-weight: 200;
+            display: inline-block;
+            padding-right: 25px;
+            margin-top: 10px;
+            padding: 10px 20px;
+        }
+
+        .commit_field input{
+            width: 100%;
+            height: 56px;
+            border: none;
+            outline:none;
+            background:transparent;
+        }
+
+        .commit_field input::placeholder{
+            color:gray;
+        }
+
+        .commit_field .upload_btn{
+            font-weight: bold;
+            font-size: 14px;
+            color:#3897f0;
+            position: absolute;
+            right: 20px;
+            top: 50%;
+            transform:translateY(-50%);
+            cursor: pointer;
+            opacity: 0.6;
+            pointer-events: none;
+        }
+
+        .commit_field input:focus ~ .upload_btn{
+            pointer-events: initial;
+            opacity: 1;
+        }
+        .commit_field .upload_btn.on{
+
+        }
+
+        .del_pop{
+            width: 100%;
+            height: 100%;
+            position: fixed;
+            left: 0;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.48);
+            z-index: -1;
+            opacity: 0;
+            transition:all 0.3s;
+        }
+
+        .del_pop.on{
+            opacity: 1;
+            z-index: 99999999999;
+        }
+
+        .del_pop.on .btn_box{
+            transform:translate(-50%,-50%)scale(1);
+
+        }
+
+        .del_pop .btn_box{
+            border-radius: 10px;
+            width: 400px;
+            background: #fff;
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform:translate(-50%,-50%)scale(1.1);
+            transition:all 0.2s;
+
+        }
+
+        .del_pop .btn_box > div{
+            padding: 20px 0;
+
+            text-align: center;
+            cursor: pointer;
+
+        }
+
+        .del_pop .btn_box > div:nth-child(1){
+            border-bottom: 1px solid rgba(0,0,0,0.09);
+            color:#ed4956;
+        }
         .m_text{
             font-size: 14px;
             font-weight: bold;
@@ -249,7 +641,7 @@
         }
 
         .sprite_heart_icon_outline.on {
-            background: url('images/background01.png') no-repeat -26px -261px;
+            background: url('../imgs/background01.png') no-repeat -26px -261px;
         }
 
         .contents .likes{
@@ -318,7 +710,7 @@
             position: relative;
             display: inline-block;
             cursor: pointer;  /* 마우스를 올리면 포인터가 표시됩니다 */
-            background: url('images/background01.png') no-repeat -301px -218px;  /* 'sprite_more_icon.png'는 당신의 이미지 경로 */
+            background: url('sprite_more_icon.png') no-repeat;  /* 'sprite_more_icon.png'는 당신의 이미지 경로 */
             width: 50px;  /* 이것은 당신의 이미지의 실제 너비에 맞게 조정해야 합니다 */
             height: 50px;  /* 이것은 당신의 이미지의 실제 높이에 맞게 조정해야 합니다 */
         }
@@ -531,24 +923,68 @@
         .toggle_box .clickable:hover {
             background-color: #ddd;  /* 추가: 클릭 가능한 아이템의 배경색 변경 */
         }
+
+        #main_container {
+        }
+
+        html, body, div, span, applet, object, iframe,
+        h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+        a, abbr, acronym, address, big, cite, code,
+        del, dfn, em, img, ins, kbd, q, s, samp,
+        small, strike, strong, sub, sup, tt, var,
+        b, u, i, center,
+        dl, dt, dd, ol, ul, li,
+        fieldset, form, label, legend,
+        table, caption, tbody, tfoot, thead, tr, th, td,
+        article, aside, canvas, details, embed,
+        figure, figcaption, footer, header, hgroup,
+        menu, nav, output, ruby, section, summary,
+        time, mark, audio, video {
+            margin: 0;
+            padding: 0;
+            border: 0;
+            font-size: 100%;
+            font: inherit;
+            vertical-align: baseline;
+        }
+
+        article, aside, details, figcaption, figure,
+        footer, header, hgroup, menu, nav, section {
+            display: block;
+        }
+        body {
+            line-height: 1;
+        }
+        ol, ul {
+            list-style: none;
+        }
+        blockquote, q {
+            quotes: none;
+        }
+        blockquote:before, blockquote:after,
+        q:before, q:after {
+            content: '';
+            content: none;
+        }
+        table {
+            border-collapse: collapse;
+            border-spacing: 0;
+        }
         body {
             background: #f8f8f8;
         }
 
         .sprite_insta_icon {
             display: inline-block;
-            background-image: url('images/2.JPG');
-            background-repeat: no-repeat;
-            background-position: 40px 26px;
+            background: url('../imgs/2.jpg') no-repeat 40px 26px;
             background-size: 48px auto;
             width: 99px;
             height: 120px;
         }
 
-
         .sprite_write_logo {
             display: inline-block;
-            background: url('images/1.jpg') no-repeat 10px 50px;
+            background: url('../imgs/1.jpg') no-repeat 10px 50px;
             background-size: 350px auto;
             width: 165px;
             height: 185px;
@@ -557,7 +993,7 @@
 
         .sprite_compass_icon {
             display: inline-block;
-            background: url('images/background01.png') no-repeat -130px -286px;
+            background: url('../imgs/background01.png') no-repeat -130px -286px;
             width: 23px;
             height: 23px;
         }
@@ -582,68 +1018,68 @@
 
         .sprite_user_icon_outline {
             display: inline-block;
-            background: url('images/background01.png') no-repeat -272px -182px;
+            background: url('../imgs/background01.png') no-repeat -272px -182px;
             width: 22px;
             height: 24px;
         }
 
         .sprite_heart_icon_outline {
             display: inline-block;
-            background: url('images/background01.png') no-repeat -52px -261px;
+            background: url('../imgs/background01.png') no-repeat -52px -261px;
             width: 24px;
             height: 22px;
         }
 
         .sprite_small_search_icon {
             display: inline-block;
-            background: url('images/background01.png') no-repeat -337px -246px;
+            background: url('../imgs/background01.png') no-repeat -337px -246px;
             width: 10px;
             height: 10px;
         }
 
         .sprite_more_icon {
             display: inline-block;
-            background: url('images/background01.png') no-repeat -301px -218px;
+            background: url('../imgs/background01.png') no-repeat -301px -218px;
             width: 15px;
             height: 3px;
         }
 
         .sprite_bubble_icon {
             display: inline-block;
-            background: url('images/background01.png') no-repeat -239px -202px;
+            background: url('../imgs/background01.png') no-repeat -239px -202px;
             width: 24px;
             height: 24px;
         }
 
         .sprite_share_icon {
             display: inline-block;
-            background: url('images/background01.png') no-repeat -324px -52px;
+            background: url('../imgs/background01.png') no-repeat -324px -52px;
             width: 21px;
             height: 24px;
         }
 
         .sprite_bookmark_outline {
             display: inline-block;
-            background: url('images/background01.png') no-repeat -237px -286px;
+            background: url('../imgs/background01.png') no-repeat -237px -286px;
             width: 19px;
             height: 24px;
         }
         .sprite_bookmark_outline.on {
-            background: url('images/background01.png') no-repeat -159px -286px;
+            background: url('../imgs/background01.png') no-repeat -159px -286px;
             width: 19px;
             height: 24px;
         }
 
         .sprite_small_heart_icon_outline {
             display: inline-block;
-            background: url('images/background01.png') no-repeat -323px -274px;
+            background: url('../imgs/background01.png') no-repeat -323px -274px;
             width: 12px;
             height: 11px;
         }
 
         .sprite_camera_icon {
             display: inline-block;
-            background: url('images/background01.png') no-repeat -271px -104px;
+            background: url('../imgs/background01.png') no-repeat -271px -104px;
             width: 24px;
             height: 22px;
         }
@@ -654,7 +1090,7 @@
 
         .sprite_plus_icon {
             display: inline-block;
-            background: url('images/background01.png') no-repeat -187px -202px;
+            background: url('../imgs/background01.png') no-repeat -187px -202px;
             width: 23px;
             height: 23px;
         }
@@ -865,72 +1301,35 @@
 
         @media screen and (max-width: 480px) {
         }
-        html, body, div, span, applet, object, iframe,
-        h1, h2, h3, h4, h5, h6, p, blockquote, pre,
-        a, abbr, acronym, address, big, cite, code,
-        del, dfn, em, img, ins, kbd, q, s, samp,
-        small, strike, strong, sub, sup, tt, var,
-        b, u, i, center,
-        dl, dt, dd, ol, ul, li,
-        fieldset, form, label, legend,
-        table, caption, tbody, tfoot, thead, tr, th, td,
-        article, aside, canvas, details, embed,
-        figure, figcaption, footer, header, hgroup,
-        menu, nav, output, ruby, section, summary,
-        time, mark, audio, video {
-            margin: 0;
-            padding: 0;
-            border: 0;
-            font-size: 100%;
-            font: inherit;
-            vertical-align: baseline;
-        }
-
-        article, aside, details, figcaption, figure,
-        footer, header, hgroup, menu, nav, section {
-            display: block;
-        }
-        body {
-            line-height: 1;
-        }
-        ol, ul {
-            list-style: none;
-        }
-        blockquote, q {
-            quotes: none;
-        }
-        blockquote:before, blockquote:after,
-        q:before, q:after {
-            content: '';
-            content: none;
-        }
-        table {
-            border-collapse: collapse;
-            border-spacing: 0;
-        }
     </style>
 </head>
 
+
 <body>
+
 <section id="container">
+
     <header id="header">
-        <section class="inner">
+        <section class="h_inner">
 
             <h1 class="logo">
                 <a href="index.html">
                     <div class="sprite_insta_icon"></div>
-                    <div class="sprite_write_logo"></div>
+                    <div>
+                        <div class="sprite_write_logo"></div>
+                    </div>
                 </a>
             </h1>
 
-            <div class="search_box">
-                <input type="text" placeholder="검색" id="search-field">
+            <div class="search_field">
+                <input type="text" placeholder="검색" tabindex="0">
 
                 <div class="fake_field">
-                    <span class="sprite_small_search_icon"></span>
+                    <span class=sprite_small_search_icon></span>
                     <span>검색</span>
                 </div>
             </div>
+
 
             <div class="right_icons">
                 <a href="/new-post">
@@ -950,184 +1349,156 @@
     </header>
 
 
-    <section id="main_container">
-        <div class="inner">
+    <div id="main_container">
+
+        <section class="b_inner">
 
             <div class="contents_box">
-                <article class="contents">
-                    <header class="top">
-                        <div class="user_container">
-                            <div class="profile_img">
-                                <img src='/images/5.jpg' alt="프로필이미지">
-                            </div>
-                            <div class="user_name">
-                                <div class="nick_name m_text">ohschang</div>
-                                <div class="country s_text">Yeongju, South Korea</div>
-                            </div>
-                        </div>
 
-                        <div class="sprite_more_icon" data-name="more" style="cursor: pointer;">
-                            <ul class="toggle_box">
-                                <li><input type="submit" class="follow" value="팔로우" data-name="follow"></li>
-                            </ul>
-                        </div>
-                    </header>
+                <article class="contents cont01">
 
                     <div class="img_section">
                         <div class="trans_inner">
-                            <div><img src="/images/9.jpg" alt="게시물 이미지"></div>
+                            <div><img src="imgs/9.jpg" alt=""></div>
                         </div>
                     </div>
 
-                    <div class="bottom_icons">
-                        <div class="left_icons">
-                            <div class="heart_btn">
-                                <div class="sprite_heart_icon_outline" name="39" data-name="heartbeat"></div>
+                    <div class="detail--right_box">
+                        <header class="top">
+                            <div class="user_container">
+                                <div class="profile_img">
+                                    <img src="/images/5.jpg" alt="">
+                                </div>
+                                <div class="user_name">
+                                    <div class="nick_name">ohschang</div>
+                                    <div class="country">Yeongju, South Korea</div>
+                                </div>
                             </div>
-                            <div class="sprite_bubble_icon"></div>
-                            <div class="sprite_share_icon" data-name="share"></div>
-                        </div>
-                        <div class="right_icon">
-                            <div class="sprite_bookmark_outline" data-name="bookmark"></div>
-                        </div>
-                    </div>
+                            <div class="sprite_more_icon" data-name="more" style="cursor: pointer;">
+                                <ul class="toggle_box">
+                                    <li><input type="submit" class="edit" value="수삭" data-name="edit"></li>
+                                    <li class="clickable">수정</li>
+                                    <li class="clickable">삭제</li>
+                                </ul>
+                            </div>
+                        </header>
 
-                    <div class="likes m_text">
-                        좋아요
-                        <span id="like-count-39">1,557</span>
-                        <span id="bookmark-count-39"></span>
-                        개
-                    </div>
+                        <section class="scroll_section">
+                            <div class="admin_container">
+                                <div class="admin"><img src="/images/5.jpg" alt="user"></div>
+                                <div class="comment">
+                                    <span class="user_id">ohschang</span>악어가방 하나 장만하러 가볼까요~ 여러분?
+                                    <div class="time">2시간</div>
+                                </div>
+                            </div>
 
-                    <div class="comment_container">
-                        <div class="comment" id="comment-list-ajax-post37">
-                            <div class="comment-detail">
-                                <div class="nick_name m_text">ohschang</div>
-                                <div>악어가 너무 무서워용~!</div>
+                            <div class="user_container-detail">
+                                <div class="user"><img src="/images/03.jpg" alt="user"></div>
+                                <div class="comment">
+                                    <span class="user_id">manager_skeleton</span>TIL 제출하고 퇴실체크 부탁드립니다.
+                                    <div class="time">2시간 <span class="try_comment">답글 달기</span></div>
+                                    <div class="icon_wrap">
+                                        <div class="more_trigger">
+                                            <div class="sprite_more_icon"></div>
+                                        </div>
+                                        <div>
+                                            <div class="sprite_small_heart_icon_outline"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="user_container-detail">
+                                <div class="user"><img src="/images/6.jpg" alt="user"></div>
+                                <div class="comment">
+                                    <span class="user_id">66_ggombi_99</span>너무귀엽네요 ㅎㅎㅎ 맞팔해요~!
+                                    <div class="time">2시간 <span class="try_comment">답글 달기</span></div>
+                                    <div class="icon_wrap">
+                                        <div class="more_trigger">
+                                            <div class="sprite_more_icon"></div>
+                                        </div>
+
+                                        <div>
+                                            <div class="sprite_small_heart_icon_outline"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+
+
+                        <div class="bottom_icons">
+                            <div class="left_icons">
+                                <div class="heart_btn">
+                                    <div class="sprite_heart_icon_outline" data-name="heartbeat"></div>
+                                </div>
+                                <div>
+                                    <div class="sprite_bubble_icon"></div>
+                                </div>
+                                <div>
+                                    <div class="sprite_share_icon" data-name="share"></div>
+                                </div>
+                            </div>
+
+                            <div class="right_icon">
+                                <div class="sprite_bookmark_outline" data-name="book-mark"></div>
                             </div>
                         </div>
-                        <div class="small_heart">
-                            <div class="sprite_small_heart_icon_outline" style="cursor: pointer;"></div>
+
+                        <div class="count_likes">
+                            좋아요
+                            <span class="count">2,351</span>
+                            개
                         </div>
-                    </div>
+                        <div class="timer">2시간</div>
 
-                    <div class="timer">10분 전</div>
+                        <div class="commit_field">
+                            <input type="text" placeholder="댓글달기..">
 
-                    <div class="comment_field" id="add-comment-post37">
-                        <input type="text" placeholder="댓글달기...">
-                        <div class="upload_btn m_text" data-name="comment">게시</div>
+                            <div class="upload_btn">게시</div>
+                        </div>
+
                     </div>
                 </article>
-
-
-                <div class="side_box">
-                    <div class="user_profile">
-                        <div class="profile_thumb">
-                            <img src="/images/5.jpg" alt="프로필사진">
-                        </div>
-                        <div class="detail">
-                            <div class="id m_text">ohschang</div>
-                            <div class="ko_name">오세창</div>
-                        </div>
-                    </div>
-
-
-                    <article class="story">
-                        <header class="story_header">
-                            <div>스토리</div>
-                            <div class="more">모두 보기</div>
-                        </header>
-
-                        <div class="scroll_inner">
-                            <div class="thumb_user">
-                                <div class="profile_thumb">
-                                    <img src="/images/5.jpg" alt="프로필사진">
-                                </div>
-                                <div class="detail">
-                                    <div class="id">ohschang</div>
-                                    <div class="time">발표 중</div>
-                                </div>
-                            </div>
-                            <div class="thumb_user">
-                                <div class="profile_thumb">
-                                    <img src="/images/4.jpg" alt="프로필사진">
-                                </div>
-                                <div class="detail">
-                                    <div class="id">king__jinhyuk</div>
-                                    <div class="time">접속 중</div>
-                                </div>
-                            </div>
-                            <div class="thumb_user">
-                                <div class="profile_thumb">
-                                    <img src="/images/03.jpg" alt="프로필사진">
-                                </div>
-                                <div class="detail">
-                                    <div class="id">manager_skeleton</div>
-                                    <div class="time">30분 전</div>
-                                </div>
-                            </div>
-                            <div class="thumb_user">
-                                <div class="profile_thumb">
-                                    <img src="/images/7.jpg" alt="프로필사진">
-                                </div>
-                                <div class="detail">
-                                    <div class="id">hg._.low</div>
-                                    <div class="time">1시간 전</div>
-                                </div>
-                            </div>
-                            <div class="thumb_user">
-                                <div class="profile_thumb">
-                                    <img src="/images/6.jpg" alt="프로필사진">
-                                </div>
-                                <div class="detail">
-                                    <div class="id">66_ggombi_99</div>
-                                    <div class="time">6시간 전</div>
-                                </div>
-                            </div>
-                        </div>
-                    </article>
-
-
-                    <article class="recommend">
-                        <header class="reco_header">
-                            <div>회원님을 위한 추천</div>
-                            <div class="more">모두 보기</div>
-                        </header>
-
-                        <div class="thumb_user">
-                            <div class="profile_thumb">
-                                <img src="/images/4.jpg" alt="프로필사진">
-                            </div>
-                            <div class="detail">
-                                <div class="id">king__jinhyuk</div>
-                                <div class="time">접속 중</div>
-                            </div>
-                        </div>
-                        <div class="thumb_user">
-                            <div class="profile_thumb">
-                                <img src="/images/03.jpg" alt="프로필사진">
-                            </div>
-                            <div class="detail">
-                                <div class="id">manager_skeleton</div>
-                                <div class="time">30분 전</div>
-                            </div>
-                        </div>
-                    </article>
-                </div>
             </div>
-    </section>
+        </section>
+    </div>
+
+    <div class="del_pop">
+        <div class="btn_box">
+            <div class="del">수정</div>
+            <div class="cancel">삭제</div>
+        </div>
+    </div>
+
 </section>
 
-<script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
-<script src="/js/main.js"></script>
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+<script src="templates/js/main.js"></script>
 <script>
+    // sprite_more_icon을 클릭하면 수정 및 삭제를 선택할 수 있는 작은 창이 나오는 이벤트 핸들러
+    document.querySelectorAll('.sprite_more_icon').forEach(function (icon) {
+        icon.addEventListener('click', function () {
+            var toggleBox = this.querySelector('.toggle_box');
+            toggleBox.style.display = toggleBox.style.display === 'none' ? 'block' : 'none';
+        });
+    });
+
+    // 댓글 옆의 sprite_more_icon을 클릭하면 댓글의 수정 및 삭제를 할 수 있는 팝업이 나오는 이벤트 핸들러
+    document.querySelectorAll('.comment .sprite_more_icon').forEach(function (icon) {
+        icon.addEventListener('click', function () {
+            // 팝업을 표시하는 코드를 작성합니다.
+            alert('댓글 수정 및 삭제를 선택할 수 있는 팝업');
+        });
+    });
+
     document.querySelector('.sprite_more_icon').addEventListener('click', function () {
         var toggleBox = this.querySelector('.toggle_box');
         toggleBox.style.display = toggleBox.style.display === 'none' ? 'block' : 'none';
     });
 
-    document.querySelector('.follow').addEventListener('click', function (event) {
-        this.value = this.value === '팔로우' ? '팔로우 취소' : '팔로우';
+    document.querySelector('.edit').addEventListener('click', function (event) {
+        this.value = this.value === '수삭' ? '삭제' : '수정';
         event.stopPropagation();  /* 클릭 이벤트가 상위 요소로 전파되는 것을 막음 */
     });
 </script>

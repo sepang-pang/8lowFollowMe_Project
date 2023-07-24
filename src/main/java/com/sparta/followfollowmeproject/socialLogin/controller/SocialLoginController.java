@@ -25,7 +25,7 @@ public class SocialLoginController {
     @GetMapping("/user/login-page")
     public String login(Model model) {
         model.addAttribute("kakaoUrl", kakaoService.getKakaoLogin());
-        return "login-page";
+        return "login";
     }
 
     @GetMapping("/user/kakao/callback")

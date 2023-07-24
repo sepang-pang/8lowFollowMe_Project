@@ -36,7 +36,7 @@ public class PostMediaService {
 	@Transactional
 	public PostMediaResponseDto uploadMedia(Long postId, MultipartFile multipartFile, User user) throws IOException {
 		Post post = postService.findPost(postId);
-		
+
 		// post의 작성자가 맞는지 확인하기
 		if (!post.getUser().getUsername().equals(user.getUsername())) {
 			throw new MediaUploadException("게시글의 작성자만 미디어를 업로드할 수 있습니다.");
@@ -69,15 +69,15 @@ public class PostMediaService {
 		// post의 작성자가 맞는지 확인하기
 		else if (!post.getUser().getUsername().equals(user.getUsername())) {
 			throw new AccessDeniedException("게시글의 작성자만 미디어를 수정할 수 있습니다.");
-		} 
+		}
 		// 업로드 할 파일을 선택했는지 확인하기
 		else if (multipartFile.getSize() == 0) {
 			throw new MediaNotFoundException("수정할 미디어를 선택해주세요");
 		}
-		
+
 		else {
 			// AWS S3 삭제
-			String deletedMediaUrl = postMedia.getMdeiaUrl();
+			String deletedMediaUrl = postMedia.getMediaUrl();
 			s3UploadService.deleteFile(deletedMediaUrl);
 			// AWS S3 저장
 			String updatedMediaUrl = s3UploadService.uploadFile(multipartFile);
@@ -101,11 +101,11 @@ public class PostMediaService {
 		// post의 작성자가 맞는지 확인하기
 		else if (!post.getUser().getUsername().equals(user.getUsername())) {
 			throw new AccessDeniedException("게시글의 작성자만 미디어를 삭제할 수 있습니다.");
-		} 
-		
+		}
+
 		else {
 			// AWS S3 삭제
-			String mediaUrl = postMedia.getMdeiaUrl();
+			String mediaUrl = postMedia.getMediaUrl();
 			s3UploadService.deleteFile(mediaUrl);
 			// DB 삭제
 			postMediaRepository.delete(postMedia);

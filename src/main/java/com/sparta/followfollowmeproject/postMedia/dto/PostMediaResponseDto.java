@@ -11,6 +11,6 @@ public class PostMediaResponseDto extends ApiResponseDto {
 
 	public PostMediaResponseDto(PostMedia postMedia) {
 		this.id = postMedia.getId();
-		this.mediaUrl = postMedia.getMdeiaUrl();
+		this.mediaUrl = postMedia.getMediaUrl();
 	}
 }

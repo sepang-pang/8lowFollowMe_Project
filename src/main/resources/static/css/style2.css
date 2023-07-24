@@ -1,0 +1,64 @@
+body {
+    background-color: #4ca0af;
+    font-family: Arial, sans-serif;
+}
+
+.container {
+    width: 300px;
+    margin: 0 auto;
+}
+
+.signup_form {
+    display: flex;
+    flex-direction: column;
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 10px;
+}
+
+.signup_form h2 {
+    color: #4ca0af;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.signup_form input {
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    border: 1px solid #cccccc;
+}
+
+.verification {
+    display: flex;
+    justify-content: space-between;
+}
+
+.verify_btn {
+    margin-left: 10px;
+    background-color: #4ca0af;
+    border: none;
+    color: #ffffff;
+    padding: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.admin_checkbox {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.submit_btn {
+    background-color: #4ca0af;
+    border: none;
+    color: #ffffff;
+    padding: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.container{
+    transform: translateY(140px);
+}

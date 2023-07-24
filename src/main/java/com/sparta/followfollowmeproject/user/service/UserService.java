@@ -37,6 +37,7 @@ public class UserService {
     // ADMIN_TOKEN
     private final String ADMIN_TOKEN = "AAABnvxRVklrnYxKZ0aHgTBcXukeZygoC";
 
+
     public ResponseEntity<ApiResponseDto> signup(SignupRequestDto requestDto) {
         String username = requestDto.getUsername();
         String password = passwordEncoder.encode(requestDto.getPassword());
@@ -70,6 +71,7 @@ public class UserService {
         userRepository.save(user);
         log.info("사용자 등록 확인");
         log.info("회원가입 성공");
+
 
         // 최초 비밀번호 저장
         PasswordManager passwordManager = new PasswordManager(password, user);
@@ -133,5 +135,6 @@ public class UserService {
 
         // 상태값 반환
         return ResponseEntity.ok().body(new ApiResponseDto("비밀번호 변경 성공", 200));
+
     }
 }
