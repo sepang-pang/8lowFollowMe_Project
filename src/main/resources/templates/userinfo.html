@@ -129,20 +129,28 @@
         </div>
 
         <div class="right_icons">
-            <a href="new_post.html"><div class="sprite_camera_icon"></div></a>
-            <a href="login.html"><div class="sprite_compass_icon"></div></a>
-            <a href="followlist.html"><div class="sprite_heart_icon_outline"></div></a>
-            <a href="profile.html"><div class="sprite_user_icon_outline"></div></a>
+            <a href="/new-post">
+                <div class="sprite_camera_icon"></div>
+            </a>
+            <a href="/api/user/login-page">
+                <div class="sprite_compass_icon"></div>
+            </a>
+            <a href="/followlist">
+                <div class="sprite_heart_icon_outline"></div>
+            </a>
+            <a href="/profile">
+                <div class="sprite_user_icon_outline"></div>
+            </a>
         </div>
     </section>
 </header>
 
 <div class="container">
-    <img src="imgs/2.jpg" alt="Some description" style="position: fixed; left: 25px; top: 16%; width: 48%;">
+    <img src="/images/2.jpg" alt="Some description" style="position: fixed; left: 25px; top: 16%; width: 48%;">
     <form action="/submit_profile" method="post">
         <div class="form-group">
             <label for="profile-picture">Profile Picture</label>
-            <img id="profile-picture-display" src="imgs/5.jpg" alt="Profile Picture">
+            <img id="profile-picture-display" src="/images/5.jpg" alt="Profile Picture">
             <br><br><br><br><br><br><br>
             <label for="profile-picture" class="file-upload">Choose File</label>
             <input type="file" id="profile-picture" name="profile-picture">

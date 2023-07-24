@@ -25,15 +25,31 @@ public class HomeController {
         return "new_post";
     }
 
-  /*
-    return "followlist";
-    return "follow";
-    return "userinfo";
-    return "post_edit";
-    return "new_post";
-    return "detail-page";
-    return "profile";
-    */
+    @GetMapping("/detail-page")
+    public String detailPage() {
+        return "detail-page";
+    }
+
+    @GetMapping("/profile")
+    public String profilePage() {
+        return "profile";
+    }
+
+    @GetMapping("/post_edit")
+    public String postEditPage() {
+        return "post_edit";
+    }
+
+    @GetMapping("/userinfo")
+    public String userinfoPage() {
+        return "userinfo";
+    }
+
+
+    @GetMapping("/followlist")
+    public String followlistPage() {
+        return "followlist";
+    }
 
 
 }
