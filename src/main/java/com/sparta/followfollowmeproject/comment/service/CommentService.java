@@ -103,31 +103,6 @@ public class CommentService {
 	}
 
 
-	@Transactional // 좋아요
-	public void likeComment(Long postId, Long commentId, User user) throws CommentNotFoundException {
-		findPost(postId);
-		Comment comment = findComment(commentId);
-
-		if (commentLikeRepository.existsByUserAndComment(user, comment)) {
-			throw new DuplicateRequestException("이미 좋아요 한 댓글 입니다.");
-		} else {
-			CommentLike commentLike = new CommentLike(user, comment);
-			commentLikeRepository.save(commentLike);
-		}
-	}
-
-	@Transactional // 좋아요 취소
-	public void deleteLikeComment(Long postId, Long commentId, User user) throws CommentNotFoundException {
-		findPost(postId);
-		Comment comment = findComment(commentId);
-		Optional<CommentLike> commentLikeOptional = commentLikeRepository.findByUserAndComment(user, comment);
-		if (commentLikeOptional.isPresent()) {
-			commentLikeRepository.delete(commentLikeOptional.get());
-		} else {
-			throw new LikeNotFoundException("해당 댓글에 취소할 좋아요가 없습니다.");
-		}
-	}
-
 	//------- 공통 메서드 -------//
 
 	// id에 따른 댓글 찾기
