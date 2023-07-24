@@ -1,4 +1,4 @@
-package com.sparta.followfollowmeproject.socialLogin.dto;
+package com.sparta.followfollowmeproject.social.login.dto;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;

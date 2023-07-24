@@ -1,9 +1,9 @@
-package com.sparta.followfollowmeproject.postMedia.controller;
+package com.sparta.followfollowmeproject.media.controller;
 
 import com.sparta.followfollowmeproject.common.dto.ApiResponseDto;
 import com.sparta.followfollowmeproject.common.security.UserDetailsImpl;
-import com.sparta.followfollowmeproject.postMedia.dto.PostMediaResponseDto;
-import com.sparta.followfollowmeproject.postMedia.service.PostMediaService;
+import com.sparta.followfollowmeproject.media.dto.PostMediaResponseDto;
+import com.sparta.followfollowmeproject.media.service.PostMediaService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
