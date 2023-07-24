@@ -1,4 +1,4 @@
-package com.sparta.followfollowmeproject.postMedia.entity;
+package com.sparta.followfollowmeproject.media.entity;
 
 import com.sparta.followfollowmeproject.common.entity.Timestamped;
 import com.sparta.followfollowmeproject.post.entity.Post;

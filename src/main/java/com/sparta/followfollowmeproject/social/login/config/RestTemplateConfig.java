@@ -1,4 +1,4 @@
-package com.sparta.followfollowmeproject.socialLogin.config;
+package com.sparta.followfollowmeproject.social.login.config;
 
 import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.context.annotation.Bean;

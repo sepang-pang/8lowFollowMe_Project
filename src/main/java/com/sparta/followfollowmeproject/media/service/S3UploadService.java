@@ -1,4 +1,4 @@
-package com.sparta.followfollowmeproject.postMedia.service;
+package com.sparta.followfollowmeproject.media.service;
 
 import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.model.ObjectMetadata;

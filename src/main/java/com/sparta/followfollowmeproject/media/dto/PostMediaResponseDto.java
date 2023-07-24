@@ -1,7 +1,7 @@
-package com.sparta.followfollowmeproject.postMedia.dto;
+package com.sparta.followfollowmeproject.media.dto;
 
 import com.sparta.followfollowmeproject.common.dto.ApiResponseDto;
-import com.sparta.followfollowmeproject.postMedia.entity.PostMedia;
+import com.sparta.followfollowmeproject.media.entity.PostMedia;
 import lombok.Getter;
 
 @Getter

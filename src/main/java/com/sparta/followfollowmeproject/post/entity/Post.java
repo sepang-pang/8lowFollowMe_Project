@@ -4,14 +4,13 @@ import com.sparta.followfollowmeproject.comment.entity.Comment;
 import com.sparta.followfollowmeproject.common.entity.Timestamped;
 import com.sparta.followfollowmeproject.like.post.entity.PostLike;
 import com.sparta.followfollowmeproject.post.dto.PostRequestDto;
-import com.sparta.followfollowmeproject.postMedia.entity.PostMedia;
+import com.sparta.followfollowmeproject.media.entity.PostMedia;
 import com.sparta.followfollowmeproject.user.entity.User;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.springframework.boot.autoconfigure.kafka.KafkaProperties;
-import java.time.LocalDateTime;
+
 import java.util.List;
 
 @Entity

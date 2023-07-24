@@ -1,10 +1,10 @@
-package com.sparta.followfollowmeproject.socialLogin.service;
+package com.sparta.followfollowmeproject.social.login.service;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.sparta.followfollowmeproject.common.jwt.JwtUtil;
-import com.sparta.followfollowmeproject.socialLogin.dto.KakaoUserInfoDto;
+import com.sparta.followfollowmeproject.social.login.dto.KakaoUserInfoDto;
 import com.sparta.followfollowmeproject.user.entity.User;
 import com.sparta.followfollowmeproject.user.entity.UserRoleEnum;
 import com.sparta.followfollowmeproject.user.repository.UserRepository;

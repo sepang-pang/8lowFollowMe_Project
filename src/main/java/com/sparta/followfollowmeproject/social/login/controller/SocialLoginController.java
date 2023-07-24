@@ -1,8 +1,8 @@
-package com.sparta.followfollowmeproject.socialLogin.controller;
+package com.sparta.followfollowmeproject.social.login.controller;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.sparta.followfollowmeproject.common.jwt.JwtUtil;
-import com.sparta.followfollowmeproject.socialLogin.service.KakaoService;
+import com.sparta.followfollowmeproject.social.login.service.KakaoService;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;

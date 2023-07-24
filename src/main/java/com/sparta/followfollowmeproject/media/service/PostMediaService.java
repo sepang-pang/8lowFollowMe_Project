@@ -1,13 +1,13 @@
-package com.sparta.followfollowmeproject.postMedia.service;
+package com.sparta.followfollowmeproject.media.service;
 
 import com.sparta.followfollowmeproject.advice.custom.MediaMismatchException;
 import com.sparta.followfollowmeproject.advice.custom.MediaNotFoundException;
 import com.sparta.followfollowmeproject.advice.custom.MediaUploadException;
 import com.sparta.followfollowmeproject.post.entity.Post;
 import com.sparta.followfollowmeproject.post.service.PostService;
-import com.sparta.followfollowmeproject.postMedia.dto.PostMediaResponseDto;
-import com.sparta.followfollowmeproject.postMedia.entity.PostMedia;
-import com.sparta.followfollowmeproject.postMedia.repository.PostMediaRepository;
+import com.sparta.followfollowmeproject.media.dto.PostMediaResponseDto;
+import com.sparta.followfollowmeproject.media.entity.PostMedia;
+import com.sparta.followfollowmeproject.media.repository.PostMediaRepository;
 import com.sparta.followfollowmeproject.user.entity.User;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.access.AccessDeniedException;
