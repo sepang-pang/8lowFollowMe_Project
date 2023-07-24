@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/admin/posts")
+@RequestMapping("api/admin/posts")
 @RequiredArgsConstructor
 @Secured(UserRoleEnum.Authority.ADMIN)
 public class PostManagementController {

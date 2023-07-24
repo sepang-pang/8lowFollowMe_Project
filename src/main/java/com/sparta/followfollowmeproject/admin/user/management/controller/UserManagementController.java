@@ -19,7 +19,7 @@ import java.util.List;
 @RestController
 @RequiredArgsConstructor
 @Secured(UserRoleEnum.Authority.ADMIN)
-@RequestMapping("/api")
+@RequestMapping("/api/admin")
 public class UserManagementController {
 
     private final UserManagementService userManagementService;
@@ -36,8 +36,6 @@ public class UserManagementController {
                                                                     @RequestBody UserManagementRequestDto requestDto) {
         return userManagementService.promotionUserRole(username, requestDto);
     }
-
-    // 회원 정보 수정 -> 프로필이 완성되면 그것과 연계하여 구현 예정
 
     // 회원 차단
     @PutMapping("/users/block")
